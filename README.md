@@ -1,7 +1,8 @@
 ## Xiaomi Flashable Firmware Creator
 
-You can easily create flashable firmware zip from Stock MIUI.
+You can easily create flashable firmware zip from Flashable Stock MIUI.
 
 ```
-./create_flashable_firmware ROM_FILE
+chmod +x create_flashable_firmware.sh
+./create_flashable_firmware.sh ROM_FILE
 ```
