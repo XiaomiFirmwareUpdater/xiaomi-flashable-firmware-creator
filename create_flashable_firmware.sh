@@ -14,17 +14,19 @@ DATE=$(date "+%Y-%m-%d %H:%M:%S")
 HOSTNAME=$(cat /etc/hostname)
 
 function creatupscrpt() {
-    echo "$(cat $1 | awk '/getprop/ && /ro.product.device/')" > $2
-    echo "$(cat $1 | awk '/ui_print/ && /Target:/')" >> $2
-    echo "show_progress(0.200000, 10);" >> $2
-    echo -e "\n" >> $2
-    echo "# Created by Xiaomi Flashable Firmware Creator" >> $2
-    echo "# $DATE - $HOSTNAME" >> $2
-    echo -e "\n" >> $2
-    echo 'ui_print("Patching firmware images...");' >> $2
-    echo "$(cat $1 | awk '/package_extract_file/ && /firmware-update\//')" >> $2
-    echo "show_progress(0.100000, 2);" >> $2
-    echo "set_progress(1.000000);" >> $2
+    cat > $2 << EOF
+$(cat $1 | awk '/getprop/ && /ro.product.device/')
+$(cat $1 | awk '/ui_print/ && /Target:/')
+show_progress(0.200000, 10);
+
+# Created by Xiaomi Flashable Firmware Creator
+# $DATE - $HOSTNAME
+
+ui_print("Patching firmware images...");
+$(cat $1 | awk '/package_extract_file/ && /firmware-update\//')
+show_progress(0.100000, 2);
+set_progress(1.000000);
+EOF
 }
 
 mkdir temp/
