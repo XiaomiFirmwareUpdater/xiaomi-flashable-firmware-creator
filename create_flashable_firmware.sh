@@ -29,6 +29,19 @@ set_progress(1.000000);
 EOF
 }
 
+function checkupscrpt() {
+    file=temp/META-INF/com/google/android/updater-script
+    path=/firmware/image
+    node=/dev/block/bootdevice/by-name
+    if grep -wq "$path/sec.dat" $file
+    then
+        sed -i "s|$path/sec.dat|$node/sec|g" $file
+    elif grep -wq "$path/splash.img" $file
+    then
+        sed -i "s|$path/splash.img|$node/splash|g" $file
+    fi
+}
+
 mkdir temp/
 mkdir temp/unzipped
 unzip -qq $1 -d temp/unzipped/
@@ -46,6 +59,7 @@ mv temp/unzipped/META-INF/com/google/android/update-binary temp/META-INF/com/goo
 creatupscrpt temp/unzipped/META-INF/com/google/android/updater-script temp/META-INF/com/google/android/updater-script
 
 cd temp/
+checkscrpt
 zip -qq -r9 ../fw_$1 META-INF/ firmware-update/
 cd ../
 
