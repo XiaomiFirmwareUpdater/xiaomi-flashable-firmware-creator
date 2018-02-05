@@ -31,7 +31,7 @@ EOF
 
 mkdir temp/
 mkdir temp/unzipped
-unzip $1 -d temp/unzipped/ >/dev/null 2>&1
+unzip -qq $1 -d temp/unzipped/
 
 if [ ! -f temp/unzipped/META-INF/com/google/android/update-binary ] || [ ! -f temp/unzipped/META-INF/com/google/android/updater-script ] || [ ! -d temp/unzipped/firmware-update ]; then
     echo "** This zip doesn't contain firmware directory."
@@ -46,7 +46,7 @@ mv temp/unzipped/META-INF/com/google/android/update-binary temp/META-INF/com/goo
 creatupscrpt temp/unzipped/META-INF/com/google/android/updater-script temp/META-INF/com/google/android/updater-script
 
 cd temp/
-zip -r ../fw_$1 META-INF/ firmware-update/
+zip -qq -r9 ../fw_$1 META-INF/ firmware-update/
 cd ../
 
 rm -rf temp/
