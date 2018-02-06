@@ -10,6 +10,15 @@ if [ ! -f $1 ]; then
     exit 1
 fi
 
+MIUI_ZIP_NAME=$(basename $1)
+MIUI_ZIP_DIR=$(dirname $1)
+
+if [ -z ${2+x} ]; then
+    OUTPUT_DIR=$2
+else
+    OUTPUT_DIR=$MIUI_ZIP_DIR
+fi
+
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
 HOSTNAME=$(cat /etc/hostname)
 
@@ -27,40 +36,39 @@ $(cat $1 | awk '/package_extract_file/ && /firmware-update\//')
 show_progress(0.100000, 2);
 set_progress(1.000000);
 EOF
-}
 
-function checkupscrpt() {
-    file=temp/META-INF/com/google/android/updater-script
-    path=/firmware/image
-    node=/dev/block/bootdevice/by-name
-    if grep -wq "$path/sec.dat" $file
+    if grep -wq "/firmware/image/sec.dat" "$2"
     then
-        sed -i "s|$path/sec.dat|$node/sec|g" $file
-    elif grep -wq "$path/splash.img" $file
+        sed -i "s|/firmware/image/sec.dat|/dev/block/bootdevice/by-name/sec|g" "$2"
+    elif grep -wq "/firmware/image/splash.img" "$2"
     then
-        sed -i "s|$path/splash.img|$node/splash|g" $file
+        sed -i "s|/firmware/image/splash.img|/dev/block/bootdevice/by-name/splash|g" "$2"
     fi
 }
 
-mkdir temp/
-mkdir temp/unzipped
-unzip -qq $1 -d temp/unzipped/
+mkdir /tmp/xiaomi-fw-zip-creator/
 
-if [ ! -f temp/unzipped/META-INF/com/google/android/update-binary ] || [ ! -f temp/unzipped/META-INF/com/google/android/updater-script ] || [ ! -d temp/unzipped/firmware-update ]; then
+mkdir /tmp/xiaomi-fw-zip-creator/unzipped
+unzip -q $MIUI_ZIP_DIR/$MIUI_ZIP_NAME -d /tmp/xiaomi-fw-zip-creator/unzipped/
+
+if [ ! -f /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary ] || [ ! -f /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script ] || [ ! -d /tmp/xiaomi-fw-zip-creator/unzipped/firmware-update/ ]; then
     echo "** This zip doesn't contain firmware directory."
-    rm -rf temp/
+    rm -rf /tmp/xiaomi-fw-zip-creator/
     exit 1
 fi
 
-mv temp/unzipped/firmware-update temp/
+mkdir /tmp/xiaomi-fw-zip-creator/out/
 
-mkdir -p temp/META-INF/com/google/android
-mv temp/unzipped/META-INF/com/google/android/update-binary temp/META-INF/com/google/android/
-creatupscrpt temp/unzipped/META-INF/com/google/android/updater-script temp/META-INF/com/google/android/updater-script
-checkupscrpt
+mv /tmp/xiaomi-fw-zip-creator/unzipped/firmware-update/ /tmp/xiaomi-fw-zip-creator/out/
 
-cd temp/
-zip -qq -r9 ../fw_$1 META-INF/ firmware-update/
-cd ../
+mkdir -p /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android
+mv /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/
+creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/updater-script
 
-rm -rf temp/
+LASTLOC=$(pwd)
+cd /tmp/xiaomi-fw-zip-creator/out/
+zip -q -r9 /tmp/xiaomi-fw-zip-creator/out/fw_$MIUI_ZIP_NAME META-INF/ firmware-update/
+cd $LASTLOC
+mv /tmp/xiaomi-fw-zip-creator/out/fw_$MIUI_ZIP_NAME $OUTPUT_DIR/
+
+rm -rf /tmp/xiaomi-fw-zip-creator/
