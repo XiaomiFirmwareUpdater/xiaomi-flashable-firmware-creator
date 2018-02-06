@@ -57,9 +57,9 @@ mv temp/unzipped/firmware-update temp/
 mkdir -p temp/META-INF/com/google/android
 mv temp/unzipped/META-INF/com/google/android/update-binary temp/META-INF/com/google/android/
 creatupscrpt temp/unzipped/META-INF/com/google/android/updater-script temp/META-INF/com/google/android/updater-script
+checkupscrpt
 
 cd temp/
-checkscrpt
 zip -qq -r9 ../fw_$1 META-INF/ firmware-update/
 cd ../
 
