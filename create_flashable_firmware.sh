@@ -69,12 +69,12 @@ creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/upd
 
 LASTLOC=$(pwd)
 cd /tmp/xiaomi-fw-zip-creator/out/
-echo "Creating firmware zip.."
+echo "Creating firmware zip.. from $MIUI_ZIP_NAME"
 zip -q -r9 /tmp/xiaomi-fw-zip-creator/out/fw_$MIUI_ZIP_NAME META-INF/ firmware-update/
 cd $LASTLOC
 mv /tmp/xiaomi-fw-zip-creator/out/fw_$MIUI_ZIP_NAME $OUTPUT_DIR/
 
-rm -rf /tmp/xiaomi-fw-zip-creator/ $MIUI_ZIP_NAME
+rm -rf /tmp/xiaomi-fw-zip-creator/
 
 if [ -f $OUTPUT_DIR/fw_$MIUI_ZIP_NAME ]; then
     echo "All done!"
