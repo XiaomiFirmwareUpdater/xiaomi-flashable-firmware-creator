@@ -71,7 +71,7 @@ creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/upd
 echo "Generating changelog.."
 device=$(echo $MIUI_ZIP_NAME | cut -d _ -f2)
 mkdir /tmp/xiaomi-fw-zip-creator/versioninfo && mkdir /tmp/xiaomi-fw-zip-creator/out/changelog/
-sudo mount -o loop /tmp/xiaomi-fw-zip-creator/out/firmware-update/NON-HLOS.bin /tmp/xiaomi-fw-zip-creator/versioninfo && cat /tmp/xiaomi-fw-zip-creator/versioninfo/verinfo/ver_info.txt | tr -d '"\n{}' | tr , '\n' | sed 's/^ *//' | sed 's/         /\n/g' > /tmp/xiaomi-fw-zip-creator/out/changelog/$device.txt
+sudo mount -o loop /tmp/xiaomi-fw-zip-creator/out/firmware-update/NON-HLOS.bin /tmp/xiaomi-fw-zip-creator/versioninfo && cat /tmp/xiaomi-fw-zip-creator/versioninfo/verinfo/ver_info.txt | tr -d '"\n{}' | tr , '\n' | sed 's/^ *//' | sed 's/         /\n/g' > /tmp/xiaomi-fw-zip-creator/out/changelog/$codename.txt
 sudo umount /tmp/xiaomi-fw-zip-creator/versioninfo
 version=$(echo $MIUI_ZIP_NAME | cut -d _ -f3)
 LASTLOC=$(pwd)
@@ -80,10 +80,13 @@ echo "Creating firmware zip.. from $MIUI_ZIP_NAME"
 zip -q -r9 /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME META-INF/ firmware-update/
 cd $LASTLOC
 mv /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME $OUTPUT_DIR/
-mv /tmp/xiaomi-fw-zip-creator/out/changelog/$device.txt $OUTPUT_DIR/changelog/$version/$device.txt
+mv /tmp/xiaomi-fw-zip-creator/out/changelog/$codename.txt $OUTPUT_DIR/changelog/$version/$codename.txt
 
 rm -rf /tmp/xiaomi-fw-zip-creator/ $MIUI_ZIP_NAME
 
+#Generate diff
+oldversion=$(ls -1 | tail -2 | head -1)
+diff OUTPUT_DIR/changelog/$oldversion/$codename.txt OUTPUT_DIR/changelog/$version/$codename.txt > OUTPUT_DIR/changelog/$version/$codename.diff
 if [ -f $OUTPUT_DIR/fw_$codename"_"$MIUI_ZIP_NAME ]; then
     echo "All done!"
 else
