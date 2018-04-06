@@ -67,26 +67,31 @@ mv /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary
 
 codename=$(cat /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script | grep -i "xiaomi/" | cut -d / -f2)
 echo "Generating updater-script for $codename.."
+
 creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/updater-script
+
 echo "Generating changelog.."
 device=$(echo $MIUI_ZIP_NAME | cut -d _ -f2)
+name=$codename-$device
 mkdir /tmp/xiaomi-fw-zip-creator/versioninfo && mkdir /tmp/xiaomi-fw-zip-creator/out/changelog/
-sudo mount -o loop /tmp/xiaomi-fw-zip-creator/out/firmware-update/NON-HLOS.bin /tmp/xiaomi-fw-zip-creator/versioninfo && cat /tmp/xiaomi-fw-zip-creator/versioninfo/verinfo/ver_info.txt | tr -d '"\n{}' | tr , '\n' | sed 's/^ *//' | sed 's/         /\n/g' > /tmp/xiaomi-fw-zip-creator/out/changelog/$codename.txt
+sudo mount -o loop /tmp/xiaomi-fw-zip-creator/out/firmware-update/NON-HLOS.bin /tmp/xiaomi-fw-zip-creator/versioninfo && cat /tmp/xiaomi-fw-zip-creator/versioninfo/verinfo/ver_info.txt | tr -d '"\n{}' | tr , '\n' | sed 's/^ *//' | sed 's/         /\n/g' > /tmp/xiaomi-fw-zip-creator/out/changelog/$name.txt
 sudo umount /tmp/xiaomi-fw-zip-creator/versioninfo
 version=$(echo $MIUI_ZIP_NAME | cut -d _ -f3)
+
 LASTLOC=$(pwd)
 cd /tmp/xiaomi-fw-zip-creator/out/
 echo "Creating firmware zip.. from $MIUI_ZIP_NAME"
 zip -q -r9 /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME META-INF/ firmware-update/
+
 cd $LASTLOC
 mv /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME $OUTPUT_DIR/
-mv /tmp/xiaomi-fw-zip-creator/out/changelog/$codename.txt $OUTPUT_DIR/changelog/$version/$codename.txt
+mv /tmp/xiaomi-fw-zip-creator/out/changelog/$name.txt $OUTPUT_DIR/changelog/$version/$name.txt
 
 rm -rf /tmp/xiaomi-fw-zip-creator/ $MIUI_ZIP_NAME
 
 #Generate diff
 oldversion=$(ls $OUTPUT_DIR/changelog -1 | tail -2 | head -1)
-diff $OUTPUT_DIR/changelog/$oldversion/$codename.txt $OUTPUT_DIR/changelog/$version/$codename.txt > "$OUTPUT_DIR/changelog/$version/$codename.diff"
+diff $OUTPUT_DIR/changelog/$oldversion/$name.txt $OUTPUT_DIR/changelog/$version/$name.txt > "$OUTPUT_DIR/changelog/$version/$name.diff"
 if [ -f $OUTPUT_DIR/fw_$codename"_"$MIUI_ZIP_NAME ]; then
     echo "All done!"
 else
