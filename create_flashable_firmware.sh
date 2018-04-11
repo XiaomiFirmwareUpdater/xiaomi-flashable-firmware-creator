@@ -64,19 +64,35 @@ mv /tmp/xiaomi-fw-zip-creator/unzipped/firmware-update/ /tmp/xiaomi-fw-zip-creat
 
 mkdir -p /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android
 mv /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/
-echo "Generating updater-script.."
+
+codename=$(cat /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script | grep -i "xiaomi/" | cut -d / -f2)
+echo "Generating updater-script for $codename.."
+
 creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/updater-script
+
+echo "Generating changelog.."
+device=$(echo $MIUI_ZIP_NAME | cut -d _ -f2)
+name=$codename-$device
+mkdir /tmp/xiaomi-fw-zip-creator/versioninfo && mkdir /tmp/xiaomi-fw-zip-creator/out/changelog/
+sudo mount -o loop /tmp/xiaomi-fw-zip-creator/out/firmware-update/NON-HLOS.bin /tmp/xiaomi-fw-zip-creator/versioninfo && cat /tmp/xiaomi-fw-zip-creator/versioninfo/verinfo/ver_info.txt | tr -d '"\n{}' | tr , '\n' | sed 's/^ *//' | sed 's/         /\n/g' > /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log
+sudo umount /tmp/xiaomi-fw-zip-creator/versioninfo
+version=$(echo $MIUI_ZIP_NAME | cut -d _ -f3)
 
 LASTLOC=$(pwd)
 cd /tmp/xiaomi-fw-zip-creator/out/
 echo "Creating firmware zip.. from $MIUI_ZIP_NAME"
-zip -q -r9 /tmp/xiaomi-fw-zip-creator/out/fw_$MIUI_ZIP_NAME META-INF/ firmware-update/
+zip -q -r9 /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME META-INF/ firmware-update/
+
 cd $LASTLOC
-mv /tmp/xiaomi-fw-zip-creator/out/fw_$MIUI_ZIP_NAME $OUTPUT_DIR/
+mv /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME $OUTPUT_DIR/
+mv /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log $OUTPUT_DIR/changelog/$version/$name.log
 
-rm -rf /tmp/xiaomi-fw-zip-creator/
+rm -rf /tmp/xiaomi-fw-zip-creator/ $MIUI_ZIP_NAME
 
-if [ -f $OUTPUT_DIR/fw_$MIUI_ZIP_NAME ]; then
+#Generate diff
+oldversion=$(cat miuiversion | head -n2 | tail -n1)
+diff $OUTPUT_DIR/changelog/$oldversion/$name.log $OUTPUT_DIR/changelog/$version/$name.log > "$OUTPUT_DIR/changelog/$version/$name.diff"
+if [ -f $OUTPUT_DIR/fw_$codename"_"$MIUI_ZIP_NAME ]; then
     echo "All done!"
 else
     echo "Failed!"
