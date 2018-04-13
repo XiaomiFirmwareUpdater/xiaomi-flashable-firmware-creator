@@ -87,7 +87,7 @@ cd $LASTLOC
 mv /tmp/xiaomi-fw-zip-creator/out/fw_$codename"_"$MIUI_ZIP_NAME $OUTPUT_DIR/
 mv /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log $OUTPUT_DIR/changelog/$version/$name.log
 
-rm -rf /tmp/xiaomi-fw-zip-creator/ $MIUI_ZIP_NAME
+rm -rf /tmp/xiaomi-fw-zip-creator/
 
 #Generate diff
 oldversion=$(cat miuiversions | head -n2 | tail -n1)
