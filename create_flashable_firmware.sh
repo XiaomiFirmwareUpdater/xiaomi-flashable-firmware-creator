@@ -71,6 +71,7 @@ echo "Generating updater-script for $codename.."
 creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/updater-script
 
 echo "Generating changelog.."
+cp -r $OUTPUT_DIR/changelog/* /tmp/xiaomi-fw-zip-creator/out/changelog/
 device=$(echo $MIUI_ZIP_NAME | cut -d _ -f2)
 name=$codename-$device
 mkdir /tmp/xiaomi-fw-zip-creator/versioninfo && mkdir /tmp/xiaomi-fw-zip-creator/out/changelog/
