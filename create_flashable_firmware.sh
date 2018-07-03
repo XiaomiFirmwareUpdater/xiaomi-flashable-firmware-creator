@@ -50,7 +50,7 @@ mkdir /tmp/xiaomi-fw-zip-creator/
 
 echo "Unzipping MIUI.."
 mkdir /tmp/xiaomi-fw-zip-creator/unzipped
-unzip -q $MIUI_ZIP_DIR/$MIUI_ZIP_NAME -d /tmp/xiaomi-fw-zip-creator/unzipped/
+unzip -q $MIUI_ZIP_DIR/$MIUI_ZIP_NAME 'firmware-update/*' 'META-INF/*' -d /tmp/xiaomi-fw-zip-creator/unzipped/
 
 if [ ! -f /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary ] || [ ! -f /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script ] || [ ! -d /tmp/xiaomi-fw-zip-creator/unzipped/firmware-update/ ]; then
     echo "** This zip doesn't contain firmware directory."
