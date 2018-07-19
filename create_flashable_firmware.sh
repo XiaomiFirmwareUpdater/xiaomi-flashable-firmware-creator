@@ -90,7 +90,7 @@ mv /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log $OUTPUT_DIR/changelog/$ver
 rm -rf /tmp/xiaomi-fw-zip-creator/
 
 #Generate diff
-oldversion=$(cat miuiversion | head -n2 | tail -n1)
+oldversion=$(cat miuiversion | head -n2 | tail -n1 | cut -d = -f2)
 diff $OUTPUT_DIR/changelog/$oldversion/$name.log $OUTPUT_DIR/changelog/$version/$name.log > "$OUTPUT_DIR/changelog/$version/$name.diff"
 if [ -f $OUTPUT_DIR/fw_$codename"_"$MIUI_ZIP_NAME ]; then
     echo "All done!"
