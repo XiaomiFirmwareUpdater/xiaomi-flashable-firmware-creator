@@ -69,11 +69,11 @@ creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/upd
 
 echo "Generating changelog.."
 device=$(echo $MIUI_ZIP_NAME | cut -d _ -f2)
-name=$codename-$device
+export name=$codename-$device
 mkdir /tmp/xiaomi-fw-zip-creator/versioninfo && mkdir /tmp/xiaomi-fw-zip-creator/out/changelog/
 sudo mount -o loop /tmp/xiaomi-fw-zip-creator/out/firmware-update/NON-HLOS.bin /tmp/xiaomi-fw-zip-creator/versioninfo && cat /tmp/xiaomi-fw-zip-creator/versioninfo/verinfo/ver_info.txt | tr -d '"\n{}' | tr , '\n' | sed 's/^ *//' | sed 's/         /\n/g' > /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log
 sudo umount /tmp/xiaomi-fw-zip-creator/versioninfo
-version=$(echo $MIUI_ZIP_NAME | cut -d _ -f3)
+export version=$(echo $MIUI_ZIP_NAME | cut -d _ -f3)
 
 LASTLOC=$(pwd)
 cd /tmp/xiaomi-fw-zip-creator/out/
@@ -89,15 +89,15 @@ rm -rf /tmp/xiaomi-fw-zip-creator/
 #Generate diff
 if [[ $MIUI_ZIP_NAME = *"MI"* ]]; then
     echo "Generating diff from global rom zip"
-    oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep MI | head -n2 | tail -n1)
+    export oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep MI | head -n2 | tail -n1)
 elif [[ $MIUI_ZIP_NAME = *"CN"* ]]; then
     echo "Generating diff from chinese rom zip"
-    oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep CN | head -n2 | tail -n1)
+    export oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep CN | head -n2 | tail -n1)
 else
     echo "Generating diff from weekly rom zip"
-    oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | head -n2 | tail -n1)
+    export oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | head -n2 | tail -n1)
+    diff $OUTPUT_DIR/changelog/$oldversion/$name.log $OUTPUT_DIR/changelog/$version/$name.log > "$OUTPUT_DIR/changelog/$version/$name.diff"
 fi
-diff $OUTPUT_DIR/changelog/$oldversion/$name.log $OUTPUT_DIR/changelog/$version/$name.log > "$OUTPUT_DIR/changelog/$version/$name.diff"
 
 md5sum *.zip > $OUTPUT_DIR/changelog/$version/$version.md5
 find . -type f -size 0b -delete
