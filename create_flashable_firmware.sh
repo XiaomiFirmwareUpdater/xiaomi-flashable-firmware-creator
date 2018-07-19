@@ -59,12 +59,9 @@ if [ ! -f /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update
 fi
 
 mkdir /tmp/xiaomi-fw-zip-creator/out/
-
 mv /tmp/xiaomi-fw-zip-creator/unzipped/firmware-update/ /tmp/xiaomi-fw-zip-creator/out/
-
 mkdir -p /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android
 mv /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/
-
 codename=$(cat /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script | grep -i "xiaomi/" | cut -d / -f2)
 echo "Generating updater-script for $codename.."
 
@@ -90,8 +87,17 @@ mv /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log $OUTPUT_DIR/changelog/$ver
 rm -rf /tmp/xiaomi-fw-zip-creator/
 
 #Generate diff
-oldversion=$(cat miuiversion | head -n2 | tail -n1 | cut -d = -f2)
+if [[ $MIUI_ZIP_NAME = *"MI"* ]]; then
+    echo "Generating diff from global zip"
+    oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep MI | head -n2 | tail -n1)
+elif [[ $MIUI_ZIP_NAME = *"CN"* ]]; then
+    echo "Generating diff from chinese zip"
+    oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep CN | head -n2 | tail -n1)
+else
+    echo "Something is wrong!"
+fi
 diff $OUTPUT_DIR/changelog/$oldversion/$name.log $OUTPUT_DIR/changelog/$version/$name.log > "$OUTPUT_DIR/changelog/$version/$name.diff"
+
 if [ -f $OUTPUT_DIR/fw_$codename"_"$MIUI_ZIP_NAME ]; then
     echo "All done!"
 else
