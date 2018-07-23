@@ -86,19 +86,6 @@ mv /tmp/xiaomi-fw-zip-creator/out/changelog/$name.log $OUTPUT_DIR/changelog/$ver
 
 rm -rf /tmp/xiaomi-fw-zip-creator/
 
-#Generate diff
-if [[ $MIUI_ZIP_NAME = *"MI"* ]]; then
-    echo "Generating diff from global rom zip"
-    export oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep MI | head -n2 | tail -n1)
-elif [[ $MIUI_ZIP_NAME = *"CN"* ]]; then
-    echo "Generating diff from chinese rom zip"
-    export oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | grep CN | head -n2 | tail -n1)
-else
-    echo "Generating diff from weekly rom zip"
-    export oldversion=$(ls $OUTPUT_DIR/changelog/ | sort -r | head -n2 | tail -n1)
-    diff $OUTPUT_DIR/changelog/$oldversion/$name.log $OUTPUT_DIR/changelog/$version/$name.log > "$OUTPUT_DIR/changelog/$version/$name.diff"
-fi
-
 md5sum *.zip > $OUTPUT_DIR/changelog/$version/$version.md5
 find . -type f -size 0b -delete
 
