@@ -62,7 +62,7 @@ mkdir /tmp/xiaomi-fw-zip-creator/out/
 mv /tmp/xiaomi-fw-zip-creator/unzipped/firmware-update/ /tmp/xiaomi-fw-zip-creator/out/
 mkdir -p /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android
 mv /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/update-binary /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/
-codename=$(cat /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script | grep -i "xiaomi/" | cut -d / -f2)
+codename=$(cat /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script | grep -Po '\"[a-z]*\"' | cut -d '"' -f2 | head -1)
 echo "Generating updater-script for $codename.."
 
 creatupscrpt /tmp/xiaomi-fw-zip-creator/unzipped/META-INF/com/google/android/updater-script /tmp/xiaomi-fw-zip-creator/out/META-INF/com/google/android/updater-script
