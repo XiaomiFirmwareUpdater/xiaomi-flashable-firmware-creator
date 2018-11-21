@@ -1,0 +1,34 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+ # Pull docker images
+ - docker pull yshalsager/docker-pyinstaller:linux
+ - docker pull yshalsager/docker-pyinstaller:windows
+
+script:
+  - cd ${TRAVIS_BUILD_DIR}
+  - docker run -v "$(pwd):/src/" yshalsager/docker-pyinstaller:linux
+  - docker run -v "$(pwd):/src/" yshalsager/docker-pyinstaller:windows
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key: "$GIT_OAUTH_TOKEN"
+  file_glob: true
+  file: ${TRAVIS_BUILD_DIR}/dist/*/create_flashable_firmware*
+  on:
+    tags: false
+    repo: XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator
+    branch: py
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+branches:
+  except:
+    - /^(?i:untagged)-.*$/
