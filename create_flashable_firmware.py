@@ -1,10 +1,11 @@
-from sys import argv
+from sys import argv, exit
 from os import makedirs, path, remove, rename
 from datetime import date
 from socket import gethostname
 from zipfile import ZipFile
 from shutil import rmtree, move, make_archive
 import re
+
 
 def usage():
     print("Usage: python create_flashable_firmware.py ROM_FILE")
@@ -14,7 +15,6 @@ def usage():
 def create_updater():
     today = str(date.today())
     host = str(gethostname())
-    print("Generating updater-script..")
     with open("tmp/META-INF/com/google/android/updater-script", 'r') as i, \
             open("out/updater-script", "w") as o:
         o.writelines("show_progress(0.200000, 10);" + '\n' + '\n')
@@ -28,6 +28,9 @@ def create_updater():
             .replace('/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
         o.write(correct)
     remove('out/updater-script')
+    with open("out//META-INF/com/google/android/updater-script", 'r') as i:
+        codename = str(i.readlines()[6].split('/', 3)[2]).split(':', 1)[0]
+    return codename
 
 
 def main():
@@ -53,11 +56,13 @@ def main():
     move(tmp_dir + '/firmware-update/', 'out/firmware-update/')
     makedirs("out/META-INF/com/google/android", exist_ok=True)
     move(tmp_dir + '/META-INF/com/google/android/update-binary', 'out/META-INF/com/google/android/')
+    print("Generating updater-script..")
     create_updater()
-    print("Creating firmware zip from " + rom)
+    codename = create_updater()
+    print("Creating firmware zip from " + rom + " for " + codename)
     make_archive('firmware', 'zip', 'out/')
     if path.exists('firmware.zip'):
-        rename('firmware.zip', 'fw_' + rom)
+        rename('firmware.zip', 'fw_' + codename + "_" + rom)
         print("All done!")
         rmtree(tmp_dir)
         rmtree('out')
