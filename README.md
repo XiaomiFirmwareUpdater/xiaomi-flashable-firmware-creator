@@ -3,5 +3,5 @@
 You can easily create flashable firmware zip from Recovery MIUI.
 
 ```
-python create_flashable_firmware.py [MIUI ZIP]
+python3 create_flashable_firmware.py [MIUI ZIP]
 ```
