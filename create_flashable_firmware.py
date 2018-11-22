@@ -1,4 +1,6 @@
-from sys import argv, exit
+from argparse import ArgumentParser
+import glob
+from sys import exit
 from os import makedirs, path, remove, rename
 from datetime import date
 from socket import gethostname
@@ -6,14 +8,67 @@ from zipfile import ZipFile
 from shutil import rmtree, move, make_archive
 
 
-def usage():
-    print("Usage: python create_flashable_firmware.py ROM_FILE")
-    exit()
+def arg_parse():
+    process = "None"
+    switches = ArgumentParser(description='Xiaomi Flashable Firmware Creator', )
+    group = switches.add_mutually_exclusive_group(required=True)
+    group.add_argument("-F", "--firmware", help="Create normal Firmware zip")
+    group.add_argument("-L", "--firmwareless", help="Create Firmware-less zip")
+    group.add_argument("-N", "--nonarb", help="Create non-ARB Firmware zip")
+    args = vars(switches.parse_args())
+    rom = list(args.values())[0]
+    firmware = args["firmware"]
+    firmwareless = args["firmwareless"]
+    nonarb = args["nonarb"]
+    if firmware is not None:
+        process = "firmware"
+    elif firmwareless is not None:
+        process = "firmwareless"
+    elif nonarb is not None:
+        process = "nonarb"
+    return rom, process
 
 
-def create_updater():
+def pre():
     today = str(date.today())
     host = str(gethostname())
+    return today, host
+
+
+def check_firmware():
+    if not path.exists("tmp" + '/firmware-update') \
+            or path.exists("tmp" + 'META-INF/com/google/android/update-binary') \
+            or path.exists("tmp" + 'META-INF/com/google/android/updater-script'):
+        print("This zip doesn't contain firmware directory.")
+        rmtree("tmp")
+        exit(1)
+
+
+def firmware_extract():
+    rom, process = arg_parse()
+    with ZipFile(rom, 'r') as z:
+        files = [n for n in z.namelist()
+                 if n.startswith('firmware-update/') or n.startswith('META-INF/')]
+        z.extractall(path="tmp", members=files)
+    check_firmware()
+    move("tmp" + '/firmware-update/', 'out/firmware-update/')
+    move("tmp" + '/META-INF/com/google/android/update-binary', 'out/META-INF/com/google/android/')
+
+
+"""
+def rom_extract():
+    rom, process = arg_parse()
+    with ZipFile(rom, 'r') as z:
+        files = [n for n in z.namelist()
+                 if not n.startswith('firmware-update/')]
+        z.extractall(path="tmp", members=files)
+    check_firmware()
+    move("tmp" + '*', 'out/')
+"""
+
+
+def firmware_updater():
+    today, host = pre()
     with open("tmp/META-INF/com/google/android/updater-script", 'r') as i, \
             open("out/updater-script", "w") as o:
         o.writelines("show_progress(0.200000, 10);" + '\n' + '\n')
@@ -26,46 +81,45 @@ def create_updater():
         correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec')\
             .replace('/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
         o.write(correct)
-    remove('out/updater-script')
     with open("out//META-INF/com/google/android/updater-script", 'r') as i:
         codename = str(i.readlines()[6].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
     return codename
 
 
-def main():
-    rom = argv[1]
-    makedirs("tmp", exist_ok=True)
-    tmp_dir = "tmp"
-    print("Unzipping MIUI..")
-    with ZipFile(rom, 'r') as z:
-        files = [n for n in z.namelist()
-                 if n.startswith('firmware-update/') or n.startswith('META-INF/')]
-        z.extractall(path=tmp_dir, members=files)
-    if not path.exists(tmp_dir + '/firmware-update') \
-            or path.exists(tmp_dir + 'META-INF/com/google/android/update-binary') \
-            or path.exists(tmp_dir + 'META-INF/com/google/android/updater-script'):
-        print("This zip doesn't contain firmware directory.")
-        rmtree(tmp_dir)
-        exit(1)
-    makedirs("out", exist_ok=True)
-    move(tmp_dir + '/firmware-update/', 'out/firmware-update/')
-    makedirs("out/META-INF/com/google/android", exist_ok=True)
-    move(tmp_dir + '/META-INF/com/google/android/update-binary', 'out/META-INF/com/google/android/')
-    print("Generating updater-script..")
-    create_updater()
-    codename = create_updater()
+def make_zip():
+    rom, process = arg_parse()
+    codename = firmware_updater()
     print("Creating firmware zip from " + rom + " for " + codename)
     make_archive('firmware', 'zip', 'out/')
     if path.exists('firmware.zip'):
         rename('firmware.zip', 'fw_' + codename + "_" + rom)
         print("All done!")
-        rmtree(tmp_dir)
+        rmtree("tmp")
         rmtree('out')
     else:
         print("Failed!" + '\n' + "Check out folder!")
 
 
-if len(argv) < 2 or len(argv) > 2:
-    usage()
-else:
-    main()
+def main():
+    rom, process = arg_parse()
+    makedirs("tmp", exist_ok=True)
+    makedirs("out", exist_ok=True)
+    makedirs("out/META-INF/com/google/android", exist_ok=True)
+    if process == "firmware" or process == "nonarb":
+        print("Unzipping MIUI..")
+        firmware_extract()
+        print("Generating updater-script..")
+        firmware_updater()
+    elif process == "firmwareless":
+        print("Unzipping MIUI..")
+        # rom_extract()
+        print("Generating updater-script..")
+        # firmwareless_updater()
+    elif process == "nonarb":
+        print("nonarb")
+    remove('out/updater-script')
+    make_zip()
+
+
+arg_parse()
+main()
