@@ -28,7 +28,7 @@ def create_updater():
         o.write(correct)
     remove('out/updater-script')
     with open("out//META-INF/com/google/android/updater-script", 'r') as i:
-        codename = str(i.readlines()[6].split('/', 3)[2]).split(':', 1)[0]
+        codename = str(i.readlines()[6].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
     return codename
 
 
