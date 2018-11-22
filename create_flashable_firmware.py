@@ -4,7 +4,6 @@ from datetime import date
 from socket import gethostname
 from zipfile import ZipFile
 from shutil import rmtree, move, make_archive
-import re
 
 
 def usage():
@@ -37,15 +36,11 @@ def main():
     rom = argv[1]
     makedirs("tmp", exist_ok=True)
     tmp_dir = "tmp"
-    archive = ZipFile(rom)
     print("Unzipping MIUI..")
-    for file in archive.namelist():
-        if file.startswith('firmware-update') or file.startswith('META-INF'):
-            archive.extract(file, tmp_dir)
-        else:
-            print("Neither firmware-update nor META-INF found!")
-            rmtree(tmp_dir)
-            exit(1)
+    with ZipFile(rom, 'r') as z:
+        files = [n for n in z.namelist()
+                 if n.startswith('firmware-update/') or n.startswith('META-INF/')]
+        z.extractall(path=tmp_dir, members=files)
     if not path.exists(tmp_dir + '/firmware-update') \
             or path.exists(tmp_dir + 'META-INF/com/google/android/update-binary') \
             or path.exists(tmp_dir + 'META-INF/com/google/android/updater-script'):
