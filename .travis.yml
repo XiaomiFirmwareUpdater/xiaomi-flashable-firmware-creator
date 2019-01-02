@@ -27,7 +27,7 @@ deploy:
   file: ${TRAVIS_BUILD_DIR}/dist/*/create_flashable_firmware*
   on:
     tags: false
-    repo: XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator
+    repo: XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py
     branch: py
 
 notifications:
