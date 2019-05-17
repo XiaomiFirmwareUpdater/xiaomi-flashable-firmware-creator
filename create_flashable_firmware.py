@@ -166,6 +166,7 @@ def vendor_updater():
 
 def make_zip():
     rom, process = arg_parse()
+    rom = path.basename(rom)
     with open("out/META-INF/com/google/android/updater-script", 'r') as i:
         codename = str(i.readlines()[7].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
     print("Creating " + process + " zip from " + rom + " for " + codename)
@@ -214,5 +215,6 @@ def main():
     make_zip()
 
 
-arg_parse()
-main()
+if __name__ == '__main__':
+    arg_parse()
+    main()
