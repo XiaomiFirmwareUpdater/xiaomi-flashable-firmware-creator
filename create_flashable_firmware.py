@@ -60,7 +60,8 @@ def firmware_extract():
         with ZipFile(rom, 'r') as z:
             files = [n for n in z.namelist()
                      if n.startswith('firmware-update/') or n.startswith('META-INF/')]
-            z.extractall(path="tmp", members=files)
+            to_extract = [i for i in files if 'splash' not in i and 'vbmeta' not in i]
+            z.extractall(path="tmp", members=to_extract)
     elif process == "nonarb":
         with ZipFile(rom, 'r') as z:
             files = [n for n in z.namelist()
