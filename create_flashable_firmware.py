@@ -1,16 +1,23 @@
+#!/usr/bin/env python3.7
+"""Xiaomi Flashable Firmware Creator"""
+
 from argparse import ArgumentParser
 from datetime import datetime
 from distutils.dir_util import copy_tree
 from os import makedirs, rename, remove, path
 from shutil import move, make_archive, rmtree
 from socket import gethostname
-from sys import exit
 from zipfile import ZipFile
+import re
 
 
 def arg_parse():
-    process = "None"
-    rom = "None"
+    """
+    Parses command-line arguments
+    :return: rom, process
+    """
+    process = None
+    rom = None
     switches = ArgumentParser(description='Xiaomi Flashable Firmware Creator', )
     group = switches.add_mutually_exclusive_group(required=True)
     group.add_argument("-F", "--firmware", help="Create normal Firmware zip")
@@ -38,158 +45,212 @@ def arg_parse():
 
 
 def pre():
+    """
+    Sets today data and hostname
+    :return: today, host
+    """
     today = str(datetime.today()).split('.')[0]
     host = str(gethostname())
     return today, host
 
 
 def check_firmware():
-    if path.exists('tmp/firmware-update') \
-            or path.exists('tmp/META-INF/com/google/android/update-binary') \
+    """
+    Checks firmware existence and type
+    :return: fw_type
+    """
+    valid = None
+    if path.exists('tmp/META-INF/com/google/android/update-binary') \
             or path.exists('tmp/META-INF/com/google/android/updater-script'):
-        pass
+        valid = True
+    fw_type = None
+    if valid is True:
+        if path.exists('tmp/firmware-update'):
+            fw_type = 'qcom'
+        elif path.exists('tmp/lk.img') \
+                or path.exists('tmp/preloader.img') \
+                or path.exists('tmp/scatter.txt'):
+            fw_type = 'mtk'
     else:
-        print("This zip doesn't contain firmware directory.")
+        print("This zip isn't a valid ROM or I couldn't find firmware! Exiting.")
         rmtree("tmp")
-        exit(1)
+        exit(2)
+    return fw_type
 
 
 def firmware_extract():
+    """
+    Extracts firmware from qcom device's ROM
+    """
     rom, process = arg_parse()
     if process == "firmware":
-        with ZipFile(rom, 'r') as z:
-            files = [n for n in z.namelist()
+        with ZipFile(rom, 'r') as zip_file:
+            files = [n for n in zip_file.namelist()
                      if n.startswith('firmware-update/') or n.startswith('META-INF/')]
-            to_extract = [i for i in files if 'dtbo' not in i and 'splash' not in i and 'vbmeta' not in i]
-            z.extractall(path="tmp", members=to_extract)
+            to_extract = [i for i in files if 'dtbo' not in i
+                          and 'splash' not in i and 'vbmeta' not in i]
+            zip_file.extractall(path="tmp", members=to_extract)
     elif process == "nonarb":
-        with ZipFile(rom, 'r') as z:
-            files = [n for n in z.namelist()
+        with ZipFile(rom, 'r') as zip_file:
+            files = [n for n in zip_file.namelist()
                      if n.startswith('firmware-update/dspso.bin')
                      or n.startswith('firmware-update/BTFM.bin')
                      or n.startswith('firmware-update/NON-HLOS.bin')
                      or n.startswith('META-INF/')]
-            z.extractall(path="tmp", members=files)
+            zip_file.extractall(path="tmp", members=files)
     check_firmware()
     move('tmp/firmware-update/', 'out/firmware-update/')
-    move("tmp" + '/META-INF/com/google/android/update-binary', 'out/META-INF/com/google/android/')
+    move('tmp/META-INF/com/google/android/update-binary', 'out/META-INF/com/google/android/')
 
 
 def rom_extract():
-    rom, process = arg_parse()
-    with ZipFile(rom, 'r') as z:
-        files = [n for n in z.namelist()
+    """
+    Extracts ROM without firmware for qcom device
+    :return:
+    """
+    rom = arg_parse()[0]
+    with ZipFile(rom, 'r') as zip_file:
+        files = [n for n in zip_file.namelist()
                  if not n.startswith('firmware-update/')]
-        z.extractall(path="tmp", members=files)
+        zip_file.extractall(path="tmp", members=files)
     check_firmware()
     copy_tree('tmp/', 'out/')
 
 
 def vendor_extract():
-    rom, process = arg_parse()
-    with ZipFile(rom, 'r') as z:
-        files = [n for n in z.namelist()
+    """
+    Extracts vendor and firmware
+    :return:
+    """
+    rom = arg_parse()[0]
+    with ZipFile(rom, 'r') as zip_file:
+        files = [n for n in zip_file.namelist()
                  if not n.startswith('system') and not n.startswith('boot')]
-        z.extractall(path="tmp", members=files)
+        zip_file.extractall(path="tmp", members=files)
     check_firmware()
     copy_tree('tmp/', 'out/')
     remove("out/META-INF/com/google/android/updater-script")
 
 
 def firmware_updater():
+    """
+    Generates updater-script for firmware zip
+    """
     today, host = pre()
     with open("tmp/META-INF/com/google/android/updater-script", 'r') as i, \
-            open("out/updater-script", "w", newline='\n') as o:
-        o.writelines("show_progress(0.200000, 10);" + '\n' + '\n')
-        o.writelines("# Generated by Xiaomi Flashable Firmware Creator" + '\n'
-                     + "# " + today + " - " + host + '\n' + '\n')
-        o.writelines('ui_print("Flashing Normal firmware...");' + '\n')
-        o.writelines(line for line in i if "getprop" in line or "Target" in line or "firmware-update" in line)
-        o.writelines('\n' + "show_progress(0.100000, 2);" + '\n' + "set_progress(1.000000);" + '\n')
+            open("out/updater-script", "w", newline='\n') as out:
+        out.writelines("show_progress(0.200000, 10);\n\n")
+        out.writelines("# Generated by Xiaomi Flashable Firmware Creator\n"
+                       + f"# {today} - {host}\n'\n")
+        out.writelines('ui_print("Flashing Normal firmware...");\n')
+        out.writelines(line for line in i if "getprop" in line or "Target" in line
+                       or "firmware-update" in line)
+        out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
     with open("out/updater-script", 'r') as i, \
-            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as o:
-        correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec')\
+            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
+        correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec') \
             .replace('/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
-        o.write(correct)
+        out.write(correct)
     remove("out/updater-script")
 
 
 def nonarb_updater():
+    """
+    Generates updater-script for non-arb firmware zip
+    """
     today, host = pre()
     with open("tmp/META-INF/com/google/android/updater-script", 'r') as i, \
-            open("out/updater-script", "w", newline='\n') as o:
-        o.writelines("show_progress(0.200000, 10);" + '\n' + '\n')
-        o.writelines("# Generated by Xiaomi Flashable Firmware Creator" + '\n'
-                     + "# " + today + " - " + host + '\n' + '\n')
-        o.writelines('ui_print("Flashing non-ARB firmware...");' + '\n')
-        o.writelines(line for line in i if "getprop" in line or "Target" in line
-                     or "modem" in line or "bluetooth" in line or "dsp" in line)
-        o.writelines('\n' + "show_progress(0.100000, 2);" + '\n' + "set_progress(1.000000);" + '\n')
+            open("out/updater-script", "w", newline='\n') as out:
+        out.writelines("show_progress(0.200000, 10);\n\n")
+        out.writelines("# Generated by Xiaomi Flashable Firmware Creator\n"
+                       + f"# {today} - {host}\n'\n")
+        out.writelines('ui_print("Flashing non-ARB firmware...");\n')
+        out.writelines(line for line in i if "getprop" in line or "Target" in line
+                       or "modem" in line or "bluetooth" in line or "dsp" in line)
+        out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
     with open("out/updater-script", 'r') as i, \
-            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as o:
-        correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec')\
+            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
+        correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec') \
             .replace('/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
-        o.write(correct)
+        out.write(correct)
     remove("out/updater-script")
 
 
 def firmwareless_updater():
+    """
+    Generates updater-script for fw-less zip
+    """
     today, host = pre()
     with open("tmp/META-INF/com/google/android/updater-script", 'r') as i, \
-            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as o:
-        o.writelines("show_progress(0.200000, 10);" + '\n' + '\n')
-        o.writelines("# Generated by Xiaomi Flashable Firmware Creator" + '\n'
-                     + "# " + today + " - " + host + '\n' + '\n')
-        o.writelines('ui_print("Flashing firmware-less ROM...");' + '\n')
-        o.writelines(line for line in i if "getprop" in line or "Target" in line
-                     or "boot.img" in line or "system" in line or "vendor" in line)
-        o.writelines('\n' + "show_progress(0.100000, 2);" + '\n' + "set_progress(1.000000);" + '\n')
+            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
+        out.writelines("show_progress(0.200000, 10);\n\n")
+        out.writelines("# Generated by Xiaomi Flashable Firmware Creator\n"
+                       + f"# {today} - {host}\n'\n")
+        out.writelines('ui_print("Flashing firmware-less ROM...");\n')
+        out.writelines(line for line in i if "getprop" in line or "Target" in line
+                       or "boot.img" in line or "system" in line or "vendor" in line)
+        out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
 
 
 def vendor_updater():
+    """
+    Generates updater-script for fw-vendor zip
+    """
     today, host = pre()
     with open("tmp/META-INF/com/google/android/updater-script", 'r') as i, \
-            open("out/updater-script", "w", newline='\n') as o:
-        o.writelines("show_progress(0.200000, 10);" + '\n' + '\n')
-        o.writelines("# Generated by Xiaomi Flashable Firmware Creator" + '\n'
-                     + "# " + today + " - " + host + '\n' + '\n')
-        o.writelines('ui_print("Flashing firmware + vendor...");' + '\n')
-        o.writelines(line for line in i if "getprop" in line or "Target" in line or "firmware-update" in line
-                     or "vendor" in line)
-        o.writelines('\n' + "show_progress(0.100000, 2);" + '\n' + "set_progress(1.000000);" + '\n')
+            open("out/updater-script", "w", newline='\n') as out:
+        out.writelines("show_progress(0.200000, 10);\n\n")
+        out.writelines("# Generated by Xiaomi Flashable Firmware Creator\n"
+                       + f"# {today} - {host}\n'\n")
+        out.writelines('ui_print("Flashing firmware+vendor...");\n')
+        out.writelines(line for line in i if "getprop" in line or "Target" in line
+                       or "firmware-update" in line
+                       or "vendor" in line)
+        out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
     with open("out/updater-script", 'r') as i, \
-            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as o:
-        correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec')\
+            open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
+        correct = i.read().replace('/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec') \
             .replace('/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
-        o.write(correct)
+        out.write(correct)
     remove("out/updater-script")
 
 
 def make_zip():
+    """
+    Creates zip from extracted files
+    """
     rom, process = arg_parse()
     rom = path.basename(rom)
     with open("out/META-INF/com/google/android/updater-script", 'r') as i:
-        codename = str(i.readlines()[7].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
-    print("Creating " + process + " zip from " + rom + " for " + codename)
+        # codename = str(i.readlines()[7].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
+        codename = re.findall(r'Target:.*/[a-z]*/', i.read())[0].split('/')[1]
+    print(f"Creating {process} zip from {rom} for {codename}")
     make_archive('firmware', 'zip', 'out/')
     if path.exists('firmware.zip'):
         if process == "firmware":
-            rename('firmware.zip', 'fw_' + codename + "_" + rom)
+            rename('firmware.zip', f'fw_{codename}_{rom}')
         elif process == "nonarb":
-            rename('firmware.zip', 'fw-non-arb_' + codename + "_" + rom)
+            rename('firmware.zip', f'fw-non-arb_{codename}_{rom}')
         elif process == "firmwareless":
-            rename('firmware.zip', 'fw-less_' + codename + "_" + rom)
+            rename('firmware.zip', f'fw-less_{codename}_{rom}')
         elif process == "vendor":
-            rename('firmware.zip', 'fw-vendor_' + codename + "_" + rom)
+            rename('firmware.zip', f'fw-vendor_{codename}_{rom}')
         print("All done!")
         rmtree("tmp")
         rmtree('out')
     else:
-        print("Failed!" + '\n' + "Check out folder!")
+        print("Failed!\n Check out folder!")
 
 
 def main():
-    rom, process = arg_parse()
+    """
+    Xiaomi Flashable Firmware Creator
+    """
+    process = arg_parse()[1]
+    if path.exists('out'):
+        rmtree('out')
+    if path.exists('tmp'):
+        rmtree('tmp')
     makedirs("tmp", exist_ok=True)
     makedirs("out", exist_ok=True)
     makedirs("out/META-INF/com/google/android", exist_ok=True)
