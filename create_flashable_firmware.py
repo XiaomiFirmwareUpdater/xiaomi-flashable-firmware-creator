@@ -144,7 +144,8 @@ def firmware_updater():
                        + f"# {today} - {host}\n'\n")
         out.writelines('ui_print("Flashing Normal firmware...");\n')
         out.writelines(line for line in i if "getprop" in line or "Target" in line
-                       or "firmware-update" in line)
+                       or "firmware-update" in line and 'splash' not in line
+                       and 'dtbo' not in line and 'vbmeta' not in line)
         out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
     with open("out/updater-script", 'r') as i, \
             open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
@@ -204,8 +205,8 @@ def vendor_updater():
                        + f"# {today} - {host}\n'\n")
         out.writelines('ui_print("Flashing firmware+vendor...");\n')
         out.writelines(line for line in i if "getprop" in line or "Target" in line
-                       or "firmware-update" in line
-                       or "vendor" in line)
+                       or "firmware-update" in line or "vendor" in line
+                       and 'splash' not in line and 'dtbo' not in line and 'vbmeta' not in line)
         out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
     with open("out/updater-script", 'r') as i, \
             open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
