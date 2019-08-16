@@ -6,12 +6,20 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp
 from PyQt5.QtGui import QIcon
+from helpers.settings import load_settings, update_settings
+from helpers.language import load_strings, RTL_LANGUAGES
 
 
 class MainWindowUi(QMainWindow):
     """Main Window"""
     def __init__(self):
         super(MainWindowUi, self).__init__()
+        # Language related
+        self.settings = load_settings()
+        self.language = self.settings['language']
+        self.translations = load_strings()
+        self.strings = self.translations[self.language]
+        # Init
         self.window_body = QtWidgets.QWidget(self)
         self.process_type = QtWidgets.QGroupBox(self.window_body)
         self.btn_fw = QtWidgets.QRadioButton(self.process_type)
@@ -28,9 +36,12 @@ class MainWindowUi(QMainWindow):
         self.label = QtWidgets.QLabel(self.status_box)
         self.menu_file = QtWidgets.QMenu(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(self)
+        self.menu_language = QtWidgets.QMenu(self.menubar)
         self.menu_help = QtWidgets.QMenu(self.menubar)
         self.action_open_zip = QtWidgets.QAction(self)
         self.action_quit = QtWidgets.QAction(self)
+        self.action_language_en = QtWidgets.QAction(self)
+        self.action_language_ar = QtWidgets.QAction(self)
         self.action_help = QtWidgets.QAction(self)
         self.action_donate = QtWidgets.QAction(self)
         self.action_about = QtWidgets.QAction(self)
@@ -39,6 +50,7 @@ class MainWindowUi(QMainWindow):
         self.setWindowIcon(QIcon('icon.png'))
         self.setAcceptDrops(True)
         self.center()
+        self.adjust_layout_direction(self.language)
         self.show()
 
     def setup_ui(self, main_window):
@@ -77,7 +89,7 @@ class MainWindowUi(QMainWindow):
         """
         self.process_type.setGeometry(QtCore.QRect(10, 40, 161, 141))
         self.process_type.setObjectName("process_type")
-        self.btn_fw.setGeometry(QtCore.QRect(0, 20, 109, 30))
+        self.btn_fw.setGeometry(QtCore.QRect(0, 20, 161, 30))
         self.btn_fw.setObjectName("btn_fw")
         self.btn_nonarb.setGeometry(QtCore.QRect(0, 50, 161, 30))
         self.btn_nonarb.setObjectName("btn_nonarb")
@@ -128,6 +140,7 @@ class MainWindowUi(QMainWindow):
         self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 32))
         self.menubar.setObjectName("menubar")
         self.menu_file.setObjectName("menu_file")
+        self.menu_language.setObjectName("menu_language")
         self.menu_help.setObjectName("menu_help")
         main_window.setMenuBar(self.menubar)
         self.statusbar.setObjectName("statusbar")
@@ -135,56 +148,63 @@ class MainWindowUi(QMainWindow):
         self.action_open_zip.setObjectName("action_open_zip")
         self.action_quit.setObjectName("action_quit")
         self.action_quit.setStatusTip("action_quit_tip")
+        self.action_language_en.setObjectName("action_language_en")
+        self.action_language_ar.setObjectName("action_language_ar")
         self.action_help.setObjectName("action_help")
         self.action_donate.setObjectName("action_donate")
         self.action_about.setObjectName("action_about")
         self.action_report_bug.setObjectName("action_report_bug")
         self.menu_file.addAction(self.action_open_zip)
         self.menu_file.addAction(self.action_quit)
+        self.menu_language.addAction(self.action_language_en)
+        self.menu_language.addAction(self.action_language_ar)
         self.menu_help.addAction(self.action_help)
         self.menu_help.addAction(self.action_report_bug)
         self.menu_help.addAction(self.action_donate)
         self.menu_help.addAction(self.action_about)
         self.menubar.addAction(self.menu_file.menuAction())
+        self.menubar.addAction(self.menu_language.menuAction())
         self.menubar.addAction(self.menu_help.menuAction())
         # Shortcuts
         self.action_open_zip.setShortcut('Ctrl+O')
         self.action_quit.setShortcut('Ctrl+Q')
         # Actions
         self.action_quit.triggered.connect(qApp.quit)
+        self.action_language_en.triggered.connect(lambda: self.change_language(main_window, "en"))
+        self.action_language_ar.triggered.connect(lambda: self.change_language(main_window, "ar"))
 
     def retranslate_ui(self, main_window):
         """
         Items strings
         """
-        _translate = QtCore.QCoreApplication.translate
-        main_window.setWindowTitle(_translate("main_window",
-                                              "Xiaomi Flashable Firmware Creator "
-                                              "by XiaomiFirmwareUpdater"))
-        self.process_type.setTitle(_translate("main_window", "Process"))
-        self.btn_fw.setText(_translate("main_window", "Firmware"))
-        self.btn_nonarb.setText(_translate("main_window", "Non-ARB Firmware"))
-        self.btn_vendor.setText(_translate("main_window", "Firmware + Vendor"))
-        self.btn_fwless.setText(_translate("main_window", "Firmware-less ROM"))
-        self.groupbox_drop.setTitle(_translate("main_window", "Drop a file"))
-        self.label_drop.setText(_translate("main_window",
-                                           "<html><head/><body>"
-                                           "<p align=\"center\">"
-                                           "<span style=\" font-style:italic;\">"
-                                           "Drop a rom zip file here"
-                                           "</span></p></body></html>"))
-        self.btn_select.setText(_translate("main_window", "Select file"))
-        self.btn_create.setText(_translate("main_window", "Create"))
-        self.status_box.setTitle(_translate("main_window", "Status"))
-        self.menu_file.setTitle(_translate("main_window", "File"))
-        self.menu_help.setTitle(_translate("main_window", "Help"))
-        self.action_open_zip.setText(_translate("main_window", "Open ZIP"))
-        self.action_quit.setText(_translate("main_window", "Quit"))
-        self.action_quit.setStatusTip(_translate("action_quit_tip", "Exits the application"))
-        self.action_help.setText(_translate("main_window", "What\'s This?"))
-        self.action_donate.setText(_translate("main_window", "Donate"))
-        self.action_about.setText(_translate("main_window", "About"))
-        self.action_report_bug.setText(_translate("main_window", "Report Bug"))
+        _translate = QApplication.translate
+        main_window.setWindowTitle(_translate("main_window", self.strings['main_window']))
+        self.process_type.setTitle(_translate("process_type", self.strings['process_type']))
+        self.btn_fw.setText(_translate("btn_fw", self.strings['btn_fw']))
+        self.btn_nonarb.setText(_translate("btn_nonarb", self.strings['btn_nonarb']))
+        self.btn_vendor.setText(_translate("btn_vendor", self.strings['btn_vendor']))
+        self.btn_fwless.setText(_translate("btn_fwless", self.strings['btn_fwless']))
+        self.groupbox_drop.setTitle(_translate("groupbox_drop", self.strings['groupbox_drop']))
+        self.label_drop.setText(_translate("label_drop", self.strings['label_drop']))
+        self.btn_select.setText(_translate("btn_select", self.strings['btn_select']))
+        self.btn_create.setText(_translate("btn_create", self.strings['btn_create']))
+        self.status_box.setTitle(_translate("status_box", self.strings['status_box']))
+        self.menu_file.setTitle(_translate("menu_file", self.strings['menu_file']))
+        self.menu_help.setTitle(_translate("menu_help", self.strings['menu_help']))
+        self.menu_language.setTitle(_translate("menu_language", self.strings['menu_language']))
+        self.action_open_zip.setText(_translate("action_open_zip", self.strings['action_open_zip']))
+        self.action_quit.setText(_translate("action_quit", self.strings['action_quit']))
+        self.action_quit.setStatusTip(_translate("action_quit_tip",
+                                                 self.strings['action_quit_tip']))
+        self.action_language_en.setText(_translate("action_language_en",
+                                                   self.strings['action_language_en']))
+        self.action_language_ar.setText(_translate("action_language_ar",
+                                                   self.strings['action_language_ar']))
+        self.action_help.setText(_translate("action_help", self.strings['action_help']))
+        self.action_donate.setText(_translate("action_donate", self.strings['action_donate']))
+        self.action_about.setText(_translate("action_about", self.strings['action_about']))
+        self.action_report_bug.setText(_translate("action_report_bug",
+                                                  self.strings['action_report_bug']))
 
     def center(self):
         """
@@ -199,6 +219,26 @@ class MainWindowUi(QMainWindow):
         window.moveCenter(center_point)
         # top left of rectangle becomes top left of window centering it
         self.move(window.topLeft())
+
+    def change_language(self, main_window, lang: str):
+        """
+        Update strings language and settings
+        """
+        self.settings.update({'language': lang})
+        update_settings(self.settings)
+        self.language = self.settings['language']
+        self.strings = self.translations[self.language]
+        self.adjust_layout_direction(lang)
+        self.retranslate_ui(main_window)
+
+    def adjust_layout_direction(self, lang: str):
+        """
+        Change Layout Direction based on languages
+        """
+        if lang in RTL_LANGUAGES:
+            self.setLayoutDirection(QtCore.Qt.RightToLeft)
+        else:
+            self.setLayoutDirection(QtCore.Qt.LeftToRight)
 
 
 if __name__ == '__main__':
