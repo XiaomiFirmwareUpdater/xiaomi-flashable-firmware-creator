@@ -4,7 +4,7 @@
 
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp
 from PyQt5.QtGui import QIcon
 
 
@@ -58,7 +58,23 @@ class MainWindowUi(QMainWindow):
         main_window.setMinimumSize(QtCore.QSize(600, 0))
         main_window.setMaximumSize(QtCore.QSize(600, 400))
         self.window_body.setObjectName("window_body")
+        main_window.setCentralWidget(self.window_body)
         # GroupBox: process_type
+        self.process_choose()
+        # GroupBox: Drop files
+        self.file_dropper()
+        # Frame: Status
+        self.status_frame()
+        # Menubar
+        self.menu_bar(main_window)
+        # UI Strings
+        self.retranslate_ui(main_window)
+        QtCore.QMetaObject.connectSlotsByName(main_window)
+
+    def process_choose(self):
+        """
+        GroupBox: process_type
+        """
         self.process_type.setGeometry(QtCore.QRect(10, 40, 161, 141))
         self.process_type.setObjectName("process_type")
         self.btn_fw.setGeometry(QtCore.QRect(0, 20, 109, 30))
@@ -69,7 +85,11 @@ class MainWindowUi(QMainWindow):
         self.btn_vendor.setObjectName("btn_vendor")
         self.btn_fwless.setGeometry(QtCore.QRect(0, 110, 161, 30))
         self.btn_fwless.setObjectName("btn_fwless")
-        # GroupBox: Drop files
+
+    def file_dropper(self):
+        """
+        GroupBox: Drop files
+        """
         self.groupbox_drop.setGeometry(QtCore.QRect(190, 40, 391, 141))
         self.groupbox_drop.setObjectName("groupbox_drop")
         self.groupbox_drop.setAcceptDrops(True)
@@ -79,7 +99,11 @@ class MainWindowUi(QMainWindow):
         self.label_drop.setLineWidth(2)
         self.label_drop.setAlignment(QtCore.Qt.AlignCenter)
         self.label_drop.setObjectName("label_drop")
-        # Frame: Status
+
+    def status_frame(self):
+        """
+        Frame: Status
+        """
         self.frame.setGeometry(QtCore.QRect(10, 190, 580, 80))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -96,8 +120,11 @@ class MainWindowUi(QMainWindow):
         self.label.setLineWidth(2)
         self.label.setText("")
         self.label.setObjectName("label")
-        # Menubar
-        main_window.setCentralWidget(self.window_body)
+
+    def menu_bar(self, main_window):
+        """
+        Menubar
+        """
         self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 32))
         self.menubar.setObjectName("menubar")
         self.menu_file.setObjectName("menu_file")
@@ -107,6 +134,7 @@ class MainWindowUi(QMainWindow):
         main_window.setStatusBar(self.statusbar)
         self.action_open_zip.setObjectName("action_open_zip")
         self.action_quit.setObjectName("action_quit")
+        self.action_quit.setStatusTip("action_quit_tip")
         self.action_help.setObjectName("action_help")
         self.action_donate.setObjectName("action_donate")
         self.action_about.setObjectName("action_about")
@@ -119,9 +147,11 @@ class MainWindowUi(QMainWindow):
         self.menu_help.addAction(self.action_about)
         self.menubar.addAction(self.menu_file.menuAction())
         self.menubar.addAction(self.menu_help.menuAction())
-
-        self.retranslate_ui(main_window)
-        QtCore.QMetaObject.connectSlotsByName(main_window)
+        # Shortcuts
+        self.action_open_zip.setShortcut('Ctrl+O')
+        self.action_quit.setShortcut('Ctrl+Q')
+        # Actions
+        self.action_quit.triggered.connect(qApp.quit)
 
     def retranslate_ui(self, main_window):
         """
@@ -150,6 +180,7 @@ class MainWindowUi(QMainWindow):
         self.menu_help.setTitle(_translate("main_window", "Help"))
         self.action_open_zip.setText(_translate("main_window", "Open ZIP"))
         self.action_quit.setText(_translate("main_window", "Quit"))
+        self.action_quit.setStatusTip(_translate("action_quit_tip", "Exits the application"))
         self.action_help.setText(_translate("main_window", "What\'s This?"))
         self.action_donate.setText(_translate("main_window", "Donate"))
         self.action_about.setText(_translate("main_window", "About"))
