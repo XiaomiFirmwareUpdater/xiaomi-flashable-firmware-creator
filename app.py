@@ -4,10 +4,31 @@
 
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFileDialog
+from PyQt5.QtCore import QMimeDatabase
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFileDialog, QGroupBox
 from PyQt5.QtGui import QIcon
 from helpers.settings import load_settings, update_settings
 from helpers.language import load_strings, RTL_LANGUAGES
+
+
+class DropSpace(QGroupBox):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, file):
+        file_type = QMimeDatabase().mimeTypeForFile(
+            file.mimeData().urls()[0].toLocalFile()).name()
+        if file_type == 'application/zip':
+            file.accept()
+        else:
+            file.ignore()
+
+    def dropEvent(self, file):
+        filepath = file.mimeData().urls()[0].toLocalFile()
+        WINDOW.filepath = filepath
+        WINDOW.filename = filepath.split('/')[-1]
+        WINDOW.status_label.setText(f"File {WINDOW.filename} is selected")
 
 
 class MainWindowUi(QMainWindow):
@@ -26,7 +47,7 @@ class MainWindowUi(QMainWindow):
         self.btn_nonarb = QtWidgets.QRadioButton(self.process_type)
         self.btn_vendor = QtWidgets.QRadioButton(self.process_type)
         self.btn_fwless = QtWidgets.QRadioButton(self.process_type)
-        self.groupbox_drop = QtWidgets.QGroupBox(self.window_body)
+        self.groupbox_drop = DropSpace(self.window_body)
         self.label_drop = QtWidgets.QLabel(self.groupbox_drop)
         self.frame = QtWidgets.QFrame(self.window_body)
         self.btn_select = QtWidgets.QPushButton(self.frame)
@@ -52,7 +73,6 @@ class MainWindowUi(QMainWindow):
         # setup
         self.setup_ui(self)
         self.setWindowIcon(QIcon('icon.png'))
-        self.setAcceptDrops(True)
         self.center()
         self.adjust_layout_direction(self.language)
         self.show()
