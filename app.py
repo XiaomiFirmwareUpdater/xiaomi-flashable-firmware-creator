@@ -4,7 +4,7 @@
 
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFileDialog
 from PyQt5.QtGui import QIcon
 from helpers.settings import load_settings, update_settings
 from helpers.language import load_strings, RTL_LANGUAGES
@@ -33,7 +33,7 @@ class MainWindowUi(QMainWindow):
         self.btn_create = QtWidgets.QPushButton(self.frame)
         self.status_box = QtWidgets.QGroupBox(self.window_body)
         self.menubar = QtWidgets.QMenuBar(self)
-        self.label = QtWidgets.QLabel(self.status_box)
+        self.status_label = QtWidgets.QLabel(self.status_box)
         self.menu_file = QtWidgets.QMenu(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(self)
         self.menu_language = QtWidgets.QMenu(self.menubar)
@@ -46,6 +46,10 @@ class MainWindowUi(QMainWindow):
         self.action_donate = QtWidgets.QAction(self)
         self.action_about = QtWidgets.QAction(self)
         self.action_report_bug = QtWidgets.QAction(self)
+        # vars
+        self.filepath = ''
+        self.filename = ''
+        # setup
         self.setup_ui(self)
         self.setWindowIcon(QIcon('icon.png'))
         self.setAcceptDrops(True)
@@ -126,12 +130,14 @@ class MainWindowUi(QMainWindow):
         self.btn_create.setObjectName("btn_create")
         self.status_box.setGeometry(QtCore.QRect(10, 249, 580, 91))
         self.status_box.setObjectName("status_box")
-        self.label.setGeometry(QtCore.QRect(0, 30, 581, 51))
-        self.label.setFrameShape(QtWidgets.QFrame.Box)
-        self.label.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.label.setLineWidth(2)
-        self.label.setText("")
-        self.label.setObjectName("label")
+        self.status_label.setGeometry(QtCore.QRect(0, 30, 580, 51))
+        self.status_label.setFrameShape(QtWidgets.QFrame.Box)
+        self.status_label.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.status_label.setLineWidth(2)
+        self.status_label.setText("")
+        self.status_label.setObjectName("status_label")
+        # Action
+        self.btn_select.clicked.connect(self.select_file)
 
     def menu_bar(self, main_window):
         """
@@ -169,6 +175,7 @@ class MainWindowUi(QMainWindow):
         self.action_open_zip.setShortcut('Ctrl+O')
         self.action_quit.setShortcut('Ctrl+Q')
         # Actions
+        self.action_open_zip.triggered.connect(self.select_file)
         self.action_quit.triggered.connect(qApp.quit)
         self.action_language_en.triggered.connect(lambda: self.change_language(main_window, "en"))
         self.action_language_ar.triggered.connect(lambda: self.change_language(main_window, "ar"))
@@ -239,6 +246,13 @@ class MainWindowUi(QMainWindow):
             self.setLayoutDirection(QtCore.Qt.RightToLeft)
         else:
             self.setLayoutDirection(QtCore.Qt.LeftToRight)
+
+    def select_file(self):
+        dialog = QFileDialog()
+        filepath = dialog.getOpenFileName(self, 'Select MIUI zip', '', "MIUI zip files (miui*.zip)")[0]
+        self.filepath = filepath
+        self.filename = filepath.split('/')[-1]
+        self.status_label.setText(f"File {self.filename} is selected")
 
 
 if __name__ == '__main__':
