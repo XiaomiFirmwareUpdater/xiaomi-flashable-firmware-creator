@@ -5,6 +5,7 @@
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget
+from PyQt5.QtGui import QIcon
 
 
 class MainWindowUi(QMainWindow):
@@ -35,6 +36,7 @@ class MainWindowUi(QMainWindow):
         self.action_about = QtWidgets.QAction(self)
         self.action_report_bug = QtWidgets.QAction(self)
         self.setup_ui(self)
+        self.setWindowIcon(QIcon('icon.png'))
         self.setAcceptDrops(True)
         self.center()
         self.show()
