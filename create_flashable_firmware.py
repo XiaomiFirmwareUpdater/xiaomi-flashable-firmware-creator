@@ -45,6 +45,17 @@ def arg_parse():
     return rom, process
 
 
+def init():
+    """Initial checks and housekeeping"""
+    if path.exists('out'):
+        rmtree('out')
+    if path.exists('tmp'):
+        rmtree('tmp')
+    makedirs("tmp", exist_ok=True)
+    makedirs("out", exist_ok=True)
+    makedirs("out/META-INF/com/google/android", exist_ok=True)
+
+
 def pre():
     """
     Sets today data and hostname
@@ -291,13 +302,7 @@ def main():
     Xiaomi Flashable Firmware Creator
     """
     rom, process = arg_parse()
-    if path.exists('out'):
-        rmtree('out')
-    if path.exists('tmp'):
-        rmtree('tmp')
-    makedirs("tmp", exist_ok=True)
-    makedirs("out", exist_ok=True)
-    makedirs("out/META-INF/com/google/android", exist_ok=True)
+
     fw_type = firmware_type(rom)
     if fw_type == 'qcom':
         if process == "firmware":

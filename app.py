@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFi
 from PyQt5.QtGui import QIcon
 from helpers.settings import load_settings, update_settings
 from helpers.language import load_strings, RTL_LANGUAGES
+import create_flashable_firmware as cf
 
 
 class DropSpace(QGroupBox):
@@ -173,6 +174,7 @@ class MainWindowUi(QMainWindow):
         self.status_label.setObjectName("status_label")
         # Action
         self.btn_select.clicked.connect(self.select_file)
+        self.btn_create.clicked.connect(self.create_zip)
 
     def menu_bar(self, main_window):
         """
@@ -292,6 +294,67 @@ class MainWindowUi(QMainWindow):
         self.filepath = filepath
         self.filename = filepath.split('/')[-1]
         self.status_label.setText(f"File {self.filename} is selected")
+
+    def create_zip(self):
+        """
+        creates output zip file
+        """
+        checked_radiobutton = None
+        process = None
+
+        for button in self.process_type.findChildren(QtWidgets.QRadioButton):
+            if button.isChecked():
+                checked_radiobutton = button.text()
+        if checked_radiobutton == 'Firmware':
+            process = 'firmware'
+        elif checked_radiobutton == 'Non-ARB Firmware':
+            process = 'nonarb'
+        elif checked_radiobutton == 'Firmware + Vendor':
+            process = 'vendor'
+        elif checked_radiobutton == 'Firmware-less ROM':
+            process = 'firmwareless'
+        self.status_label.setText(f"Starting {process} job")
+        cf.init()
+        fw_type = cf.firmware_type(self.filepath)
+        self.status_label.setText(f"Detected {fw_type} device")
+        if fw_type == 'qcom':
+            if process == "firmware":
+                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                cf.firmware_extract(self.filepath, process)
+                self.status_label.setText("Generating updater-script...")
+                cf.firmware_updater()
+            elif process == "nonarb":
+                self.status_label.setText(f"Unzipping MIUI...")
+                cf.firmware_extract(self.filepath, process)
+                self.status_label.setText("Generating updater-script...")
+                cf.nonarb_updater()
+            elif process == "firmwareless":
+                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                cf.rom_extract(self.filepath)
+                self.status_label.setText("Generating updater-script...")
+                cf.firmwareless_updater()
+            elif process == "vendor":
+                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                cf.vendor_extract(self.filepath)
+                self.status_label.setText("Generating updater-script...")
+                cf.vendor_updater()
+        elif fw_type == 'mtk':
+            if process == "firmware":
+                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                cf.mtk_firmware_extract(self.filepath)
+                self.status_label.setText("Generating updater-script...")
+                cf. mtk_firmware_updater()
+            elif process == "vendor":
+                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                cf.vendor_extract(self.filepath)
+                self.status_label.setText("Generating updater-script...")
+                cf.mtk_vendor_updater()
+            else:
+                self.status_label.setText("Error: Unsupported operation for MTK!")
+        else:
+            self.status_label.setText("Couldn't find firmware!")
+        cf.make_zip(self.filepath, process)
+        self.status_label.setText("All Done!")
 
 
 if __name__ == '__main__':
