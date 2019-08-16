@@ -12,11 +12,19 @@ from helpers.language import load_strings, RTL_LANGUAGES
 
 
 class DropSpace(QGroupBox):
+    """
+    Modified Groupbox to allow drag and drop
+    """
     def __init__(self, parent):
         super().__init__(parent)
         self.setAcceptDrops(True)
 
-    def dragEnterEvent(self, file):
+    @classmethod
+    def dragEnterEvent(cls, file):
+        """
+        Override default dragEnterEvent
+        Allows dragging zip files only
+        """
         file_type = QMimeDatabase().mimeTypeForFile(
             file.mimeData().urls()[0].toLocalFile()).name()
         if file_type == 'application/zip':
@@ -24,7 +32,12 @@ class DropSpace(QGroupBox):
         else:
             file.ignore()
 
-    def dropEvent(self, file):
+    @classmethod
+    def dropEvent(cls, file):
+        """
+        Override default dropEvent
+        Update selected filename
+        """
         filepath = file.mimeData().urls()[0].toLocalFile()
         WINDOW.filepath = filepath
         WINDOW.filename = filepath.split('/')[-1]
@@ -121,6 +134,8 @@ class MainWindowUi(QMainWindow):
         self.btn_vendor.setObjectName("btn_vendor")
         self.btn_fwless.setGeometry(QtCore.QRect(0, 110, 161, 30))
         self.btn_fwless.setObjectName("btn_fwless")
+        # Actions
+        self.btn_fw.setChecked(True)
 
     def file_dropper(self):
         """
@@ -154,7 +169,7 @@ class MainWindowUi(QMainWindow):
         self.status_label.setFrameShape(QtWidgets.QFrame.Box)
         self.status_label.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.status_label.setLineWidth(2)
-        self.status_label.setText("")
+        self.status_label.setText("Ready")
         self.status_label.setObjectName("status_label")
         # Action
         self.btn_select.clicked.connect(self.select_file)
@@ -268,8 +283,12 @@ class MainWindowUi(QMainWindow):
             self.setLayoutDirection(QtCore.Qt.LeftToRight)
 
     def select_file(self):
+        """
+        Opens select file Dialog
+        """
         dialog = QFileDialog()
-        filepath = dialog.getOpenFileName(self, 'Select MIUI zip', '', "MIUI zip files (miui*.zip)")[0]
+        filepath = dialog.getOpenFileName(self, 'Select MIUI zip',
+                                          '', "MIUI zip files (miui*.zip)")[0]
         self.filepath = filepath
         self.filename = filepath.split('/')[-1]
         self.status_label.setText(f"File {self.filename} is selected")
