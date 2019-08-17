@@ -3,6 +3,7 @@
 """Xiaomi Flashable Firmware Creator Settings loader"""
 
 import json
+from locale import getdefaultlocale
 
 
 def load_settings() -> dict:
@@ -10,8 +11,13 @@ def load_settings() -> dict:
     loads settings into dict
     :return: dict
     """
-    with open('data/settings.json', 'r') as json_file:
-        settings = json.load(json_file)
+    try:
+        with open('data/settings.json', 'r') as json_file:
+            settings = json.load(json_file)
+    except FileNotFoundError:
+        locale = getdefaultlocale()[0]
+        settings = dict({"language": locale})
+        update_settings(settings)
     return settings
 
 
