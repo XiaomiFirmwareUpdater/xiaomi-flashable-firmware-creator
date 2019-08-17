@@ -60,6 +60,7 @@ class MainWindowUi(QMainWindow):
         self.frame = QtWidgets.QFrame(self.window_body)
         self.btn_select = QtWidgets.QPushButton(self.frame)
         self.btn_create = QtWidgets.QPushButton(self.frame)
+        self.error_message = QtWidgets.QMessageBox(self.window_body)
         self.menubar = QtWidgets.QMenuBar(self)
         self.status_box = QtWidgets.QTextEdit(self.window_body)
         self.progress_bar = QtWidgets.QProgressBar(self.window_body)
@@ -159,13 +160,13 @@ class MainWindowUi(QMainWindow):
         self.btn_create.setGeometry(QtCore.QRect(290, 20, 105, 35))
         self.btn_create.setObjectName("btn_create")
         self.status_box.setGeometry(QtCore.QRect(10, 250, 580, 40))
+        self.error_message.setIcon(QtWidgets.QMessageBox.Critical)
         self.status_box.setObjectName("status_box")
         self.status_box.setFrameShape(QtWidgets.QFrame.Box)
         self.status_box.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.status_box.setReadOnly(True)
         self.status_box.setOverwriteMode(True)
         self.status_box.setObjectName("status_box")
-        self.status_box.setText("Ready")
         self.progress_bar.setGeometry(QtCore.QRect(10, 300, 580, 40))
         self.progress_bar.setObjectName("progress_bar")
         self.progress_bar.setValue(0)
@@ -238,6 +239,10 @@ class MainWindowUi(QMainWindow):
                                            "Drop a rom zip file here"
                                            "</span></p></body></html>"))
         self.btn_select.setText(_translate("Main Buttons", "Select file"))
+        self.error_message.setWindowTitle(_translate("Main Buttons", "Error"))
+        self.error_message.setText(_translate("Main Buttons", "You must select a ROM zip first!"))
+        self.btn_select.setText(_translate("Main Buttons", "Select file"))
+        self.btn_select.setText(_translate("Main Buttons", "Select file"))
         self.btn_create.setText(_translate("Main Buttons", "Create"))
         self.menu_file.setTitle(_translate("Menu bar", "File"))
         self.menu_language.setTitle(_translate("Menu bar", "Language"))
@@ -251,6 +256,8 @@ class MainWindowUi(QMainWindow):
         self.action_donate.setText(_translate("Menu bar", "Donate"))
         self.action_about.setText(_translate("Menu bar", "About"))
         self.action_report_bug.setText(_translate("Menu bar", "Report Bug"))
+        self.status_box.setText(_translate("Status Box", "Ready"))
+
 
     def center(self):
         """
@@ -302,6 +309,9 @@ class MainWindowUi(QMainWindow):
         """
         checked_radiobutton = None
         process = None
+        if not self.filepath:
+            self.error_message.exec_()
+            return
 
         for button in self.process_type.findChildren(QtWidgets.QRadioButton):
             if button.isChecked():
