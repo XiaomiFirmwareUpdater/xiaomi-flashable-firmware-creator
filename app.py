@@ -293,7 +293,7 @@ class MainWindowUi(QMainWindow):
         """
         Change Layout Direction based on languages
         """
-        rtl_languages = ['ar']
+        rtl_languages = ['ar', 'az', 'dv', 'fa', 'he', 'ur']
         if lang in rtl_languages:
             self.setLayoutDirection(QtCore.Qt.RightToLeft)
         else:
