@@ -4,9 +4,9 @@
 
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtCore import QMimeDatabase
+from PyQt5.QtCore import QMimeDatabase, QUrl
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFileDialog, QGroupBox
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QDesktopServices
 from helpers.settings import load_settings, update_settings
 import create_flashable_firmware as cf
 
@@ -217,6 +217,9 @@ class MainWindowUi(QMainWindow):
             lambda: self.change_language(main_window, "en_US"))
         self.action_language_ar.triggered.connect(
             lambda: self.change_language(main_window, "ar"))
+        self.action_report_bug.triggered.connect(
+            lambda: self.open_link('https://github.com/XiaomiFirmwareUpdater/'
+                                   'xiaomi-flashable-firmware-creator.py/issues'))
 
     def retranslate_ui(self, main_window):
         """
@@ -257,7 +260,6 @@ class MainWindowUi(QMainWindow):
         self.action_about.setText(_translate("Menu bar", "About"))
         self.action_report_bug.setText(_translate("Menu bar", "Report Bug"))
         self.status_box.setText(_translate("Status Box", "Ready"))
-
 
     def center(self):
         """
@@ -390,6 +392,13 @@ class MainWindowUi(QMainWindow):
         cf.make_zip(self.filepath, process)
         self.status_box.setText("All Done!")
         self.progress_bar.setValue(100)
+
+    @staticmethod
+    def open_link(link):
+        """
+        Opens link in browser
+        """
+        QDesktopServices.openUrl(QUrl(link))
 
 
 if __name__ == '__main__':
