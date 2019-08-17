@@ -62,6 +62,7 @@ class MainWindowUi(QMainWindow):
         self.btn_create = QtWidgets.QPushButton(self.frame)
         self.menubar = QtWidgets.QMenuBar(self)
         self.status_box = QtWidgets.QTextEdit(self.window_body)
+        self.progress_bar = QtWidgets.QProgressBar(self.window_body)
         self.menu_file = QtWidgets.QMenu(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(self)
         self.menu_language = QtWidgets.QMenu(self.menubar)
@@ -118,15 +119,15 @@ class MainWindowUi(QMainWindow):
         """
         GroupBox: process_type
         """
-        self.process_type.setGeometry(QtCore.QRect(10, 40, 161, 141))
+        self.process_type.setGeometry(QtCore.QRect(10, 20, 160, 140))
         self.process_type.setObjectName("process_type")
-        self.btn_fw.setGeometry(QtCore.QRect(0, 20, 161, 30))
+        self.btn_fw.setGeometry(QtCore.QRect(0, 20, 160, 30))
         self.btn_fw.setObjectName("btn_fw")
-        self.btn_nonarb.setGeometry(QtCore.QRect(0, 50, 161, 30))
+        self.btn_nonarb.setGeometry(QtCore.QRect(0, 50, 160, 30))
         self.btn_nonarb.setObjectName("btn_nonarb")
-        self.btn_vendor.setGeometry(QtCore.QRect(0, 80, 161, 30))
+        self.btn_vendor.setGeometry(QtCore.QRect(0, 80, 160, 30))
         self.btn_vendor.setObjectName("btn_vendor")
-        self.btn_fwless.setGeometry(QtCore.QRect(0, 110, 161, 30))
+        self.btn_fwless.setGeometry(QtCore.QRect(0, 110, 160, 30))
         self.btn_fwless.setObjectName("btn_fwless")
         # Actions
         self.btn_fw.setChecked(True)
@@ -135,7 +136,7 @@ class MainWindowUi(QMainWindow):
         """
         GroupBox: Drop files
         """
-        self.groupbox_drop.setGeometry(QtCore.QRect(190, 40, 391, 141))
+        self.groupbox_drop.setGeometry(QtCore.QRect(195, 20, 390, 140))
         self.groupbox_drop.setObjectName("groupbox_drop")
         self.groupbox_drop.setAcceptDrops(True)
         self.label_drop.setGeometry(QtCore.QRect(0, 30, 381, 111))
@@ -149,23 +150,26 @@ class MainWindowUi(QMainWindow):
         """
         Frame: Status
         """
-        self.frame.setGeometry(QtCore.QRect(10, 190, 580, 80))
+        self.frame.setGeometry(QtCore.QRect(10, 170, 580, 80))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.btn_select.setGeometry(QtCore.QRect(160, 20, 104, 37))
+        self.btn_select.setGeometry(QtCore.QRect(175, 20, 105, 35))
         self.btn_select.setObjectName("btn_select")
-        self.btn_create.setGeometry(QtCore.QRect(280, 20, 104, 37))
+        self.btn_create.setGeometry(QtCore.QRect(290, 20, 105, 35))
         self.btn_create.setObjectName("btn_create")
-        self.status_box.setGeometry(QtCore.QRect(10, 280, 580, 40))
+        self.status_box.setGeometry(QtCore.QRect(10, 250, 580, 40))
         self.status_box.setObjectName("status_box")
         self.status_box.setFrameShape(QtWidgets.QFrame.Box)
         self.status_box.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.status_box.setLineWidth(2)
         self.status_box.setReadOnly(True)
         self.status_box.setOverwriteMode(True)
         self.status_box.setObjectName("status_box")
         self.status_box.setText("Ready")
+        self.progress_bar.setGeometry(QtCore.QRect(10, 300, 580, 40))
+        self.progress_bar.setObjectName("progress_bar")
+        self.progress_bar.setValue(0)
+
         # Action
         self.btn_select.clicked.connect(self.select_file)
         self.btn_create.clicked.connect(self.create_zip)
@@ -208,8 +212,10 @@ class MainWindowUi(QMainWindow):
         # Actions
         self.action_open_zip.triggered.connect(self.select_file)
         self.action_quit.triggered.connect(qApp.quit)
-        self.action_language_en.triggered.connect(lambda: self.change_language(main_window, "en_US"))
-        self.action_language_ar.triggered.connect(lambda: self.change_language(main_window, "ar"))
+        self.action_language_en.triggered.connect(
+            lambda: self.change_language(main_window, "en_US"))
+        self.action_language_ar.triggered.connect(
+            lambda: self.change_language(main_window, "ar"))
 
     def retranslate_ui(self, main_window):
         """
@@ -273,8 +279,8 @@ class MainWindowUi(QMainWindow):
         """
         Change Layout Direction based on languages
         """
-        RTL_LANGUAGES = ['ar']
-        if lang in RTL_LANGUAGES:
+        rtl_languages = ['ar']
+        if lang in rtl_languages:
             self.setLayoutDirection(QtCore.Qt.RightToLeft)
         else:
             self.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -309,47 +315,71 @@ class MainWindowUi(QMainWindow):
         elif checked_radiobutton == 'Firmware-less ROM':
             process = 'firmwareless'
         self.status_box.setText(f"Starting {process} job")
+        self.progress_bar.setValue(1)
         cf.init()
+        self.progress_bar.setValue(5)
         fw_type = cf.firmware_type(self.filepath)
         self.status_box.setText(f"Detected {fw_type} device")
+        self.progress_bar.setValue(10)
         if fw_type == 'qcom':
             if process == "firmware":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.progress_bar.setValue(30)
                 cf.firmware_extract(self.filepath, process)
+                self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
+                self.progress_bar.setValue(55)
                 cf.firmware_updater()
             elif process == "nonarb":
                 self.status_box.setText(f"Unzipping MIUI...")
+                self.progress_bar.setValue(30)
                 cf.firmware_extract(self.filepath, process)
+                self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
+                self.progress_bar.setValue(55)
                 cf.nonarb_updater()
             elif process == "firmwareless":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.progress_bar.setValue(30)
                 cf.rom_extract(self.filepath)
+                self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
+                self.progress_bar.setValue(55)
                 cf.firmwareless_updater()
             elif process == "vendor":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.progress_bar.setValue(30)
                 cf.vendor_extract(self.filepath)
+                self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
+                self.progress_bar.setValue(55)
                 cf.vendor_updater()
         elif fw_type == 'mtk':
             if process == "firmware":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.progress_bar.setValue(30)
                 cf.mtk_firmware_extract(self.filepath)
+                self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
+                self.progress_bar.setValue(55)
                 cf.mtk_firmware_updater()
             elif process == "vendor":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.progress_bar.setValue(30)
                 cf.vendor_extract(self.filepath)
+                self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
+                self.progress_bar.setValue(55)
                 cf.mtk_vendor_updater()
             else:
                 self.status_box.setText("Error: Unsupported operation for MTK!")
         else:
             self.status_box.setText("Couldn't find firmware!")
+        self.status_box.setText("Creating zip..")
+        self.progress_bar.setValue(75)
         cf.make_zip(self.filepath, process)
         self.status_box.setText("All Done!")
+        self.progress_bar.setValue(100)
 
 
 if __name__ == '__main__':
