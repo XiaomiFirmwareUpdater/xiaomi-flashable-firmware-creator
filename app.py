@@ -41,7 +41,7 @@ class DropSpace(QGroupBox):
         filepath = file.mimeData().urls()[0].toLocalFile()
         WINDOW.filepath = filepath
         WINDOW.filename = filepath.split('/')[-1]
-        WINDOW.status_label.setText(f"File {WINDOW.filename} is selected")
+        WINDOW.status_box.setText(f"File {WINDOW.filename} is selected")
 
 
 class MainWindowUi(QMainWindow):
@@ -60,9 +60,8 @@ class MainWindowUi(QMainWindow):
         self.frame = QtWidgets.QFrame(self.window_body)
         self.btn_select = QtWidgets.QPushButton(self.frame)
         self.btn_create = QtWidgets.QPushButton(self.frame)
-        self.status_box = QtWidgets.QGroupBox(self.window_body)
         self.menubar = QtWidgets.QMenuBar(self)
-        self.status_label = QtWidgets.QLabel(self.status_box)
+        self.status_box = QtWidgets.QTextEdit(self.window_body)
         self.menu_file = QtWidgets.QMenu(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(self)
         self.menu_language = QtWidgets.QMenu(self.menubar)
@@ -158,14 +157,15 @@ class MainWindowUi(QMainWindow):
         self.btn_select.setObjectName("btn_select")
         self.btn_create.setGeometry(QtCore.QRect(280, 20, 104, 37))
         self.btn_create.setObjectName("btn_create")
-        self.status_box.setGeometry(QtCore.QRect(10, 249, 580, 91))
+        self.status_box.setGeometry(QtCore.QRect(10, 280, 580, 40))
         self.status_box.setObjectName("status_box")
-        self.status_label.setGeometry(QtCore.QRect(0, 30, 580, 51))
-        self.status_label.setFrameShape(QtWidgets.QFrame.Box)
-        self.status_label.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.status_label.setLineWidth(2)
-        self.status_label.setText("Ready")
-        self.status_label.setObjectName("status_label")
+        self.status_box.setFrameShape(QtWidgets.QFrame.Box)
+        self.status_box.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.status_box.setLineWidth(2)
+        self.status_box.setReadOnly(True)
+        self.status_box.setOverwriteMode(True)
+        self.status_box.setObjectName("status_box")
+        self.status_box.setText("Ready")
         # Action
         self.btn_select.clicked.connect(self.select_file)
         self.btn_create.clicked.connect(self.create_zip)
@@ -233,7 +233,6 @@ class MainWindowUi(QMainWindow):
                                            "</span></p></body></html>"))
         self.btn_select.setText(_translate("Main Buttons", "Select file"))
         self.btn_create.setText(_translate("Main Buttons", "Create"))
-        self.status_box.setTitle(_translate("Status Box", "Status"))
         self.menu_file.setTitle(_translate("Menu bar", "File"))
         self.menu_language.setTitle(_translate("Menu bar", "Language"))
         self.menu_help.setTitle(_translate("Menu bar", "Help"))
@@ -289,7 +288,7 @@ class MainWindowUi(QMainWindow):
                                           '', "MIUI zip files (miui*.zip)")[0]
         self.filepath = filepath
         self.filename = filepath.split('/')[-1]
-        self.status_label.setText(f"File {self.filename} is selected")
+        self.status_box.setText(f"File {self.filename} is selected")
 
     def create_zip(self):
         """
@@ -309,48 +308,48 @@ class MainWindowUi(QMainWindow):
             process = 'vendor'
         elif checked_radiobutton == 'Firmware-less ROM':
             process = 'firmwareless'
-        self.status_label.setText(f"Starting {process} job")
+        self.status_box.setText(f"Starting {process} job")
         cf.init()
         fw_type = cf.firmware_type(self.filepath)
-        self.status_label.setText(f"Detected {fw_type} device")
+        self.status_box.setText(f"Detected {fw_type} device")
         if fw_type == 'qcom':
             if process == "firmware":
-                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 cf.firmware_extract(self.filepath, process)
-                self.status_label.setText("Generating updater-script...")
+                self.status_box.setText("Generating updater-script...")
                 cf.firmware_updater()
             elif process == "nonarb":
-                self.status_label.setText(f"Unzipping MIUI...")
+                self.status_box.setText(f"Unzipping MIUI...")
                 cf.firmware_extract(self.filepath, process)
-                self.status_label.setText("Generating updater-script...")
+                self.status_box.setText("Generating updater-script...")
                 cf.nonarb_updater()
             elif process == "firmwareless":
-                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 cf.rom_extract(self.filepath)
-                self.status_label.setText("Generating updater-script...")
+                self.status_box.setText("Generating updater-script...")
                 cf.firmwareless_updater()
             elif process == "vendor":
-                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 cf.vendor_extract(self.filepath)
-                self.status_label.setText("Generating updater-script...")
+                self.status_box.setText("Generating updater-script...")
                 cf.vendor_updater()
         elif fw_type == 'mtk':
             if process == "firmware":
-                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 cf.mtk_firmware_extract(self.filepath)
-                self.status_label.setText("Generating updater-script...")
-                cf. mtk_firmware_updater()
+                self.status_box.setText("Generating updater-script...")
+                cf.mtk_firmware_updater()
             elif process == "vendor":
-                self.status_label.setText(f"Unzipping MIUI... ({fw_type}) device")
+                self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 cf.vendor_extract(self.filepath)
-                self.status_label.setText("Generating updater-script...")
+                self.status_box.setText("Generating updater-script...")
                 cf.mtk_vendor_updater()
             else:
-                self.status_label.setText("Error: Unsupported operation for MTK!")
+                self.status_box.setText("Error: Unsupported operation for MTK!")
         else:
-            self.status_label.setText("Couldn't find firmware!")
+            self.status_box.setText("Couldn't find firmware!")
         cf.make_zip(self.filepath, process)
-        self.status_label.setText("All Done!")
+        self.status_box.setText("All Done!")
 
 
 if __name__ == '__main__':
