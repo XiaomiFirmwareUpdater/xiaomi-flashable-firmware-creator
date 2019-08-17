@@ -76,6 +76,7 @@ class MainWindowUi(QMainWindow):
         self.action_donate = QtWidgets.QAction(self)
         self.action_about = QtWidgets.QAction(self)
         self.action_report_bug = QtWidgets.QAction(self)
+        self.action_website = QtWidgets.QAction(self)
         # vars
         self.filepath = ''
         self.filename = ''
@@ -204,6 +205,7 @@ class MainWindowUi(QMainWindow):
         self.menu_help.addAction(self.action_report_bug)
         self.menu_help.addAction(self.action_donate)
         self.menu_help.addAction(self.action_about)
+        self.menu_help.addAction(self.action_website)
         self.menubar.addAction(self.menu_file.menuAction())
         self.menubar.addAction(self.menu_language.menuAction())
         self.menubar.addAction(self.menu_help.menuAction())
@@ -220,6 +222,8 @@ class MainWindowUi(QMainWindow):
         self.action_report_bug.triggered.connect(
             lambda: self.open_link('https://github.com/XiaomiFirmwareUpdater/'
                                    'xiaomi-flashable-firmware-creator.py/issues'))
+        self.action_website.triggered.connect(
+            lambda: self.open_link('https://xiaomifirmwareupdater.com'))
 
     def retranslate_ui(self, main_window):
         """
@@ -259,6 +263,7 @@ class MainWindowUi(QMainWindow):
         self.action_donate.setText(_translate("Menu bar", "Donate"))
         self.action_about.setText(_translate("Menu bar", "About"))
         self.action_report_bug.setText(_translate("Menu bar", "Report Bug"))
+        self.action_website.setText(_translate("Menu bar", "Website"))
         self.status_box.setText(_translate("Status Box", "Ready"))
 
     def center(self):
