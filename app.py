@@ -7,6 +7,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QMimeDatabase, QUrl
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFileDialog, QGroupBox
 from PyQt5.QtGui import QIcon, QDesktopServices
+from windows.about import AboutBox
 from helpers.settings import load_settings, update_settings
 import create_flashable_firmware as cf
 
@@ -80,6 +81,8 @@ class MainWindowUi(QMainWindow):
         # vars
         self.filepath = ''
         self.filename = ''
+        # other windows
+        self.about_box = AboutBox()
         # setup
         self.setup_ui(self)
         self.setWindowIcon(QIcon('icon.png'))
@@ -219,6 +222,7 @@ class MainWindowUi(QMainWindow):
             lambda: self.change_language(main_window, "en_US"))
         self.action_language_ar.triggered.connect(
             lambda: self.change_language(main_window, "ar"))
+        self.action_about.triggered.connect(self.open_about)
         self.action_report_bug.triggered.connect(
             lambda: self.open_link('https://github.com/XiaomiFirmwareUpdater/'
                                    'xiaomi-flashable-firmware-creator.py/issues'))
@@ -404,6 +408,13 @@ class MainWindowUi(QMainWindow):
         Opens link in browser
         """
         QDesktopServices.openUrl(QUrl(link))
+
+    def open_about(self):
+        """
+        Opens About box
+        """
+        self.about_box.setup_ui(self.about_box)
+        self.about_box.show()
 
 
 if __name__ == '__main__':
