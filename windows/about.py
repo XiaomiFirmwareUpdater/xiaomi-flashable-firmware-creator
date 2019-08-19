@@ -35,6 +35,7 @@ class AboutBox(QtWidgets.QDialog):
         size_policy.setVerticalStretch(0)
         size_policy.setHeightForWidth(about_box.sizePolicy().hasHeightForWidth())
         about_box.setSizePolicy(size_policy)
+        about_box.setMinimumSize(QtCore.QSize(600, 345))
         about_box.setMaximumSize(QtCore.QSize(600, 345))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
