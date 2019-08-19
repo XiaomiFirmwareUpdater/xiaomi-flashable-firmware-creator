@@ -226,6 +226,8 @@ class MainWindowUi(QMainWindow):
         self.action_report_bug.triggered.connect(
             lambda: self.open_link('https://github.com/XiaomiFirmwareUpdater/'
                                    'xiaomi-flashable-firmware-creator.py/issues'))
+        self.action_donate.triggered.connect(
+            lambda: self.open_link('https://xiaomifirmwareupdater.com/donate'))
         self.action_website.triggered.connect(
             lambda: self.open_link('https://xiaomifirmwareupdater.com'))
 
