@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Xiaomi Flashable Firmware Creator GUI"""
 
+import logging
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QMimeDatabase, QUrl
@@ -444,6 +445,7 @@ class MainWindowUi(QMainWindow):
         self.adjust_layout_direction(lang)
         TRANSLATOR.load(f'i18n/{lang}.qm')
         self.retranslate_ui(main_window)
+        logging.info(f'Language is switched to {lang}')
 
     def adjust_layout_direction(self, lang: str):
         """
@@ -465,6 +467,7 @@ class MainWindowUi(QMainWindow):
         self.filepath = filepath
         self.filename = filepath.split('/')[-1]
         self.status_box.setText(f"File {self.filename} is selected")
+        logging.info(f'File {self.filename} is selected')
 
     def create_zip(self):
         """
@@ -474,11 +477,13 @@ class MainWindowUi(QMainWindow):
         process = None
         if not self.filepath:
             self.error_message.exec_()
+            logging.info(f'No Zip error shown')
             return
 
         for button in self.process_type.findChildren(QtWidgets.QRadioButton):
             if button.isChecked():
                 checked_radiobutton = button.text()
+                logging.info(f'Selected process ({button.text()})')
         if checked_radiobutton == 'Firmware':
             process = 'firmware'
         elif checked_radiobutton == 'Non-ARB Firmware':
@@ -490,69 +495,87 @@ class MainWindowUi(QMainWindow):
         self.status_box.setText(f"Starting {process} job")
         self.progress_bar.setValue(1)
         cf.init()
+        logging.info(f'Starting extract job')
         self.progress_bar.setValue(5)
         fw_type = cf.firmware_type(self.filepath)
         self.status_box.setText(f"Detected {fw_type} device")
+        logging.info(f'Detected {fw_type} device')
         self.progress_bar.setValue(10)
         if fw_type == 'qcom':
             if process == "firmware":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 self.progress_bar.setValue(30)
+                logging.info(f'Unzipping {self.filename}')
                 cf.firmware_extract(self.filepath, process)
                 self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
                 self.progress_bar.setValue(55)
+                logging.info(f'Creating updater-script')
                 cf.firmware_updater()
             elif process == "nonarb":
                 self.status_box.setText(f"Unzipping MIUI...")
                 self.progress_bar.setValue(30)
+                logging.info(f'Unzipping {self.filename}')
                 cf.firmware_extract(self.filepath, process)
                 self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
                 self.progress_bar.setValue(55)
+                logging.info(f'Creating updater-script')
                 cf.nonarb_updater()
             elif process == "firmwareless":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 self.progress_bar.setValue(30)
+                logging.info(f'Unzipping {self.filename}')
                 cf.rom_extract(self.filepath)
                 self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
                 self.progress_bar.setValue(55)
+                logging.info(f'Creating updater-script')
                 cf.firmwareless_updater()
             elif process == "vendor":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 self.progress_bar.setValue(30)
+                logging.info(f'Unzipping {self.filename}')
                 cf.vendor_extract(self.filepath)
                 self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
                 self.progress_bar.setValue(55)
+                logging.info(f'Creating updater-script')
                 cf.vendor_updater()
         elif fw_type == 'mtk':
             if process == "firmware":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 self.progress_bar.setValue(30)
+                logging.info(f'Unzipping {self.filename}')
                 cf.mtk_firmware_extract(self.filepath)
                 self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
                 self.progress_bar.setValue(55)
+                logging.info(f'Creating updater-script')
                 cf.mtk_firmware_updater()
             elif process == "vendor":
                 self.status_box.setText(f"Unzipping MIUI... ({fw_type}) device")
                 self.progress_bar.setValue(30)
+                logging.info(f'Unzipping {self.filename}')
                 cf.vendor_extract(self.filepath)
                 self.progress_bar.setValue(45)
                 self.status_box.setText("Generating updater-script...")
                 self.progress_bar.setValue(55)
+                logging.info(f'Creating updater-script')
                 cf.mtk_vendor_updater()
             else:
                 self.status_box.setText("Error: Unsupported operation for MTK!")
+                logging.warning(f'Unsupported operation for MTK')
         else:
             self.status_box.setText("Couldn't find firmware!")
+            logging.warning(f"Can't find firmware in {self.filename}")
         self.status_box.setText("Creating zip..")
         self.progress_bar.setValue(75)
+        logging.info(f'Creating output zip')
         cf.make_zip(self.filepath, process)
         self.status_box.setText("All Done!")
         self.progress_bar.setValue(100)
+        logging.info(f'Done')
 
     @staticmethod
     def open_link(link):
@@ -560,6 +583,7 @@ class MainWindowUi(QMainWindow):
         Opens link in browser
         """
         QDesktopServices.openUrl(QUrl(link))
+        logging.info(f'{link} opened')
 
     def open_about(self):
         """
@@ -570,9 +594,14 @@ class MainWindowUi(QMainWindow):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename='data/last_run.log', filemode='w',
+                        format='(%(asctime)s) - %(name)s - %(levelname)s - %(message)s',
+                        datefmt='%d-%b-%y %H:%M:%S',
+                        level=logging.INFO)
     APP = QApplication(sys.argv)
     SETTINGS = load_settings()
     LANG = SETTINGS['language']
+    logging.info(f'Language {LANG} loaded')
     TRANSLATOR = QtCore.QTranslator(APP)
     TRANSLATOR.load(f'i18n/{LANG}.qm')
     APP.installTranslator(TRANSLATOR)
