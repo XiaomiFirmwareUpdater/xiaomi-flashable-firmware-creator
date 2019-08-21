@@ -5,3 +5,5 @@ tmp*
 .idea/
 env/
 *.log
+*.dist
+*.build
