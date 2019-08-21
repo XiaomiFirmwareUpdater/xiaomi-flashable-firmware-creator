@@ -21,10 +21,11 @@ script:
   - pip3 install -r requirements.txt
   - pip3 install nuitka
   - cd ${TRAVIS_BUILD_DIR}/xiaomi_flashable_firmware_creator/
-  - python -m nuitka --follow-imports create_flashable_firmware.py --standalone
-  - python -m nuitka --follow-imports main.py --standalone --plugin-enable=qt-plugins
-  - zip -r9 create_flashable_firmware-cli.zip create_flashable_firmware.dist/*
-  - zip -r9 create_flashable_firmware-gui.zip main.dist/*
+  - python3 -m nuitka --follow-imports create_flashable_firmware.py --standalone
+  - python3 -m nuitka --follow-imports main.py --standalone --plugin-enable=qt-plugins
+  - zip -r9 -r -j -q xiaomi_flashable_firmware_creator-cli.zip create_flashable_firmware.dist/*
+  - cp -r data/ helpers/ i18n/ icon.png main.dist/*
+  - zip -r9 -r -q xiaomi_flashable_firmware_creator-gui.zip main.dist/*
 
 deploy:
   skip_cleanup: true
