@@ -321,7 +321,7 @@ class AboutBox(QtWidgets.QDialog):
                                             "<a href=\"https://t.me/Bodzey\">"
                                             "<span style=\" text-decoration: "
                                             "underline; color:#009dff;\">Bohdan Cherniak</span>"
-                                            "</a> for Russian translation</li>"    
+                                            "</a> for Russian translation</li>"
                                             "<li style=\"\" style=\" margin-top:0px; "
                                             "margin-bottom:0px; "
                                             "margin-left:0px; margin-right:0px; "
