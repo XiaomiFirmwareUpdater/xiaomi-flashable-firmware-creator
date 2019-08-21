@@ -302,7 +302,7 @@ def main():
     Xiaomi Flashable Firmware Creator
     """
     rom, process = arg_parse()
-
+    init()
     fw_type = firmware_type(rom)
     if fw_type == 'qcom':
         if process == "firmware":
