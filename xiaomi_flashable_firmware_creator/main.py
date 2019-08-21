@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.7
 # -*- coding: utf-8 -*-
 """Xiaomi Flashable Firmware Creator GUI"""
+# pylint: disable=E1101
 
 import logging
 import sys
@@ -8,7 +9,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QMimeDatabase, QUrl
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, qApp, QFileDialog, QGroupBox
 from PyQt5.QtGui import QIcon, QDesktopServices
-from windows.about import AboutBox
+from about import AboutBox
 from helpers.settings import load_settings, update_settings
 import create_flashable_firmware as cf
 
