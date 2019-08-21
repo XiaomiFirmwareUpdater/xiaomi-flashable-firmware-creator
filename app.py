@@ -74,11 +74,16 @@ class MainWindowUi(QMainWindow):
         # languages
         self.action_language_sq = QtWidgets.QAction(self)
         self.action_language_ar = QtWidgets.QAction(self)
+        self.action_language_ca = QtWidgets.QAction(self)
         self.action_language_zh_CN = QtWidgets.QAction(self)
         self.action_language_hr = QtWidgets.QAction(self)
+        self.action_language_cs = QtWidgets.QAction(self)
+        self.action_language_nl = QtWidgets.QAction(self)
         self.action_language_en = QtWidgets.QAction(self)
         self.action_language_fr = QtWidgets.QAction(self)
         self.action_language_de = QtWidgets.QAction(self)
+        self.action_language_el = QtWidgets.QAction(self)
+        self.action_language_hi = QtWidgets.QAction(self)
         self.action_language_id = QtWidgets.QAction(self)
         self.action_language_it = QtWidgets.QAction(self)
         self.action_language_fa = QtWidgets.QAction(self)
@@ -91,6 +96,7 @@ class MainWindowUi(QMainWindow):
         self.action_language_es_ES = QtWidgets.QAction(self)
         self.action_language_tr = QtWidgets.QAction(self)
         self.action_language_uk = QtWidgets.QAction(self)
+        self.action_language_vi = QtWidgets.QAction(self)
         self.action_donate = QtWidgets.QAction(self)
         self.action_about = QtWidgets.QAction(self)
         self.action_report_bug = QtWidgets.QAction(self)
@@ -216,11 +222,16 @@ class MainWindowUi(QMainWindow):
         self.action_quit.setStatusTip("action_quit_tip")
         self.action_language_sq.setObjectName("action_language_sq")
         self.action_language_ar.setObjectName("action_language_ar")
+        self.action_language_ca.setObjectName("action_language_ca")
         self.action_language_zh_CN.setObjectName("action_language_zh_CN")
         self.action_language_hr.setObjectName("action_language_hr")
+        self.action_language_cs.setObjectName("action_language_cs")
+        self.action_language_nl.setObjectName("action_language_nl")
         self.action_language_en.setObjectName("action_language_en")
         self.action_language_fr.setObjectName("action_language_fr")
         self.action_language_de.setObjectName("action_language_de")
+        self.action_language_el.setObjectName("action_language_el")
+        self.action_language_hi.setObjectName("action_language_hi")
         self.action_language_id.setObjectName("action_language_id")
         self.action_language_it.setObjectName("action_language_it")
         self.action_language_ms.setObjectName("action_language_ms")
@@ -233,6 +244,7 @@ class MainWindowUi(QMainWindow):
         self.action_language_es_ES.setObjectName("action_language_es_ES")
         self.action_language_tr.setObjectName("action_language_tr")
         self.action_language_uk.setObjectName("action_language_uk")
+        self.action_language_vi.setObjectName("action_language_vi")
         self.action_report_bug.setObjectName("action_report_bug")
         self.action_report_bug.setStatusTip("action_report_bug_tip")
         self.action_donate.setObjectName("action_donate")
@@ -245,11 +257,16 @@ class MainWindowUi(QMainWindow):
         self.menu_file.addAction(self.action_quit)
         self.menu_language.addAction(self.action_language_sq)
         self.menu_language.addAction(self.action_language_ar)
+        self.menu_language.addAction(self.action_language_ca)
         self.menu_language.addAction(self.action_language_zh_CN)
         self.menu_language.addAction(self.action_language_hr)
+        self.menu_language.addAction(self.action_language_cs)
+        self.menu_language.addAction(self.action_language_nl)
         self.menu_language.addAction(self.action_language_en)
         self.menu_language.addAction(self.action_language_fr)
         self.menu_language.addAction(self.action_language_de)
+        self.menu_language.addAction(self.action_language_el)
+        self.menu_language.addAction(self.action_language_hi)
         self.menu_language.addAction(self.action_language_id)
         self.menu_language.addAction(self.action_language_it)
         self.menu_language.addAction(self.action_language_ms)
@@ -262,6 +279,7 @@ class MainWindowUi(QMainWindow):
         self.menu_language.addAction(self.action_language_es_ES)
         self.menu_language.addAction(self.action_language_tr)
         self.menu_language.addAction(self.action_language_uk)
+        self.menu_language.addAction(self.action_language_vi)
         self.menu_help.addAction(self.action_report_bug)
         self.menu_help.addAction(self.action_donate)
         self.menu_help.addAction(self.action_about)
@@ -279,16 +297,26 @@ class MainWindowUi(QMainWindow):
             lambda: self.change_language(main_window, "sq"))
         self.action_language_ar.triggered.connect(
             lambda: self.change_language(main_window, "ar"))
+        self.action_language_ca.triggered.connect(
+            lambda: self.change_language(main_window, "ca"))
         self.action_language_zh_CN.triggered.connect(
             lambda: self.change_language(main_window, "zh-CN"))
         self.action_language_hr.triggered.connect(
             lambda: self.change_language(main_window, "hr"))
+        self.action_language_cs.triggered.connect(
+            lambda: self.change_language(main_window, "cs"))
+        self.action_language_nl.triggered.connect(
+            lambda: self.change_language(main_window, "nl"))
         self.action_language_en.triggered.connect(
             lambda: self.change_language(main_window, "en_US"))
         self.action_language_fr.triggered.connect(
             lambda: self.change_language(main_window, "fr"))
         self.action_language_de.triggered.connect(
             lambda: self.change_language(main_window, "de"))
+        self.action_language_el.triggered.connect(
+            lambda: self.change_language(main_window, "el"))
+        self.action_language_hi.triggered.connect(
+            lambda: self.change_language(main_window, "hi"))
         self.action_language_id.triggered.connect(
             lambda: self.change_language(main_window, "id"))
         self.action_language_it.triggered.connect(
@@ -313,6 +341,8 @@ class MainWindowUi(QMainWindow):
             lambda: self.change_language(main_window, "tr"))
         self.action_language_uk.triggered.connect(
             lambda: self.change_language(main_window, "uk"))
+        self.action_language_vi.triggered.connect(
+            lambda: self.change_language(main_window, "vi"))
         self.action_about.triggered.connect(self.open_about)
         self.action_report_bug.triggered.connect(
             lambda: self.open_link('https://github.com/XiaomiFirmwareUpdater/'
@@ -358,11 +388,16 @@ class MainWindowUi(QMainWindow):
         self.action_quit.setStatusTip(_translate("Menu bar", "Exits the application"))
         self.action_language_sq.setText(_translate("Menu bar", "Albanian"))
         self.action_language_ar.setText(_translate("Menu bar", "Arabic"))
+        self.action_language_ca.setText(_translate("Menu bar", "Catalan"))
         self.action_language_zh_CN.setText(_translate("Menu bar", "Chinese Simplified"))
         self.action_language_hr.setText(_translate("Menu bar", "Croatian"))
+        self.action_language_cs.setText(_translate("Menu bar", "Czech"))
+        self.action_language_nl.setText(_translate("Menu bar", "Dutch"))
         self.action_language_en.setText(_translate("Menu bar", "English"))
         self.action_language_fr.setText(_translate("Menu bar", "French"))
         self.action_language_de.setText(_translate("Menu bar", "German"))
+        self.action_language_el.setText(_translate("Menu bar", "Greek"))
+        self.action_language_hi.setText(_translate("Menu bar", "Hindi"))
         self.action_language_id.setText(_translate("Menu bar", "Indonesian"))
         self.action_language_it.setText(_translate("Menu bar", "Italian"))
         self.action_language_ms.setText(_translate("Menu bar", "Malay"))
@@ -375,6 +410,7 @@ class MainWindowUi(QMainWindow):
         self.action_language_es_ES.setText(_translate("Menu bar", "Spanish"))
         self.action_language_tr.setText(_translate("Menu bar", "Turkish"))
         self.action_language_uk.setText(_translate("Menu bar", "Ukrainian"))
+        self.action_language_vi.setText(_translate("Menu bar", "Vietnamese"))
         self.action_report_bug.setText(_translate("Menu bar", "Report Bug"))
         self.action_report_bug.setStatusTip(_translate("Menu bar", "Submit an issue "
                                                                    "in case anything is wrong"))
