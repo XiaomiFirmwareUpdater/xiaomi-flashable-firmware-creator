@@ -10,6 +10,10 @@ before_install:
       echo "Not running CI since only docs were changed."
       exit
     fi
+  - sudo apt-get install -y chrpath
+addons:
+  apt:
+    update: true
 
 
 script:
