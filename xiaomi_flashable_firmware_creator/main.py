@@ -330,7 +330,7 @@ class MainWindowUi(QMainWindow):
         self.action_language_pl.triggered.connect(
             lambda: self.change_language(main_window, "pl"))
         self.action_language_pt_BR.triggered.connect(
-            lambda: self.change_language(main_window, "pt_BR"))
+            lambda: self.change_language(main_window, "pt-BR"))
         self.action_language_ro.triggered.connect(
             lambda: self.change_language(main_window, "ro"))
         self.action_language_ru.triggered.connect(
@@ -338,7 +338,7 @@ class MainWindowUi(QMainWindow):
         self.action_language_sl.triggered.connect(
             lambda: self.change_language(main_window, "sl"))
         self.action_language_es_ES.triggered.connect(
-            lambda: self.change_language(main_window, "es_ES"))
+            lambda: self.change_language(main_window, "es-ES"))
         self.action_language_tr.triggered.connect(
             lambda: self.change_language(main_window, "tr"))
         self.action_language_uk.triggered.connect(
