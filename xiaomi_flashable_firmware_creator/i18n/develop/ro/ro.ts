@@ -101,12 +101,12 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Drop space</name>
     <message>
-      <location filename="../app.py" line="338"/>
+      <location filename="../app.py" line="368"/>
       <source>Drop a file</source>
       <translation>Adauga un fisier </translation>
     </message>
     <message>
-      <location filename="../app.py" line="339"/>
+      <location filename="../app.py" line="369"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Adauga un fisier ZIP aici&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -114,205 +114,235 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Main Buttons</name>
     <message>
-      <location filename="../app.py" line="348"/>
+      <location filename="../app.py" line="378"/>
       <source>Select file</source>
       <translation>Selectaţi fişierul</translation>
     </message>
     <message>
-      <location filename="../app.py" line="346"/>
+      <location filename="../app.py" line="376"/>
       <source>Error</source>
       <translation>Eroare</translation>
     </message>
     <message>
-      <location filename="../app.py" line="347"/>
+      <location filename="../app.py" line="377"/>
       <source>You must select a ROM zip first!</source>
       <translation>Trebuie să selectezi un fisier ZIP prima dată.</translation>
     </message>
     <message>
-      <location filename="../app.py" line="349"/>
+      <location filename="../app.py" line="379"/>
       <source>Select MIUI Zip file</source>
       <translation>Selectează un fișier ZIP cu sistem de operare MIUI</translation>
     </message>
     <message>
-      <location filename="../app.py" line="350"/>
+      <location filename="../app.py" line="380"/>
       <source>Create</source>
       <translation>Crează</translation>
     </message>
     <message>
-      <location filename="../app.py" line="351"/>
+      <location filename="../app.py" line="381"/>
       <source>Create the selected output zip</source>
-      <translation type="unfinished">Create the selected output zip</translation>
+      <translation>Creaza</translation>
     </message>
   </context>
   <context>
     <name>Menu bar</name>
     <message>
-      <location filename="../app.py" line="352"/>
+      <location filename="../app.py" line="382"/>
       <source>File</source>
       <translation>Fișier</translation>
     </message>
     <message>
-      <location filename="../app.py" line="353"/>
+      <location filename="../app.py" line="383"/>
       <source>Language</source>
       <translation>Limbă</translation>
     </message>
     <message>
-      <location filename="../app.py" line="354"/>
+      <location filename="../app.py" line="384"/>
       <source>Help</source>
       <translation>Ajutor</translation>
     </message>
     <message>
-      <location filename="../app.py" line="355"/>
+      <location filename="../app.py" line="385"/>
       <source>Open ZIP</source>
       <translation>Selectati Fisier </translation>
     </message>
     <message>
-      <location filename="../app.py" line="356"/>
+      <location filename="../app.py" line="386"/>
       <source>Select MIUI Zip file</source>
       <translation>Selectează un fișier ZIP cu sistem de operare MIUI</translation>
     </message>
     <message>
-      <location filename="../app.py" line="357"/>
+      <location filename="../app.py" line="387"/>
       <source>Quit</source>
       <translation>Ieșire</translation>
     </message>
     <message>
-      <location filename="../app.py" line="358"/>
+      <location filename="../app.py" line="388"/>
       <source>Exits the application</source>
       <translation>Ieșire</translation>
     </message>
     <message>
-      <location filename="../app.py" line="359"/>
+      <location filename="../app.py" line="389"/>
       <source>Albanian</source>
       <translation>Albaneză</translation>
     </message>
     <message>
-      <location filename="../app.py" line="360"/>
+      <location filename="../app.py" line="390"/>
       <source>Arabic</source>
       <translation>Arabă</translation>
     </message>
     <message>
-      <location filename="../app.py" line="361"/>
+      <location filename="../app.py" line="391"/>
+      <source>Catalan</source>
+      <translation>Catalană</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="392"/>
       <source>Chinese Simplified</source>
       <translation>Chineză Simplificată</translation>
     </message>
     <message>
-      <location filename="../app.py" line="362"/>
+      <location filename="../app.py" line="393"/>
       <source>Croatian</source>
       <translation>Croată</translation>
     </message>
     <message>
-      <location filename="../app.py" line="363"/>
+      <location filename="../app.py" line="394"/>
+      <source>Czech</source>
+      <translation>Cehă</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="395"/>
+      <source>Dutch</source>
+      <translation>Olandeză</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="396"/>
       <source>English</source>
       <translation>Engleză</translation>
     </message>
     <message>
-      <location filename="../app.py" line="364"/>
+      <location filename="../app.py" line="397"/>
       <source>French</source>
       <translation>Franceză</translation>
     </message>
     <message>
-      <location filename="../app.py" line="365"/>
+      <location filename="../app.py" line="398"/>
       <source>German</source>
       <translation>Germană</translation>
     </message>
     <message>
-      <location filename="../app.py" line="366"/>
+      <location filename="../app.py" line="399"/>
+      <source>Greek</source>
+      <translation>Greacă</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="400"/>
+      <source>Hindi</source>
+      <translation type="unfinished">Hindi</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="401"/>
       <source>Indonesian</source>
       <translation>Indoneziană</translation>
     </message>
     <message>
-      <location filename="../app.py" line="367"/>
+      <location filename="../app.py" line="402"/>
       <source>Italian</source>
       <translation>Italiană</translation>
     </message>
     <message>
-      <location filename="../app.py" line="368"/>
+      <location filename="../app.py" line="403"/>
       <source>Malay</source>
       <translation>Malaeziană</translation>
     </message>
     <message>
-      <location filename="../app.py" line="369"/>
+      <location filename="../app.py" line="404"/>
       <source>Persian</source>
       <translation>Persană</translation>
     </message>
     <message>
-      <location filename="../app.py" line="370"/>
+      <location filename="../app.py" line="405"/>
       <source>Polish</source>
       <translation>Poloneză</translation>
     </message>
     <message>
-      <location filename="../app.py" line="371"/>
+      <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
       <translation>Portugheză (Braziliană)</translation>
     </message>
     <message>
-      <location filename="../app.py" line="372"/>
+      <location filename="../app.py" line="407"/>
       <source>Romanian</source>
       <translation>Română</translation>
     </message>
     <message>
-      <location filename="../app.py" line="373"/>
+      <location filename="../app.py" line="408"/>
       <source>Russian</source>
       <translation>Rusă</translation>
     </message>
     <message>
-      <location filename="../app.py" line="374"/>
+      <location filename="../app.py" line="409"/>
       <source>Slovenian</source>
       <translation>Slovenă</translation>
     </message>
     <message>
-      <location filename="../app.py" line="375"/>
+      <location filename="../app.py" line="410"/>
       <source>Spanish</source>
       <translation>Spaniolă</translation>
     </message>
     <message>
-      <location filename="../app.py" line="376"/>
+      <location filename="../app.py" line="411"/>
       <source>Turkish</source>
       <translation>Turcă</translation>
     </message>
     <message>
-      <location filename="../app.py" line="377"/>
+      <location filename="../app.py" line="412"/>
       <source>Ukrainian</source>
       <translation>Ucrainiană</translation>
     </message>
     <message>
-      <location filename="../app.py" line="378"/>
+      <location filename="../app.py" line="413"/>
+      <source>Vietnamese</source>
+      <translation>Vietnameză</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="414"/>
       <source>Report Bug</source>
       <translation>Raportează eroarea</translation>
     </message>
     <message>
-      <location filename="../app.py" line="379"/>
+      <location filename="../app.py" line="415"/>
       <source>Submit an issue in case anything is wrong</source>
       <translation type="unfinished">Submit an issue in case anything is wrong</translation>
     </message>
     <message>
-      <location filename="../app.py" line="381"/>
+      <location filename="../app.py" line="417"/>
       <source>Donate</source>
       <translation>Donează</translation>
     </message>
     <message>
-      <location filename="../app.py" line="382"/>
+      <location filename="../app.py" line="418"/>
       <source>Show us some love</source>
       <translation>Aratane putina dragoste</translation>
     </message>
     <message>
-      <location filename="../app.py" line="383"/>
+      <location filename="../app.py" line="419"/>
       <source>About</source>
       <translation>Despre</translation>
     </message>
     <message>
-      <location filename="../app.py" line="384"/>
+      <location filename="../app.py" line="420"/>
       <source>About this tool</source>
       <translation>Despre această aplicaţie</translation>
     </message>
     <message>
-      <location filename="../app.py" line="385"/>
+      <location filename="../app.py" line="421"/>
       <source>Website</source>
       <translation>Site web</translation>
     </message>
     <message>
-      <location filename="../app.py" line="386"/>
+      <location filename="../app.py" line="422"/>
       <source>Visit tool website</source>
       <translation>Vizitați situl nostru</translation>
     </message>
@@ -320,27 +350,27 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Radio Buttons</name>
     <message>
-      <location filename="../app.py" line="333"/>
+      <location filename="../app.py" line="363"/>
       <source>Process</source>
       <translation>Proces</translation>
     </message>
     <message>
-      <location filename="../app.py" line="334"/>
+      <location filename="../app.py" line="364"/>
       <source>Firmware</source>
       <translation>Firmware-ul</translation>
     </message>
     <message>
-      <location filename="../app.py" line="335"/>
+      <location filename="../app.py" line="365"/>
       <source>Non-ARB Firmware</source>
       <translation>Firmware-ul fara Protectia Anti-Rollback (ARB)</translation>
     </message>
     <message>
-      <location filename="../app.py" line="336"/>
+      <location filename="../app.py" line="366"/>
       <source>Firmware + Vendor</source>
       <translation>Firmware-ul + Vendor</translation>
     </message>
     <message>
-      <location filename="../app.py" line="337"/>
+      <location filename="../app.py" line="367"/>
       <source>Firmware-less ROM</source>
       <translation type="unfinished">Firmware-less ROM</translation>
     </message>
@@ -348,7 +378,7 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Status Box</name>
     <message>
-      <location filename="../app.py" line="387"/>
+      <location filename="../app.py" line="423"/>
       <source>Ready</source>
       <translation>Disponibil</translation>
     </message>
@@ -356,7 +386,7 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Title</name>
     <message>
-      <location filename="../app.py" line="330"/>
+      <location filename="../app.py" line="360"/>
       <source>Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</source>
       <translation>Xiaomi Flashable Firmware Creator creat de Xiaomi Firmware Update</translation>
     </message>
