@@ -14,7 +14,10 @@ It supports creating untouched firmware, non-arb firmware, firmware + vendor fla
 ### Features:
 - CLI and GUI version
 - Easy-to-use interface
-- Multilanguage support (more than 25 language!). Thanks to our community members!
+- Multilanguage support (more than 25 languages!). Thanks to our community members!
+
+#### Screenshots:
+[Here](https://github.com/XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py/tree/gui/screenshots)
 
 ### GUI Usage:
 - Clone or download this repo.
