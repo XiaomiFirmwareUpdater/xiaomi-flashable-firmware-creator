@@ -465,6 +465,9 @@ class MainWindowUi(QMainWindow):
         dialog = QFileDialog()
         filepath = dialog.getOpenFileName(self, 'Select MIUI zip',
                                           '', "MIUI zip files (miui*.zip)")[0]
+        if not filepath:
+            self.status_box.setText(f"Please select a file!")
+            return
         self.filepath = filepath
         self.filename = filepath.split('/')[-1]
         self.status_box.setText(f"File {self.filename} is selected")
