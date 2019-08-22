@@ -101,12 +101,12 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Drop space</name>
     <message>
-      <location filename="../app.py" line="338"/>
+      <location filename="../app.py" line="368"/>
       <source>Drop a file</source>
       <translation>删除一个文件</translation>
     </message>
     <message>
-      <location filename="../app.py" line="339"/>
+      <location filename="../app.py" line="369"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -114,32 +114,32 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Main Buttons</name>
     <message>
-      <location filename="../app.py" line="348"/>
+      <location filename="../app.py" line="378"/>
       <source>Select file</source>
       <translation>选择文件</translation>
     </message>
     <message>
-      <location filename="../app.py" line="346"/>
+      <location filename="../app.py" line="376"/>
       <source>Error</source>
       <translation>错误</translation>
     </message>
     <message>
-      <location filename="../app.py" line="347"/>
+      <location filename="../app.py" line="377"/>
       <source>You must select a ROM zip first!</source>
       <translation>你必须先选择一个 ROM zip！</translation>
     </message>
     <message>
-      <location filename="../app.py" line="349"/>
+      <location filename="../app.py" line="379"/>
       <source>Select MIUI Zip file</source>
       <translation>选择 MIUI Zip 文件</translation>
     </message>
     <message>
-      <location filename="../app.py" line="350"/>
+      <location filename="../app.py" line="380"/>
       <source>Create</source>
       <translation>创建</translation>
     </message>
     <message>
-      <location filename="../app.py" line="351"/>
+      <location filename="../app.py" line="381"/>
       <source>Create the selected output zip</source>
       <translation>创建选定的输出 zip</translation>
     </message>
@@ -147,172 +147,202 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Menu bar</name>
     <message>
-      <location filename="../app.py" line="352"/>
+      <location filename="../app.py" line="382"/>
       <source>File</source>
       <translation>文件</translation>
     </message>
     <message>
-      <location filename="../app.py" line="353"/>
+      <location filename="../app.py" line="383"/>
       <source>Language</source>
       <translation>语言</translation>
     </message>
     <message>
-      <location filename="../app.py" line="354"/>
+      <location filename="../app.py" line="384"/>
       <source>Help</source>
       <translation>帮助</translation>
     </message>
     <message>
-      <location filename="../app.py" line="355"/>
+      <location filename="../app.py" line="385"/>
       <source>Open ZIP</source>
       <translation>打开 ZIP</translation>
     </message>
     <message>
-      <location filename="../app.py" line="356"/>
+      <location filename="../app.py" line="386"/>
       <source>Select MIUI Zip file</source>
       <translation>选择 MIUI Zip 文件</translation>
     </message>
     <message>
-      <location filename="../app.py" line="357"/>
+      <location filename="../app.py" line="387"/>
       <source>Quit</source>
       <translation>退出</translation>
     </message>
     <message>
-      <location filename="../app.py" line="358"/>
+      <location filename="../app.py" line="388"/>
       <source>Exits the application</source>
       <translation>退出应用程序</translation>
     </message>
     <message>
-      <location filename="../app.py" line="359"/>
+      <location filename="../app.py" line="389"/>
       <source>Albanian</source>
       <translation>阿尔巴尼亚语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="360"/>
+      <location filename="../app.py" line="390"/>
       <source>Arabic</source>
       <translation>阿拉伯语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="361"/>
+      <location filename="../app.py" line="391"/>
+      <source>Catalan</source>
+      <translation type="unfinished">Catalan</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="392"/>
       <source>Chinese Simplified</source>
       <translation>简体中文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="362"/>
+      <location filename="../app.py" line="393"/>
       <source>Croatian</source>
       <translation>克罗地亚文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="363"/>
+      <location filename="../app.py" line="394"/>
+      <source>Czech</source>
+      <translation type="unfinished">Czech</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="395"/>
+      <source>Dutch</source>
+      <translation type="unfinished">Dutch</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="396"/>
       <source>English</source>
       <translation>英语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="364"/>
+      <location filename="../app.py" line="397"/>
       <source>French</source>
       <translation>法文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="365"/>
+      <location filename="../app.py" line="398"/>
       <source>German</source>
       <translation>德语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="366"/>
+      <location filename="../app.py" line="399"/>
+      <source>Greek</source>
+      <translation type="unfinished">Greek</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="400"/>
+      <source>Hindi</source>
+      <translation type="unfinished">Hindi</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="401"/>
       <source>Indonesian</source>
       <translation>印度尼西亚文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="367"/>
+      <location filename="../app.py" line="402"/>
       <source>Italian</source>
       <translation>意大利语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="368"/>
+      <location filename="../app.py" line="403"/>
       <source>Malay</source>
       <translation>马来语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="369"/>
+      <location filename="../app.py" line="404"/>
       <source>Persian</source>
       <translation>波斯文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="370"/>
+      <location filename="../app.py" line="405"/>
       <source>Polish</source>
       <translation>波兰文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="371"/>
+      <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
       <translation>巴西葡萄牙语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="372"/>
+      <location filename="../app.py" line="407"/>
       <source>Romanian</source>
       <translation>罗马尼亚文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="373"/>
+      <location filename="../app.py" line="408"/>
       <source>Russian</source>
       <translation>俄语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="374"/>
+      <location filename="../app.py" line="409"/>
       <source>Slovenian</source>
       <translation>斯洛文尼亚语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="375"/>
+      <location filename="../app.py" line="410"/>
       <source>Spanish</source>
       <translation>西班牙语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="376"/>
+      <location filename="../app.py" line="411"/>
       <source>Turkish</source>
       <translation>土耳其文</translation>
     </message>
     <message>
-      <location filename="../app.py" line="377"/>
+      <location filename="../app.py" line="412"/>
       <source>Ukrainian</source>
       <translation>乌克兰语</translation>
     </message>
     <message>
-      <location filename="../app.py" line="378"/>
+      <location filename="../app.py" line="413"/>
+      <source>Vietnamese</source>
+      <translation type="unfinished">Vietnamese</translation>
+    </message>
+    <message>
+      <location filename="../app.py" line="414"/>
       <source>Report Bug</source>
       <translation>Bug反馈</translation>
     </message>
     <message>
-      <location filename="../app.py" line="379"/>
+      <location filename="../app.py" line="415"/>
       <source>Submit an issue in case anything is wrong</source>
       <translation>如有任何问题，请提交 Issue</translation>
     </message>
     <message>
-      <location filename="../app.py" line="381"/>
+      <location filename="../app.py" line="417"/>
       <source>Donate</source>
       <translation>捐赠</translation>
     </message>
     <message>
-      <location filename="../app.py" line="382"/>
+      <location filename="../app.py" line="418"/>
       <source>Show us some love</source>
       <translation>向我们展示一些爱</translation>
     </message>
     <message>
-      <location filename="../app.py" line="383"/>
+      <location filename="../app.py" line="419"/>
       <source>About</source>
       <translation>关于</translation>
     </message>
     <message>
-      <location filename="../app.py" line="384"/>
+      <location filename="../app.py" line="420"/>
       <source>About this tool</source>
       <translation>关于这个工具</translation>
     </message>
     <message>
-      <location filename="../app.py" line="385"/>
+      <location filename="../app.py" line="421"/>
       <source>Website</source>
       <translation>官网</translation>
     </message>
     <message>
-      <location filename="../app.py" line="386"/>
+      <location filename="../app.py" line="422"/>
       <source>Visit tool website</source>
       <translation>浏览工具网站</translation>
     </message>
@@ -320,27 +350,27 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Radio Buttons</name>
     <message>
-      <location filename="../app.py" line="333"/>
+      <location filename="../app.py" line="363"/>
       <source>Process</source>
       <translation>处理</translation>
     </message>
     <message>
-      <location filename="../app.py" line="334"/>
+      <location filename="../app.py" line="364"/>
       <source>Firmware</source>
       <translation>底包</translation>
     </message>
     <message>
-      <location filename="../app.py" line="335"/>
+      <location filename="../app.py" line="365"/>
       <source>Non-ARB Firmware</source>
       <translation>非防回滚的底包</translation>
     </message>
     <message>
-      <location filename="../app.py" line="336"/>
+      <location filename="../app.py" line="366"/>
       <source>Firmware + Vendor</source>
       <translation>底包 + Vendor</translation>
     </message>
     <message>
-      <location filename="../app.py" line="337"/>
+      <location filename="../app.py" line="367"/>
       <source>Firmware-less ROM</source>
       <translation>不加底包的ROM</translation>
     </message>
@@ -348,7 +378,7 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Status Box</name>
     <message>
-      <location filename="../app.py" line="387"/>
+      <location filename="../app.py" line="423"/>
       <source>Ready</source>
       <translation>准备就绪</translation>
     </message>
@@ -356,7 +386,7 @@ p, li { white-space: pre-wrap; }
   <context>
     <name>Title</name>
     <message>
-      <location filename="../app.py" line="330"/>
+      <location filename="../app.py" line="360"/>
       <source>Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</source>
       <translation type="unfinished">Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</translation>
     </message>
