@@ -27,8 +27,8 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pencipta Flashable Firmware Xiaomi&lt;/span&gt;&lt;/a&gt; merupakan alat Python 3 yang menghasilkan pakej kemaskini firmware-flashable , diekstrak daripada ROM MIUI Rasmi. Oleh &lt;a href=&quot;https://xiaomifirmwareupdater.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;XiaomiFirmwareUpdater.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ia menyokong untuk menghasilkan firmware asli, firmware non-arb, firmware + vendor flashable zip, dan ROM firmware-less.&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://xiaomifirmwareupdater.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Xiaomi Firmware Updater&lt;/span&gt;&lt;/a&gt; merupakan projek komuniti, dimulakan pada January 2018, menyasarkan untuk menyediakan pakej firmware untuk semua peranti Xiaomi, untuk membolehkan pegguna custom ROM mengemaskini firmware peranti dengan mudah melalui custom recovery tanpa perlu flash keseluruhan ROM setiap kali mahu mengemaskini firmware.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ia menyokong untuk menghasilkan firmware asli, firmware non-arb, firmware + vendor flashable zip, dan ROM tanpa firmware.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://xiaomifirmwareupdater.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Xiaomi Firmware Updater&lt;/span&gt;&lt;/a&gt; merupakan projek komuniti, dimulakan pada Januari 2018, menyasarkan untuk menyediakan pakej firmware untuk semua peranti Xiaomi, untuk membolehkan pengguna custom ROM mengemaskini firmware peranti dengan mudah melalui custom recovery tanpa perlu flash keseluruhan ROM setiap kali mahu mengemaskini firmware.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="178"/>
@@ -174,7 +174,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="387"/>
       <source>Quit</source>
-      <translation>Berhenti</translation>
+      <translation>Keluar</translation>
     </message>
     <message>
       <location filename="../app.py" line="388"/>
@@ -194,7 +194,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="391"/>
       <source>Catalan</source>
-      <translation type="unfinished">Catalan</translation>
+      <translation>Bahasa Catalonia</translation>
     </message>
     <message>
       <location filename="../app.py" line="392"/>
@@ -209,12 +209,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="394"/>
       <source>Czech</source>
-      <translation type="unfinished">Czech</translation>
+      <translation>Bahasa Czech</translation>
     </message>
     <message>
       <location filename="../app.py" line="395"/>
       <source>Dutch</source>
-      <translation type="unfinished">Dutch</translation>
+      <translation>Bahasa Belanda</translation>
     </message>
     <message>
       <location filename="../app.py" line="396"/>
@@ -234,12 +234,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="399"/>
       <source>Greek</source>
-      <translation type="unfinished">Greek</translation>
+      <translation>Bahasa Greek</translation>
     </message>
     <message>
       <location filename="../app.py" line="400"/>
       <source>Hindi</source>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Bahasa Hindi</translation>
     </message>
     <message>
       <location filename="../app.py" line="401"/>
@@ -259,7 +259,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="404"/>
       <source>Persian</source>
-      <translation>Persian</translation>
+      <translation>Bahasa Parsi</translation>
     </message>
     <message>
       <location filename="../app.py" line="405"/>
@@ -304,7 +304,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="413"/>
       <source>Vietnamese</source>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Bahasa Vietnam</translation>
     </message>
     <message>
       <location filename="../app.py" line="414"/>

@@ -89,7 +89,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; за версію скріпта оболонки&lt;/li&gt;
-&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; та &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; за спрощений китайский переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; за хорватський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; за німецький переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; за италійський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; за польский переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; та Thorin за іспанський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; за російський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; та &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; за турецький переклад&lt;/li&gt;&lt;/ul&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; та &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; за спрощений китайский переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; за хорватський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; за німецький переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; за италійський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; за польський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; та Thorin за іспанський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; за російський переклад&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; та &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; за турецький переклад&lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;І всім людям, які внесли свій вклад, яких я забув згадати.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -169,17 +169,17 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="386"/>
       <source>Select MIUI Zip file</source>
-      <translation>Виберіть MIUI zip-файл</translation>
+      <translation>Виберіть архів з прошивкою MIUI</translation>
     </message>
     <message>
       <location filename="../app.py" line="387"/>
       <source>Quit</source>
-      <translation>Вихід</translation>
+      <translation>Закрити</translation>
     </message>
     <message>
       <location filename="../app.py" line="388"/>
       <source>Exits the application</source>
-      <translation>Вийти з додатку</translation>
+      <translation>Вихід з програми</translation>
     </message>
     <message>
       <location filename="../app.py" line="389"/>
@@ -269,12 +269,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
-      <translation>Португальська, Бразилія</translation>
+      <translation>Бразильська португальська</translation>
     </message>
     <message>
       <location filename="../app.py" line="407"/>
       <source>Romanian</source>
-      <translation>Румунське</translation>
+      <translation>Румунська</translation>
     </message>
     <message>
       <location filename="../app.py" line="408"/>

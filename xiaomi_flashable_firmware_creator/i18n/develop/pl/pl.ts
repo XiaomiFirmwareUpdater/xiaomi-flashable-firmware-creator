@@ -84,13 +84,13 @@ p, li { white-space: pre-wrap; }
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; for shell script version&lt;/li&gt;
 &lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; for Simplified Chinese translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; for Croatian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; for German translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; for Italian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; for Polish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; and Thorin for Spanish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; for Russian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; for Turkish translation&lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;And all people who have contributed and I have forgotten to mention.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+      <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; for shell script version&lt;/li&gt;
-&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; for Simplified Chinese translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; for Croatian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; for German translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; for Italian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; for Polish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; and Thorin for Spanish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; for Russian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; for Turkish translation&lt;/li&gt;&lt;/ul&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;And all people who have contributed and I have forgotten to mention.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; za shellową wersję skryptu&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język chiński (uproszczony)&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język chorwacki&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język niemiecki&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język włoski&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język polski&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; oraz Thorin - tłumaczenie na język hiszpański&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język rosyjski&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; oraz &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; - tłumaczenie na język turecki&lt;/li&gt;&lt;/ul&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;... oraz wszystkim osobom, które wniosły swój wkład w projekt, a o których zapomniałem.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="344"/>
@@ -179,7 +179,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="388"/>
       <source>Exits the application</source>
-      <translation>Wychodzi z aplikacji</translation>
+      <translation>Wyjdź z aplikacji</translation>
     </message>
     <message>
       <location filename="../app.py" line="389"/>
@@ -194,12 +194,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="391"/>
       <source>Catalan</source>
-      <translation type="unfinished">Catalan</translation>
+      <translation>Kataloński</translation>
     </message>
     <message>
       <location filename="../app.py" line="392"/>
       <source>Chinese Simplified</source>
-      <translation>Chiński Uproszczony</translation>
+      <translation>Chiński (uproszczony)</translation>
     </message>
     <message>
       <location filename="../app.py" line="393"/>
@@ -209,12 +209,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="394"/>
       <source>Czech</source>
-      <translation type="unfinished">Czech</translation>
+      <translation>Czeski</translation>
     </message>
     <message>
       <location filename="../app.py" line="395"/>
       <source>Dutch</source>
-      <translation type="unfinished">Dutch</translation>
+      <translation>Duński</translation>
     </message>
     <message>
       <location filename="../app.py" line="396"/>
@@ -234,12 +234,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="399"/>
       <source>Greek</source>
-      <translation type="unfinished">Greek</translation>
+      <translation>Grecki</translation>
     </message>
     <message>
       <location filename="../app.py" line="400"/>
       <source>Hindi</source>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Hinduski</translation>
     </message>
     <message>
       <location filename="../app.py" line="401"/>
@@ -269,7 +269,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
-      <translation>Portugalski, Brazylia</translation>
+      <translation>Portugalski (Brazylia)</translation>
     </message>
     <message>
       <location filename="../app.py" line="407"/>
@@ -304,7 +304,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="413"/>
       <source>Vietnamese</source>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Wietnamski</translation>
     </message>
     <message>
       <location filename="../app.py" line="414"/>
@@ -367,7 +367,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="366"/>
       <source>Firmware + Vendor</source>
-      <translation type="unfinished">Firmware + Vendor</translation>
+      <translation>Firmware + Vendor</translation>
     </message>
     <message>
       <location filename="../app.py" line="367"/>

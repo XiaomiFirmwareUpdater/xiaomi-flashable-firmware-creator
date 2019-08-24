@@ -11,7 +11,7 @@
     <message>
       <location filename="../windows/about.py" line="127"/>
       <source>Xiaomi Flashable Firmware Creator By Xiaomi Firmware Updater</source>
-      <translation>Xiaomi Flashable Firmware Creator By Xiaomi Firmware Updater</translation>
+      <translation>Xiaomi Flashable Firmware Creator Από Xiaomi Firmware Updater</translation>
     </message>
     <message encoding="UTF-8">
       <location filename="../windows/about.py" line="129"/>
@@ -82,18 +82,19 @@ p, li { white-space: pre-wrap; }
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; for shell script version&lt;/li&gt;
 &lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; for Simplified Chinese translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; for Croatian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; for German translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; for Italian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; for Polish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; and Thorin for Spanish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; for Russian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; for Turkish translation&lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;And all people who have contributed and I have forgotten to mention.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+      <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; for shell script version&lt;/li&gt;
-&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; for Simplified Chinese translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; for Croatian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; for German translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; for Italian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; for Polish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; and Thorin for Spanish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; for Russian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; for Turkish translation&lt;/li&gt;&lt;/ul&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;And all people who have contributed and I have forgotten to mention.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; για την shell έκδοση version&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; και &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; 
+για μετάφραση σε απλοποιημένα Κινέζικα&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; για την μετάφραση στα Κροατικά&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; για την μετάφραση στα Γερμανικά&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; για την μετάφραση στα Ιταλικά&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; για την μετάφραση στα Πολονικά&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; και Thorin για την μετάφραση στα Ισπανικά&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; για την μετάφραση στα Ρωσικά&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; και &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; για την μετάφραση στα Τούρκικα&lt;/li&gt;&lt;/ul&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;Και όλους τους ανθρώπους που συνέβαλαν και έχω ξεχάσει να αναφέρω.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="344"/>
       <source>Thanks To</source>
-      <translation type="unfinished">Thanks To</translation>
+      <translation>Ευχαριστούμε τους</translation>
     </message>
   </context>
   <context>
@@ -101,12 +102,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="368"/>
       <source>Drop a file</source>
-      <translation type="unfinished">Drop a file</translation>
+      <translation>Σύρετε ένα αρχείο</translation>
     </message>
     <message>
       <location filename="../app.py" line="369"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Σύρετε ένα rom zip αρχείο&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
   </context>
   <context>
@@ -114,32 +115,32 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="378"/>
       <source>Select file</source>
-      <translation type="unfinished">Select file</translation>
+      <translation>Επιλογή αρχείου</translation>
     </message>
     <message>
       <location filename="../app.py" line="376"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Σφάλμα</translation>
     </message>
     <message>
       <location filename="../app.py" line="377"/>
       <source>You must select a ROM zip first!</source>
-      <translation type="unfinished">You must select a ROM zip first!</translation>
+      <translation>Πρέπει να επιλέξετε ένα zip μιας ROM πρώτα!</translation>
     </message>
     <message>
       <location filename="../app.py" line="379"/>
       <source>Select MIUI Zip file</source>
-      <translation type="unfinished">Select MIUI Zip file</translation>
+      <translation>Επιλογή MIUI zip αρχείου</translation>
     </message>
     <message>
       <location filename="../app.py" line="380"/>
       <source>Create</source>
-      <translation type="unfinished">Create</translation>
+      <translation>Δημιουργία</translation>
     </message>
     <message>
       <location filename="../app.py" line="381"/>
       <source>Create the selected output zip</source>
-      <translation type="unfinished">Create the selected output zip</translation>
+      <translation>Δημιουργία του επιλεγμένου zip εξόδου</translation>
     </message>
   </context>
   <context>
@@ -147,202 +148,202 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="382"/>
       <source>File</source>
-      <translation type="unfinished">File</translation>
+      <translation>Αρχείο</translation>
     </message>
     <message>
       <location filename="../app.py" line="383"/>
       <source>Language</source>
-      <translation type="unfinished">Language</translation>
+      <translation>Γλώσσα</translation>
     </message>
     <message>
       <location filename="../app.py" line="384"/>
       <source>Help</source>
-      <translation type="unfinished">Help</translation>
+      <translation>Βοήθεια</translation>
     </message>
     <message>
       <location filename="../app.py" line="385"/>
       <source>Open ZIP</source>
-      <translation type="unfinished">Open ZIP</translation>
+      <translation>Άνοιγμα ZIP</translation>
     </message>
     <message>
       <location filename="../app.py" line="386"/>
       <source>Select MIUI Zip file</source>
-      <translation type="unfinished">Select MIUI Zip file</translation>
+      <translation>Επιλογή MIUI zip αρχείου</translation>
     </message>
     <message>
       <location filename="../app.py" line="387"/>
       <source>Quit</source>
-      <translation type="unfinished">Quit</translation>
+      <translation>Έξοδος</translation>
     </message>
     <message>
       <location filename="../app.py" line="388"/>
       <source>Exits the application</source>
-      <translation type="unfinished">Exits the application</translation>
+      <translation>Έξοδος από την εφαρμογή</translation>
     </message>
     <message>
       <location filename="../app.py" line="389"/>
       <source>Albanian</source>
-      <translation type="unfinished">Albanian</translation>
+      <translation>Αλβανικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="390"/>
       <source>Arabic</source>
-      <translation type="unfinished">Arabic</translation>
+      <translation>Αραβικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="391"/>
       <source>Catalan</source>
-      <translation type="unfinished">Catalan</translation>
+      <translation>Καταλανικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="392"/>
       <source>Chinese Simplified</source>
-      <translation type="unfinished">Chinese Simplified</translation>
+      <translation>Κινέζικα Απλοποιημένα</translation>
     </message>
     <message>
       <location filename="../app.py" line="393"/>
       <source>Croatian</source>
-      <translation type="unfinished">Croatian</translation>
+      <translation>Κροατικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="394"/>
       <source>Czech</source>
-      <translation type="unfinished">Czech</translation>
+      <translation>Τσέχικα</translation>
     </message>
     <message>
       <location filename="../app.py" line="395"/>
       <source>Dutch</source>
-      <translation type="unfinished">Dutch</translation>
+      <translation>Ολλανδικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="396"/>
       <source>English</source>
-      <translation type="unfinished">English</translation>
+      <translation>Αγγλικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="397"/>
       <source>French</source>
-      <translation type="unfinished">French</translation>
+      <translation>Γαλλικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="398"/>
       <source>German</source>
-      <translation type="unfinished">German</translation>
+      <translation>Γερμανικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="399"/>
       <source>Greek</source>
-      <translation type="unfinished">Greek</translation>
+      <translation>Ελληνικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="400"/>
       <source>Hindi</source>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Ινδικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="401"/>
       <source>Indonesian</source>
-      <translation type="unfinished">Indonesian</translation>
+      <translation>Ινδονησιακά</translation>
     </message>
     <message>
       <location filename="../app.py" line="402"/>
       <source>Italian</source>
-      <translation type="unfinished">Italian</translation>
+      <translation>Ιταλικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="403"/>
       <source>Malay</source>
-      <translation type="unfinished">Malay</translation>
+      <translation>Μαλαισιακά</translation>
     </message>
     <message>
       <location filename="../app.py" line="404"/>
       <source>Persian</source>
-      <translation type="unfinished">Persian</translation>
+      <translation>Περσικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="405"/>
       <source>Polish</source>
-      <translation type="unfinished">Polish</translation>
+      <translation>Πολωνικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
-      <translation type="unfinished">Portuguese, Brazilian</translation>
+      <translation>Πορτογαλικά, Βραζιλιάνικα</translation>
     </message>
     <message>
       <location filename="../app.py" line="407"/>
       <source>Romanian</source>
-      <translation type="unfinished">Romanian</translation>
+      <translation>Ρουμάνικα</translation>
     </message>
     <message>
       <location filename="../app.py" line="408"/>
       <source>Russian</source>
-      <translation type="unfinished">Russian</translation>
+      <translation>Ρωσικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="409"/>
       <source>Slovenian</source>
-      <translation type="unfinished">Slovenian</translation>
+      <translation>Σλοβενικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="410"/>
       <source>Spanish</source>
-      <translation type="unfinished">Spanish</translation>
+      <translation>Ισπανικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="411"/>
       <source>Turkish</source>
-      <translation type="unfinished">Turkish</translation>
+      <translation>Τούρκικα</translation>
     </message>
     <message>
       <location filename="../app.py" line="412"/>
       <source>Ukrainian</source>
-      <translation type="unfinished">Ukrainian</translation>
+      <translation>Ουκρανικά</translation>
     </message>
     <message>
       <location filename="../app.py" line="413"/>
       <source>Vietnamese</source>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Βιετναμέζικα</translation>
     </message>
     <message>
       <location filename="../app.py" line="414"/>
       <source>Report Bug</source>
-      <translation type="unfinished">Report Bug</translation>
+      <translation>Αναφορά σφάλματος</translation>
     </message>
     <message>
       <location filename="../app.py" line="415"/>
       <source>Submit an issue in case anything is wrong</source>
-      <translation type="unfinished">Submit an issue in case anything is wrong</translation>
+      <translation>Υποβάλετε ένα ζήτημα σε περίπτωση που κάτι δεν είναι σωστό</translation>
     </message>
     <message>
       <location filename="../app.py" line="417"/>
       <source>Donate</source>
-      <translation type="unfinished">Donate</translation>
+      <translation>Κάντε Δωρεά</translation>
     </message>
     <message>
       <location filename="../app.py" line="418"/>
       <source>Show us some love</source>
-      <translation type="unfinished">Show us some love</translation>
+      <translation>Δείξε μας λίγη αγάπη</translation>
     </message>
     <message>
       <location filename="../app.py" line="419"/>
       <source>About</source>
-      <translation type="unfinished">About</translation>
+      <translation>Σχετικά με</translation>
     </message>
     <message>
       <location filename="../app.py" line="420"/>
       <source>About this tool</source>
-      <translation type="unfinished">About this tool</translation>
+      <translation>Σχετικά με αυτό το εργαλείο</translation>
     </message>
     <message>
       <location filename="../app.py" line="421"/>
       <source>Website</source>
-      <translation type="unfinished">Website</translation>
+      <translation>Ιστοσελίδα</translation>
     </message>
     <message>
       <location filename="../app.py" line="422"/>
       <source>Visit tool website</source>
-      <translation type="unfinished">Visit tool website</translation>
+      <translation>Μετάβαση στην Ιστοσελίδα</translation>
     </message>
   </context>
   <context>
@@ -350,27 +351,27 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="363"/>
       <source>Process</source>
-      <translation type="unfinished">Process</translation>
+      <translation>Διαδικασία</translation>
     </message>
     <message>
       <location filename="../app.py" line="364"/>
       <source>Firmware</source>
-      <translation type="unfinished">Firmware</translation>
+      <translation>Firmware</translation>
     </message>
     <message>
       <location filename="../app.py" line="365"/>
       <source>Non-ARB Firmware</source>
-      <translation type="unfinished">Non-ARB Firmware</translation>
+      <translation>Non-ARB Firmware</translation>
     </message>
     <message>
       <location filename="../app.py" line="366"/>
       <source>Firmware + Vendor</source>
-      <translation type="unfinished">Firmware + Vendor</translation>
+      <translation>Firmware + Vendor</translation>
     </message>
     <message>
       <location filename="../app.py" line="367"/>
       <source>Firmware-less ROM</source>
-      <translation type="unfinished">Firmware-less ROM</translation>
+      <translation>Firmware-less ROM</translation>
     </message>
   </context>
   <context>
@@ -378,7 +379,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="423"/>
       <source>Ready</source>
-      <translation type="unfinished">Ready</translation>
+      <translation>Έτοιμο</translation>
     </message>
   </context>
   <context>
@@ -386,7 +387,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="360"/>
       <source>Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</source>
-      <translation type="unfinished">Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</translation>
+      <translation>Xiaomi Flashable Firmware Creator από XiaomiFirmwareUpdater</translation>
     </message>
   </context>
 </TS>

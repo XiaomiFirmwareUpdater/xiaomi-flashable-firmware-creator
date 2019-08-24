@@ -269,12 +269,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
-      <translation>Португальский, Бразильский</translation>
+      <translation>Бразильский португальский</translation>
     </message>
     <message>
       <location filename="../app.py" line="407"/>
       <source>Romanian</source>
-      <translation>Румынская</translation>
+      <translation>Румынский</translation>
     </message>
     <message>
       <location filename="../app.py" line="408"/>

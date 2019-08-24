@@ -6,12 +6,12 @@
     <message>
       <location filename="../windows/about.py" line="126"/>
       <source>About </source>
-      <translation type="unfinished">About </translation>
+      <translation>Sobre </translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="127"/>
       <source>Xiaomi Flashable Firmware Creator By Xiaomi Firmware Updater</source>
-      <translation type="unfinished">Xiaomi Flashable Firmware Creator By Xiaomi Firmware Updater</translation>
+      <translation>Xiaomi Flashable Firmware Creator por Xiaomi Firmware Updater</translation>
     </message>
     <message encoding="UTF-8">
       <location filename="../windows/about.py" line="129"/>
@@ -33,7 +33,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../windows/about.py" line="178"/>
       <source>About</source>
-      <translation type="unfinished">About</translation>
+      <translation>Sobre</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="180"/>
@@ -55,7 +55,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../windows/about.py" line="212"/>
       <source>Sources</source>
-      <translation type="unfinished">Sources</translation>
+      <translation>Fontes</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="214"/>
@@ -73,7 +73,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../windows/about.py" line="236"/>
       <source>Authors</source>
-      <translation type="unfinished">Authors</translation>
+      <translation>Autores</translation>
     </message>
     <message encoding="UTF-8">
       <location filename="../windows/about.py" line="238"/>
@@ -95,7 +95,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../windows/about.py" line="344"/>
       <source>Thanks To</source>
-      <translation type="unfinished">Thanks To</translation>
+      <translation>Agradecimentos</translation>
     </message>
   </context>
   <context>
@@ -103,12 +103,12 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="368"/>
       <source>Drop a file</source>
-      <translation type="unfinished">Drop a file</translation>
+      <translation>Soltar um ficheiro</translation>
     </message>
     <message>
       <location filename="../app.py" line="369"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Drop a rom zip file here&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Solte um ficheiro zip de ROM aqui&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
   </context>
   <context>
@@ -116,32 +116,32 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="378"/>
       <source>Select file</source>
-      <translation type="unfinished">Select file</translation>
+      <translation>Selecionar ficheiro</translation>
     </message>
     <message>
       <location filename="../app.py" line="376"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Erro</translation>
     </message>
     <message>
       <location filename="../app.py" line="377"/>
       <source>You must select a ROM zip first!</source>
-      <translation type="unfinished">You must select a ROM zip first!</translation>
+      <translation>Tem de selecionar um zip de ROM primeiro!</translation>
     </message>
     <message>
       <location filename="../app.py" line="379"/>
       <source>Select MIUI Zip file</source>
-      <translation type="unfinished">Select MIUI Zip file</translation>
+      <translation>Selecionar ficheiro Zip MIUI</translation>
     </message>
     <message>
       <location filename="../app.py" line="380"/>
       <source>Create</source>
-      <translation type="unfinished">Create</translation>
+      <translation>Criar</translation>
     </message>
     <message>
       <location filename="../app.py" line="381"/>
       <source>Create the selected output zip</source>
-      <translation type="unfinished">Create the selected output zip</translation>
+      <translation>Criar o zip de saída selecionado</translation>
     </message>
   </context>
   <context>
@@ -149,202 +149,202 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="382"/>
       <source>File</source>
-      <translation type="unfinished">File</translation>
+      <translation>Ficheiro</translation>
     </message>
     <message>
       <location filename="../app.py" line="383"/>
       <source>Language</source>
-      <translation type="unfinished">Language</translation>
+      <translation>Idioma</translation>
     </message>
     <message>
       <location filename="../app.py" line="384"/>
       <source>Help</source>
-      <translation type="unfinished">Help</translation>
+      <translation>Ajuda</translation>
     </message>
     <message>
       <location filename="../app.py" line="385"/>
       <source>Open ZIP</source>
-      <translation type="unfinished">Open ZIP</translation>
+      <translation>Abrir ZIP</translation>
     </message>
     <message>
       <location filename="../app.py" line="386"/>
       <source>Select MIUI Zip file</source>
-      <translation type="unfinished">Select MIUI Zip file</translation>
+      <translation>Selecionar ficheiro Zip MIUI</translation>
     </message>
     <message>
       <location filename="../app.py" line="387"/>
       <source>Quit</source>
-      <translation type="unfinished">Quit</translation>
+      <translation>Sair</translation>
     </message>
     <message>
       <location filename="../app.py" line="388"/>
       <source>Exits the application</source>
-      <translation type="unfinished">Exits the application</translation>
+      <translation>Sai da aplicação</translation>
     </message>
     <message>
       <location filename="../app.py" line="389"/>
       <source>Albanian</source>
-      <translation type="unfinished">Albanian</translation>
+      <translation>Albanês</translation>
     </message>
     <message>
       <location filename="../app.py" line="390"/>
       <source>Arabic</source>
-      <translation type="unfinished">Arabic</translation>
+      <translation>Árabe</translation>
     </message>
     <message>
       <location filename="../app.py" line="391"/>
       <source>Catalan</source>
-      <translation type="unfinished">Catalan</translation>
+      <translation>Catalão</translation>
     </message>
     <message>
       <location filename="../app.py" line="392"/>
       <source>Chinese Simplified</source>
-      <translation type="unfinished">Chinese Simplified</translation>
+      <translation>Chinês Simplificado</translation>
     </message>
     <message>
       <location filename="../app.py" line="393"/>
       <source>Croatian</source>
-      <translation type="unfinished">Croatian</translation>
+      <translation>Croata</translation>
     </message>
     <message>
       <location filename="../app.py" line="394"/>
       <source>Czech</source>
-      <translation type="unfinished">Czech</translation>
+      <translation>Tcheco</translation>
     </message>
     <message>
       <location filename="../app.py" line="395"/>
       <source>Dutch</source>
-      <translation type="unfinished">Dutch</translation>
+      <translation>Holandês</translation>
     </message>
     <message>
       <location filename="../app.py" line="396"/>
       <source>English</source>
-      <translation type="unfinished">English</translation>
+      <translation>Inglês</translation>
     </message>
     <message>
       <location filename="../app.py" line="397"/>
       <source>French</source>
-      <translation type="unfinished">French</translation>
+      <translation>Francês</translation>
     </message>
     <message>
       <location filename="../app.py" line="398"/>
       <source>German</source>
-      <translation type="unfinished">German</translation>
+      <translation>Alemão</translation>
     </message>
     <message>
       <location filename="../app.py" line="399"/>
       <source>Greek</source>
-      <translation type="unfinished">Greek</translation>
+      <translation>Grego</translation>
     </message>
     <message>
       <location filename="../app.py" line="400"/>
       <source>Hindi</source>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Hindi</translation>
     </message>
     <message>
       <location filename="../app.py" line="401"/>
       <source>Indonesian</source>
-      <translation type="unfinished">Indonesian</translation>
+      <translation>Indonésio</translation>
     </message>
     <message>
       <location filename="../app.py" line="402"/>
       <source>Italian</source>
-      <translation type="unfinished">Italian</translation>
+      <translation>Italiano</translation>
     </message>
     <message>
       <location filename="../app.py" line="403"/>
       <source>Malay</source>
-      <translation type="unfinished">Malay</translation>
+      <translation>Malaio</translation>
     </message>
     <message>
       <location filename="../app.py" line="404"/>
       <source>Persian</source>
-      <translation type="unfinished">Persian</translation>
+      <translation>Persa</translation>
     </message>
     <message>
       <location filename="../app.py" line="405"/>
       <source>Polish</source>
-      <translation type="unfinished">Polish</translation>
+      <translation>Polonês</translation>
     </message>
     <message>
       <location filename="../app.py" line="406"/>
       <source>Portuguese, Brazilian</source>
-      <translation type="unfinished">Portuguese, Brazilian</translation>
+      <translation>Português, Brasil</translation>
     </message>
     <message>
       <location filename="../app.py" line="407"/>
       <source>Romanian</source>
-      <translation type="unfinished">Romanian</translation>
+      <translation>Romeno</translation>
     </message>
     <message>
       <location filename="../app.py" line="408"/>
       <source>Russian</source>
-      <translation type="unfinished">Russian</translation>
+      <translation>Russo</translation>
     </message>
     <message>
       <location filename="../app.py" line="409"/>
       <source>Slovenian</source>
-      <translation type="unfinished">Slovenian</translation>
+      <translation>Esloveno</translation>
     </message>
     <message>
       <location filename="../app.py" line="410"/>
       <source>Spanish</source>
-      <translation type="unfinished">Spanish</translation>
+      <translation>Espanhol</translation>
     </message>
     <message>
       <location filename="../app.py" line="411"/>
       <source>Turkish</source>
-      <translation type="unfinished">Turkish</translation>
+      <translation>Turco</translation>
     </message>
     <message>
       <location filename="../app.py" line="412"/>
       <source>Ukrainian</source>
-      <translation type="unfinished">Ukrainian</translation>
+      <translation>Ucraniano</translation>
     </message>
     <message>
       <location filename="../app.py" line="413"/>
       <source>Vietnamese</source>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Vietnamita</translation>
     </message>
     <message>
       <location filename="../app.py" line="414"/>
       <source>Report Bug</source>
-      <translation type="unfinished">Report Bug</translation>
+      <translation>Reportar Erro</translation>
     </message>
     <message>
       <location filename="../app.py" line="415"/>
       <source>Submit an issue in case anything is wrong</source>
-      <translation type="unfinished">Submit an issue in case anything is wrong</translation>
+      <translation>Submeter um problema caso algo esteja errado</translation>
     </message>
     <message>
       <location filename="../app.py" line="417"/>
       <source>Donate</source>
-      <translation type="unfinished">Donate</translation>
+      <translation>Doar</translation>
     </message>
     <message>
       <location filename="../app.py" line="418"/>
       <source>Show us some love</source>
-      <translation type="unfinished">Show us some love</translation>
+      <translation>Mostre-nos algum amor</translation>
     </message>
     <message>
       <location filename="../app.py" line="419"/>
       <source>About</source>
-      <translation type="unfinished">About</translation>
+      <translation>Sobre</translation>
     </message>
     <message>
       <location filename="../app.py" line="420"/>
       <source>About this tool</source>
-      <translation type="unfinished">About this tool</translation>
+      <translation>Sobre esta ferramenta</translation>
     </message>
     <message>
       <location filename="../app.py" line="421"/>
       <source>Website</source>
-      <translation type="unfinished">Website</translation>
+      <translation>Sítio</translation>
     </message>
     <message>
       <location filename="../app.py" line="422"/>
       <source>Visit tool website</source>
-      <translation type="unfinished">Visit tool website</translation>
+      <translation>Visite o sítio da ferramenta</translation>
     </message>
   </context>
   <context>
@@ -352,27 +352,27 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="363"/>
       <source>Process</source>
-      <translation type="unfinished">Process</translation>
+      <translation>Processo</translation>
     </message>
     <message>
       <location filename="../app.py" line="364"/>
       <source>Firmware</source>
-      <translation type="unfinished">Firmware</translation>
+      <translation>Firmware</translation>
     </message>
     <message>
       <location filename="../app.py" line="365"/>
       <source>Non-ARB Firmware</source>
-      <translation type="unfinished">Non-ARB Firmware</translation>
+      <translation>Firmware Não-ARB</translation>
     </message>
     <message>
       <location filename="../app.py" line="366"/>
       <source>Firmware + Vendor</source>
-      <translation type="unfinished">Firmware + Vendor</translation>
+      <translation>Firmware + Vendor</translation>
     </message>
     <message>
       <location filename="../app.py" line="367"/>
       <source>Firmware-less ROM</source>
-      <translation type="unfinished">Firmware-less ROM</translation>
+      <translation>ROM sem Firmware</translation>
     </message>
   </context>
   <context>
@@ -380,7 +380,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="423"/>
       <source>Ready</source>
-      <translation type="unfinished">Ready</translation>
+      <translation>Pronto</translation>
     </message>
   </context>
   <context>
@@ -388,7 +388,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="360"/>
       <source>Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</source>
-      <translation type="unfinished">Xiaomi Flashable Firmware Creator by XiaomiFirmwareUpdater</translation>
+      <translation>Xiaomi Flashable Firmware Creator por Xiaomi Firmware Updater</translation>
     </message>
   </context>
 </TS>

@@ -6,12 +6,12 @@
     <message>
       <location filename="../windows/about.py" line="126"/>
       <source>About </source>
-      <translation>About </translation>
+      <translation>Über </translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="127"/>
       <source>Xiaomi Flashable Firmware Creator By Xiaomi Firmware Updater</source>
-      <translation>Xiaomi Flashable Firmware Creator By Xiaomi Firmware Updater</translation>
+      <translation>Xiaomi Flashable Firmware Creator von Xiaomi Firmware Updater</translation>
     </message>
     <message encoding="UTF-8">
       <location filename="../windows/about.py" line="129"/>
@@ -26,8 +26,8 @@ p, li { white-space: pre-wrap; }
  &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Xiaomi Flashable Firmware Creator&lt;/span&gt;&lt;/a&gt; ist ein Python 3 Programm, welches aus MIUI ROMS extrahierte, flashbare Firmware-Update Pakete erstellt. Von &lt;a href=&quot;https://xiaomifirmwareupdater.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;XiaomiFirmwareUpdater.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Es werden &quot;untouched Firmware&quot;, &quot;non-arb Firmware&quot;, &quot;Firmware + Vendor flashbare Zip&quot;, und &quot;Firmware-freie ROMs&quot; unterstützt&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Xiaomi Flashable Firmware Creator&lt;/span&gt;&lt;/a&gt; ist ein Python 3 Programm, welches aus MIUI ROMs extrahierte, flashbare Firmware-Update Pakete erstellt. Von &lt;a href=&quot;https://xiaomifirmwareupdater.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;XiaomiFirmwareUpdater.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Es werden "untouched Firmware", "non-arb Firmware", "Firmware + Vendor flashbare Zip", und "Firmware-freie ROMs" unterstützt.&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://xiaomifirmwareupdater.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Xiaomi Firmware Updater&lt;/span&gt;&lt;/a&gt; ist ein Community Projekt, gestartet im Januar 2018, mit dem Ziel Firmware Pakete für alle Xiaomi Geräte anzubieten. Es soll Custom ROM Nutzern eine einfache Möglichkeit bieten Ihre Geräte Firmware mittels Custom Revovery zu aktualisieren, ohne jedes mal die komplette ROM Datei flashen zu müssen, wenn sie eine Aktualisierung wünschen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -48,9 +48,9 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Xiaomi Flashable Firmware Creator ist eine freie und quelloffene software, lizenziert unter der GPL-3.0 (GNU GENERAL PUBLIC LICENSE) license.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Xiaomi Flashable Firmware Creator ist eine freie und quelloffene Software, lizenziert unter der GPL-3.0 (GNU GENERAL PUBLIC LICENSE) Lizenz.&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Es werden die folgenden Bibliotheken verwendet:&lt;/p&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;PyQt 5.13.0 (built against 5.13.0)&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;PyQt 5.13.0 (erstellt mit 5.13.0)&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="212"/>
@@ -68,7 +68,8 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/yshalsager&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;yshalsager&lt;/span&gt;&lt;/a&gt;  - Leitender Entwickler&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/yshalsager&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;yshalsager&lt;/span&gt;&lt;/a&gt;  - 
+Leitender Entwickler&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="236"/>
@@ -84,13 +85,13 @@ p, li { white-space: pre-wrap; }
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; for shell script version&lt;/li&gt;
 &lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; for Simplified Chinese translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; for Croatian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; for German translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; for Italian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; for Polish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; and Thorin for Spanish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; for Russian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; for Turkish translation&lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;And all people who have contributed and I have forgotten to mention.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+      <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; for shell script version&lt;/li&gt;
-&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; for Simplified Chinese translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; for Croatian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; for German translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; for Italian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; for Polish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; and Thorin for Spanish translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; for Russian translation&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; for Turkish translation&lt;/li&gt;&lt;/ul&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;And all people who have contributed and I have forgotten to mention.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ardadem&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;ardadem&lt;/span&gt;&lt;/a&gt; für Shell Skript Version&lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/hh2333&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;TH779&lt;/span&gt;&lt;/a&gt; und &lt;a href=&quot;https://github.com/PIPIPIG233666&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;PIPIPIG233666&lt;/span&gt;&lt;/a&gt; für vereinfachte chinesische Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/zstanecic&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Zvonimir Stanecic&lt;/span&gt;&lt;/a&gt; für kroatische Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/0n3-70uch&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Fabian Briese&lt;/span&gt;&lt;/a&gt; für deutsche Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/foxone&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Ed&lt;/span&gt;&lt;/a&gt; für italienische Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/kacskrz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Orjon&lt;/span&gt;&lt;/a&gt; für polnische Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/DeicPro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Pablo&lt;/span&gt;&lt;/a&gt; und Thorin für spanische Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://t.me/Bodzey&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Bohdan Cherniak&lt;/span&gt;&lt;/a&gt; für russische Übersetzung&lt;/li&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/EnesSastim&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Enes Sastim&lt;/span&gt;&lt;/a&gt; und &lt;a href=&quot;https://github.com/trzpro&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#009dff;&quot;&gt;Emir Bardakçı&lt;/span&gt;&lt;/a&gt; für türkische Übersetzung&lt;/li&gt;&lt;/ul&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br/&gt;Und alle Personen welche beigetragen haben und ich vergessen habe zu erwähnen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../windows/about.py" line="344"/>
@@ -116,7 +117,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="378"/>
       <source>Select file</source>
-      <translation>Datei auswählen</translation>
+      <translation>Datei wählen</translation>
     </message>
     <message>
       <location filename="../app.py" line="376"/>
@@ -164,7 +165,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="385"/>
       <source>Open ZIP</source>
-      <translation>Öffne ZIP</translation>
+      <translation>ZIP öffnen</translation>
     </message>
     <message>
       <location filename="../app.py" line="386"/>
@@ -189,7 +190,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="390"/>
       <source>Arabic</source>
-      <translation>Arabic</translation>
+      <translation>Arabisch</translation>
     </message>
     <message>
       <location filename="../app.py" line="391"/>
@@ -219,7 +220,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="396"/>
       <source>English</source>
-      <translation>English</translation>
+      <translation>Englisch</translation>
     </message>
     <message>
       <location filename="../app.py" line="397"/>
@@ -372,7 +373,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../app.py" line="367"/>
       <source>Firmware-less ROM</source>
-      <translation>Firmware-freie ROM</translation>
+      <translation>Firmware-freier ROM</translation>
     </message>
   </context>
   <context>
