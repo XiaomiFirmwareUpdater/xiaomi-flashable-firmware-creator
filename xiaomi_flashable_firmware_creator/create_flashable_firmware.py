@@ -278,8 +278,16 @@ def make_zip(rom, process):
     """
     rom = path.basename(rom)
     with open("out/META-INF/com/google/android/updater-script", 'r') as i:
-        # codename = str(i.readlines()[7].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
-        codename = re.findall(r'/.*:[0-9]', i.read())[0].split('/')[-1].split(':')[0]
+        updater_script = i.read()
+    # codename = str(i.readlines()[7].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
+    try:
+        codename = re.findall(r'/.*:[0-9]', updater_script)[0].split('/')[-1].split(':')[0]
+    except IndexError:
+        try:
+            codename = re.search(r'get_device_compatible\(\"([a-z]*)|\\\"([a-z]*)\\\"', updater_script).group(1)
+        except Exception as e:
+            print(f"Error: can't get this device codename ({e})\n")
+            codename = "codename"
     print(f"Creating {process} zip from {rom} for {codename}")
     make_archive('firmware', 'zip', 'out/')
     if path.exists('firmware.zip'):
