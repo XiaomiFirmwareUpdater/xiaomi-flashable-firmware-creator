@@ -288,6 +288,8 @@ def make_zip(rom, process):
         except Exception as e:
             print(f"Error: can't get this device codename ({e})\n")
             codename = "codename"
+    if codename.find('_') > 1:
+        codename = codename.replace('_', '-')
     print(f"Creating {process} zip from {rom} for {codename}")
     make_archive('firmware', 'zip', 'out/')
     if path.exists('firmware.zip'):
