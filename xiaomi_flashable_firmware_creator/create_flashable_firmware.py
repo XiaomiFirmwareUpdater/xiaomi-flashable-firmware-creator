@@ -122,7 +122,7 @@ def mtk_firmware_extract(rom):
     """
     with ZipFile(rom, 'r') as zip_file:
         files = [n for n in zip_file.namelist() if 'system' not in n and 'vendor' not in n
-                 and 'boot.img' not in n and 'file_contexts' not in n]
+                 and 'product' not in n and 'boot.img' not in n and 'file_contexts' not in n]
         zip_file.extractall(path="tmp", members=files)
     check_firmware()
     for file in glob('tmp/*'):
