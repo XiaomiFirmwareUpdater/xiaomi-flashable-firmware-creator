@@ -151,7 +151,7 @@ def vendor_extract(rom):
     """
     with ZipFile(rom, 'r') as zip_file:
         files = [n for n in zip_file.namelist()
-                 if not n.startswith('system') and not n.startswith('boot')]
+                 if not n.startswith('system') and not n.startswith('vbmeta')]
         zip_file.extractall(path="tmp", members=files)
     check_firmware()
     copy_tree('tmp/', 'out/')
