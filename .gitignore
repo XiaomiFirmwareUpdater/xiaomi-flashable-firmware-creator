@@ -4,6 +4,10 @@ dist/
 tmp*
 .idea/
 env/
+venv/
+.python-version
 *.log
 *.dist
 *.build
+*/i18n/develop/
+*/i18n/lang.ts
