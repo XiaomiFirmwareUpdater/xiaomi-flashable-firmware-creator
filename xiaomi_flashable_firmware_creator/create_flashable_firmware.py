@@ -9,6 +9,7 @@ from os import makedirs, rename, remove, path
 from shutil import move, make_archive, rmtree
 from socket import gethostname
 from zipfile import ZipFile
+from sys import exit as exit_
 import re
 
 
@@ -74,7 +75,7 @@ def check_firmware():
             or not path.exists('tmp/META-INF/com/google/android/updater-script'):
         print("This zip isn't a valid ROM!")
         rmtree("tmp")
-        exit(2)
+        exit_(2)
 
 
 def firmware_type(rom):
@@ -101,7 +102,7 @@ def firmware_extract(rom, process):
             files = [n for n in zip_file.namelist()
                      if n.startswith('firmware-update/') or n.startswith('META-INF/')]
             to_extract = [i for i in files if 'dtbo' not in i
-                          and 'splash' not in i and 'vbmeta' not in i]
+                          and 'splash' not in i and 'logo' not in i and 'vbmeta' not in i]
             zip_file.extractall(path="tmp", members=to_extract)
     elif process == "nonarb":
         with ZipFile(rom, 'r') as zip_file:
@@ -172,7 +173,7 @@ def firmware_updater():
         out.writelines('ui_print("Flashing Normal firmware...");\n')
         out.writelines(line for line in i if "getprop" in line or "Target" in line
                        or "firmware-update" in line and "dtbo.img" not in line
-                       and "vbmeta.img" not in line and "splash" not in line)
+                       and "vbmeta" not in line and "splash" not in line and "logo" not in line)
         out.writelines('\nshow_progress(0.100000, 2);\nset_progress(1.000000);\n')
     with open("out/updater-script", 'r') as i, \
             open("out/META-INF/com/google/android/updater-script", "w", newline='\n') as out:
@@ -284,9 +285,10 @@ def make_zip(rom, process):
         codename = re.findall(r'/.*:[0-9]', updater_script)[0].split('/')[-1].split(':')[0]
     except IndexError:
         try:
-            codename = re.search(r'get_device_compatible\(\"([a-z]*)|\\\"([a-z]*)\\\"', updater_script).group(1)
-        except Exception as e:
-            print(f"Error: can't get this device codename ({e})\n")
+            codename = re.search(r'get_device_compatible\(\"([a-z]*)|\\\"([a-z]*)\\\"',
+                                 updater_script).group(1)
+        except Exception as err:
+            print(f"Error: can't get this device codename ({err})\n")
             codename = "codename"
     if codename.find('_') > 1:
         codename = codename.replace('_', '-')
@@ -347,10 +349,10 @@ def main():
             mtk_vendor_updater()
         else:
             print('Unsupported operation for MTK. Exiting!')
-            exit(3)
+            exit_(3)
     else:
         print("I couldn't find firmware! Exiting.")
-        exit(4)
+        exit_(4)
     make_zip(rom, process)
 
 
