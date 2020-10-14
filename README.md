@@ -9,27 +9,6 @@ Create flashable firmware zip from MIUI Recovery ROMs!
 Xiaomi Flashable Firmware Creator is a tool that generates flashable firmware-update packages from official MIUI ROMS.
 
 It supports creating untouched firmware, non-arb firmware, firmware + vendor flashable zip, and firmware-less ROMs.
-[![screenshot](https://raw.githubusercontent.com/XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py/py/screenshots/1.png)](https://xiaomifirmwareupdater.com/projects/xiaomi-flashable-firmware-creator/)
-
-### Features:
-- CLI and GUI version
-- Easy-to-use interface
-- Multilanguage support (more than 25 languages!). Thanks to our community members!
-
-#### Screenshots:
-[Here](https://github.com/XiaomiFirmwareUpdater/xiaomi-flashable-firmware-creator.py/tree/py/screenshots)
-
-### GUI Usage:
-- Clone or download this repo.
-- Make sure that you have Python3 installed on your device.
-- Install the required packages.
-```
-pip3 install -r requirements.txt
-```
-- Run the tool.
-```
-python3 main.py
-```
 
 ### CLI Usage:
 

@@ -9,5 +9,3 @@ venv/
 *.log
 *.dist
 *.build
-*/i18n/develop/
-*/i18n/lang.ts
