@@ -1,19 +1,25 @@
+"""Miscellaneous functions used by the tool."""
 import re
 
 
-def extract_codename(updater_script):
-    # codename = str(i.readlines()[7].split('/', 3)[2]).split(':', 1)[0].replace('_', '-')
-    codename = ''
-    match = re.findall(r'/.*:[0-9]', updater_script)
+def extract_codename(updater_script) -> str:
+    r"""
+    This method extracts device codename form updater-script
+
+    Regex pattern explanation:
+    - (?:/[\w\d_-]+/([\w\d]+):\d) matches codename in update fingerprint like
+    Xiaomi/cmi_global/cmi:11/RKQ1.200710.002/V12.1.2.0.RJAMIXM:user/release-keys
+    - (?:\(\"ro\.product\.device\"\) == \"([\w\d]+)\") matches codename
+     in getprop("ro.product.device") statements
+    - (?:get_device_compatible\(\"([\w\d]+)\"\)) matches get_device_compatible() statements
+    :param updater_script: updater-script file as string
+    :return: extracted codename if found or 'codename' if not found.
+    """
+    pattern = re.compile(r'(?:/[\w\d_-]+/([\w\d]+):\d)|'
+                         r'(?:\(\"ro\.product\.device\"\) == \"([\w\d]+)\")|'
+                         r'(?:get_device_compatible\(\"([\w\d]+)\"\))')
+    match = pattern.search(updater_script)
     if match:
-        codename = match[0].split('/')[-1].split(':')[0]
-    else:
-        match = re.search(r'get_device_compatible\(\"([a-z]*)|\\\"([a-z]*)\\\"',
-                          updater_script)
-        if match:
-            codename = match.group(1)
-    if not codename:
-        codename = "codename"
-    if codename.find('_') > 1:
-        codename = codename.replace('_', '-')
-    return codename
+        codename = [i for i in match.groups() if i is not None]
+        return codename[0]
+    return 'codename'
