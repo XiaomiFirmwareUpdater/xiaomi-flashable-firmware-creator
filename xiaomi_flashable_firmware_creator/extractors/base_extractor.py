@@ -66,11 +66,13 @@ class BaseExtractor(ABC):
     def get_files_list(self):
         if self.extract_mode is ProcessTypes.firmware:
             return [i for i in self.files if
-                    i.startswith('META-INF/') or (i.startswith('firmware-update/')
-                                                  and 'dtbo' not in i
-                                                  and 'splash' not in i
-                                                  and 'logo' not in i
-                                                  and 'vbmeta' not in i)] \
+                    (i.startswith('META-INF/')
+                     and (i.endswith('updater-script') or i.endswith('update-binary'))
+                     ) or (i.startswith('firmware-update/')
+                           and 'dtbo' not in i
+                           and 'splash' not in i
+                           and 'logo' not in i
+                           and 'vbmeta' not in i)] \
                 if self.zip_type is ZipTypes.qcom \
                 else [n for n in self.files if 'system' not in n
                       and 'vendor' not in n
