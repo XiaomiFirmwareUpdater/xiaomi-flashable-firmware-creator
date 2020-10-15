@@ -1,0 +1,26 @@
+getprop("ro.product.device") == "omega" || abort("This package is for \"omega\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+ui_print("Target: Xiaomi/omega/omega:6.0/MRA58K/V10.2.1.0.MHQCNXM:user/release-keys");
+show_progress(0.200000, 10);
+package_extract_file("boot.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/boot");
+assert(write_preloader("preloader.img"));
+
+# ---- radio update tasks ----
+
+ui_print("Patching firmware images...");
+package_extract_file("firmware-update/logo.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/logo");
+package_extract_file("firmware-update/md1arm7.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md1arm7");
+package_extract_file("firmware-update/trustzone.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/tee1");
+package_extract_file("firmware-update/lk.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/lk");
+package_extract_file("firmware-update/md1rom.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md1img");
+package_extract_file("firmware-update/tinysys-scp.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/scp1");
+package_extract_file("firmware-update/md1dsp.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md1dsp");
+package_extract_file("firmware-update/md3rom.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md3img");
+package_extract_file("META-INF/com/miui/miui_update", "/cache/miui_update");
+set_metadata("/cache/miui_update", "uid", 0, "gid", 0, "mode", 0555, "capabilities", 0x0);
+run_program("/cache/miui_update");
+delete("/cache/miui_update");
+show_progress(0.600000, 85);
+ui_print("Patching system image unconditionally...");
+block_image_update("/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/system", package_extract_file("system.transfer.list"), "system.new.dat", "system.patch.dat") ||
+    abort("Failed to update system image.");
+show_progress(0.100000, 2);

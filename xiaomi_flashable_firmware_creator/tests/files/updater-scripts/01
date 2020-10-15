@@ -1,0 +1,92 @@
+getprop("ro.product.device") == "begonia" || abort("E3004: This package is for \"begonia\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+ui_print("Target: Redmi/begonia/begonia:10/QP1A.190711.020/V12.0.3.0.QGGMIXM:user/release-keys");
+show_progress(0.200000, 10);
+package_extract_file("boot.img", "/dev/block/platform/bootdevice/by-name/boot");
+show_progress(0.700000, 250);
+ui_print("Patching system image unconditionally...");
+block_image_update("/dev/block/platform/bootdevice/by-name/system", package_extract_file("system.transfer.list"), "system.new.dat.br", "system.patch.dat") ||
+  abort("E1001: Failed to update system image.");
+ui_print("Patching vendor image unconditionally...");
+block_image_update("/dev/block/platform/bootdevice/by-name/vendor", package_extract_file("vendor.transfer.list"), "vendor.new.dat.br", "vendor.patch.dat") ||
+  abort("E2001: Failed to update vendor image.");
+show_progress(0.100000, 2);
+show_mtupdate_stage("/cache/recovery/last_mtupdate_stage");
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "1") ,
+(
+ui_print("start to update general image");
+package_extract_file("logo.bin", "/dev/block/platform/bootdevice/by-name/logo");
+package_extract_file("audio_dsp.img", "/dev/block/platform/bootdevice/by-name/audio_dsp");
+package_extract_file("cam_vpu3.img", "/dev/block/platform/bootdevice/by-name/cam_vpu3");
+package_extract_file("dtbo.img", "/dev/block/platform/bootdevice/by-name/dtbo");
+package_extract_file("cam_vpu2.img", "/dev/block/platform/bootdevice/by-name/cam_vpu2");
+package_extract_file("md1img.img", "/dev/block/platform/bootdevice/by-name/md1img");
+package_extract_file("spmfw.img", "/dev/block/platform/bootdevice/by-name/spmfw");
+package_extract_file("cam_vpu1.img", "/dev/block/platform/bootdevice/by-name/cam_vpu1");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "1");
+),
+ui_print("general images are already updated");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "3") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "2") then
+
+ui_print("start to update alt loader image");
+package_extract_file("sspm.img", "/dev/block/platform/bootdevice/by-name/sspm_2");
+package_extract_file("lk.img", "/dev/block/platform/bootdevice/by-name/lk2");
+package_extract_file("gz.img", "/dev/block/platform/bootdevice/by-name/gz2");
+package_extract_file("scp.img", "/dev/block/platform/bootdevice/by-name/scp2");
+package_extract_file("tee.img", "/dev/block/platform/bootdevice/by-name/tee2");
+if get_storage_type() then 
+ assert(package_extract_file("preloader_ufs.img", "/dev/block/sdb"));
+else 
+ assert(set_emmc_writable("/sys/block/mmcblk0boot1/force_ro"),
+        package_extract_file("preloader_emmc.img", "/dev/block/mmcblk0boot1"));
+endif;
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "2");
+endif;
+
+switch_active("sspm_1", "sspm_2");
+switch_active("lk", "lk2");
+switch_active("gz1", "gz2");
+switch_active("scp1", "scp2");
+switch_active("tee1", "tee2");
+switch_active("preloader", "preloader2");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "3");
+),
+ui_print("alt loder images are already updated");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "5") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "4") then
+
+ui_print("start to update main loader image");
+package_extract_file("sspm.img", "/dev/block/platform/bootdevice/by-name/sspm_1");
+package_extract_file("lk.img", "/dev/block/platform/bootdevice/by-name/lk");
+package_extract_file("gz.img", "/dev/block/platform/bootdevice/by-name/gz1");
+package_extract_file("scp.img", "/dev/block/platform/bootdevice/by-name/scp1");
+package_extract_file("tee.img", "/dev/block/platform/bootdevice/by-name/tee1");
+if get_storage_type() then 
+ assert(package_extract_file("preloader_ufs.img", "/dev/block/sda"));
+else 
+ assert(set_emmc_writable("/sys/block/mmcblk0boot0/force_ro"),
+        package_extract_file("preloader_emmc.img", "/dev/block/mmcblk0boot0"));
+endif;
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "4");
+endif;
+
+switch_active("sspm_2", "sspm_1");
+switch_active("lk2", "lk");
+switch_active("gz2", "gz1");
+switch_active("scp2", "scp1");
+switch_active("tee2", "tee1");
+switch_active("preloader2", "preloader");
+),
+ui_print("main loader images are already updated");
+);
+delete("/cache/recovery/last_mtupdate_stage");
+package_extract_file("vbmeta.img", "/dev/block/platform/bootdevice/by-name/vbmeta");
+post_ota_action();
+set_progress(1.000000);

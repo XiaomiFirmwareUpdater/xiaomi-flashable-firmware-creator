@@ -1,0 +1,40 @@
+getprop("ro.product.device") == "lithium" || abort("E3004: This package is for \"lithium\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+ui_print("Target: Xiaomi/lithium/lithium:8.0.0/OPR1.170623.032/V11.0.2.0.OAHMIXM:user/release-keys");
+show_progress(0.200000, 10);
+package_extract_file("boot.img", "/dev/block/bootdevice/by-name/boot");
+
+# ---- radio update tasks ----
+
+ui_print("Patching firmware images...");
+package_extract_file("firmware-update/cmnlib64.mbn", "/dev/block/bootdevice/by-name/cmnlib64");
+package_extract_file("firmware-update/cmnlib.mbn", "/dev/block/bootdevice/by-name/cmnlib");
+package_extract_file("firmware-update/hyp.mbn", "/dev/block/bootdevice/by-name/hyp");
+package_extract_file("firmware-update/pmic.elf", "/dev/block/bootdevice/by-name/pmic");
+package_extract_file("firmware-update/tz.mbn", "/dev/block/bootdevice/by-name/tz");
+package_extract_file("firmware-update/emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/aboot");
+package_extract_file("firmware-update/lksecapp.mbn", "/dev/block/bootdevice/by-name/lksecapp");
+package_extract_file("firmware-update/devcfg.mbn", "/dev/block/bootdevice/by-name/devcfg");
+package_extract_file("firmware-update/keymaster.mbn", "/dev/block/bootdevice/by-name/keymaster");
+package_extract_file("firmware-update/xbl.elf", "/dev/block/bootdevice/by-name/xbl");
+package_extract_file("firmware-update/rpm.mbn", "/dev/block/bootdevice/by-name/rpm");
+package_extract_file("firmware-update/cmnlib64.mbn", "/dev/block/bootdevice/by-name/cmnlib64bak");
+package_extract_file("firmware-update/cmnlib.mbn", "/dev/block/bootdevice/by-name/cmnlibbak");
+package_extract_file("firmware-update/hyp.mbn", "/dev/block/bootdevice/by-name/hypbak");
+package_extract_file("firmware-update/tz.mbn", "/dev/block/bootdevice/by-name/tzbak");
+package_extract_file("firmware-update/emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/abootbak");
+package_extract_file("firmware-update/lksecapp.mbn", "/dev/block/bootdevice/by-name/lksecappbak");
+package_extract_file("firmware-update/devcfg.mbn", "/dev/block/bootdevice/by-name/devcfgbak");
+package_extract_file("firmware-update/keymaster.mbn", "/dev/block/bootdevice/by-name/keymasterbak");
+package_extract_file("firmware-update/xbl.elf", "/dev/block/bootdevice/by-name/xblbak");
+package_extract_file("firmware-update/rpm.mbn", "/dev/block/bootdevice/by-name/rpmbak");
+package_extract_file("firmware-update/splash.img", "/dev/block/bootdevice/by-name/splash");
+package_extract_file("firmware-update/NON-HLOS.bin", "/dev/block/bootdevice/by-name/modem");
+package_extract_file("firmware-update/logo.img", "/dev/block/bootdevice/by-name/logo");
+package_extract_file("firmware-update/adspso.bin", "/dev/block/bootdevice/by-name/dsp");
+package_extract_file("firmware-update/BTFM.bin", "/dev/block/bootdevice/by-name/bluetooth");
+show_progress(0.600000, 250);
+ui_print("Patching system image unconditionally...");
+block_image_update("/dev/block/bootdevice/by-name/system", package_extract_file("system.transfer.list"), "system.new.dat", "system.patch.dat") ||
+  abort("E1001: Failed to update system image.");
+show_progress(0.100000, 2);
+set_progress(1.000000);
