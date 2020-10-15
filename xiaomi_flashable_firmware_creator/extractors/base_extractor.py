@@ -162,7 +162,8 @@ class BaseExtractor(ABC):
 
     def make_zip(self):
         out = Path(f'{self._out_dir}/result.zip')
-        make_archive(str(out).split('.')[0], 'zip', self._tmp_dir)
+        partial_path = '/'.join(out.parts[1:-1])
+        make_archive(f"/{partial_path}/{out.stem}", 'zip', self._tmp_dir)
         if not out.exists():
             raise RuntimeError("Could not create result zip file!")
         codename = extract_codename(self.update_script)
