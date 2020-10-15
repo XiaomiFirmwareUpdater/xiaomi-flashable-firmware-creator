@@ -1,19 +1,21 @@
 from pathlib import Path
 from shutil import rmtree
+from typing import Union
 from zipfile import ZipFile
 
 from xiaomi_flashable_firmware_creator.extractors.base_extractor import BaseExtractor
 
 
 class LocalExtractor(BaseExtractor):
-    def __init__(self, _extract_mode: str, zip_file: str):
-        self.zip_file_path = Path(zip_file)
-        super().__init__(_extract_mode)
+    def __init__(self, _extract_mode: str, zip_file: Union[str, Path], out_dir=''):
+        self.zip_file_path = Path(zip_file) if isinstance(zip_file, str) else zip_file
+
+        super().__init__(_extract_mode, out_dir)
 
         if not self.zip_file_path.exists():
             raise FileNotFoundError(f"Zip file {self.zip_file_path.name} does not exist.")
 
-        self.zip_file = ZipFile(self.zip_file_path.name, 'r')
+        self.zip_file = ZipFile(self.zip_file_path, 'r')
         self.files = self.zip_file.namelist()
 
         if self.is_valid_firmware_zip():
@@ -33,4 +35,4 @@ class LocalExtractor(BaseExtractor):
         self.zip_file.close()
 
     def get_zip_name(self):
-        return self.zip_file.filename
+        return self.zip_file_path.name
