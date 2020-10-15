@@ -1,12 +1,13 @@
-*__pycache__ 
+__pycache__
 build/
 dist/
-tmp*
 .idea/
+.vscode/
 env/
 venv/
 .python-version
 *.log
-*.dist
 *.build
 *.zip
+*bak*
+tmp*
