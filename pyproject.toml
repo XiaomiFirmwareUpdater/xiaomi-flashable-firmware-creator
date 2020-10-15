@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xiaomi_flashable_firmware_creator"
-version = "2.0.0-alpha"
+version = "2.0.1-alpha"
 description = "Create flashable firmware zip from MIUI Recovery ROMs!"
 authors = ["yshalsager <ysh-alsager@hotmail.com>"]
 license = "GPL-3.0-only"
@@ -14,6 +14,7 @@ include = [
     "README.md",
     "pyproject.toml"
 ]
+exclude = ["xiaomi_flashable_firmware_creator/tests"]
 readme = "README.md"
 
 [tool.poetry.scripts]
