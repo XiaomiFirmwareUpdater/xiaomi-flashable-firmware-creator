@@ -1,13 +1,16 @@
 from pathlib import Path
 from shutil import rmtree
-from typing import Union
+from typing import Union, Any
 from zipfile import ZipFile
 
 from xiaomi_flashable_firmware_creator.extractors.base_extractor import BaseExtractor
 
 
 class LocalExtractor(BaseExtractor):
-    def __init__(self, _extract_mode: str, zip_file: Union[str, Path], out_dir=''):
+    zip_file_path: Union[Path, str]
+    zip_file: ZipFile
+
+    def __init__(self, _extract_mode: str, zip_file: Union[str, Path], out_dir: str = ''):
         self.zip_file_path = Path(zip_file) if isinstance(zip_file, str) else zip_file
 
         super().__init__(_extract_mode, out_dir)
@@ -23,10 +26,6 @@ class LocalExtractor(BaseExtractor):
         else:
             rmtree(self._tmp_dir)
             raise RuntimeError(f"{self.zip_file} is not a valid ROM zip file. Exiting..")
-
-    def is_valid_firmware_zip(self):
-        return "META-INF/com/google/android/update-binary" in self.files \
-               or "META-INF/com/google/android/updater-script" in self.files
 
     def extract(self):
         self.zip_file.extractall(path=self._tmp_dir, members=self.get_files_list())

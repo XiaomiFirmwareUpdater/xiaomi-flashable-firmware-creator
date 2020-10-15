@@ -53,9 +53,9 @@ class BaseExtractor(ABC):
         except KeyError:
             raise RuntimeError('Unknown process!')
 
-    @abstractmethod
     def is_valid_firmware_zip(self):
-        raise NotImplementedError
+        return "META-INF/com/google/android/update-binary" in self.files \
+               or "META-INF/com/google/android/updater-script" in self.files
 
     def get_fw_type(self):
         if 'firmware-update' in str(self.files):
