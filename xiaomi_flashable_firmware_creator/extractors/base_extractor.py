@@ -6,7 +6,7 @@ from socket import gethostname
 from string import Template
 from typing import List
 
-from xiaomi_flashable_firmware_creator import work_dir, package_dir
+from xiaomi_flashable_firmware_creator import work_dir
 from xiaomi_flashable_firmware_creator.extractors.types import ProcessTypes, ZipTypes
 from xiaomi_flashable_firmware_creator.helpers.misc import extract_codename
 
@@ -22,8 +22,9 @@ class BaseExtractor(ABC):
     files: List[str]
     update_script: str
 
-    def __init__(self, _extract_mode):
-        self._tmp_dir = work_dir / 'tmp'
+    def __init__(self, _extract_mode, out_dir=""):
+        self._tmp_dir = Path(out_dir) / 'tmp' if out_dir else work_dir / 'tmp'
+        self._out_dir = self._tmp_dir.parent
         self._updater_script_dir = self._tmp_dir / 'META-INF/com/google/android'
         self.host = gethostname()
         self.datetime = datetime.now()
@@ -36,7 +37,7 @@ class BaseExtractor(ABC):
         """Initial checks and housekeeping"""
         if self._tmp_dir.exists():
             rmtree(self._tmp_dir)
-        self._tmp_dir.mkdir(exist_ok=True)
+        self._tmp_dir.mkdir(parents=True, exist_ok=True)
         self._updater_script_dir.mkdir(parents=True, exist_ok=True)
 
     @staticmethod
@@ -87,13 +88,16 @@ class BaseExtractor(ABC):
         elif self.extract_mode is ProcessTypes.vendor:
             return [n for n in self.files if not n.startswith('system')
                     and not n.startswith('vbmeta')]
+        else:
+            return []  # Will never happen
 
     @abstractmethod
     def extract(self):
         raise NotImplementedError
 
     def get_updater_script_lines(self):
-        original_updater_script = Path(self._updater_script_dir / 'updater-script').read_text().splitlines()
+        original_updater_script = Path(self._updater_script_dir / 'updater-script'
+                                       ).read_text().splitlines()
         lines = []
         if self.extract_mode is ProcessTypes.firmware:
             lines = [line for line in original_updater_script if "getprop" in line
@@ -115,7 +119,8 @@ class BaseExtractor(ABC):
                      or "product" in line] \
                 if self.zip_type is ZipTypes.qcom else []
         elif self.extract_mode is ProcessTypes.vendor:
-            lines = [line for line in original_updater_script if "getprop" in line or "Target" in line
+            lines = [line for line in original_updater_script
+                     if "getprop" in line or "Target" in line
                      or "firmware-update" in line
                      or "vendor" in line] if self.zip_type is ZipTypes.qcom \
                 else [line for line in original_updater_script if
@@ -123,7 +128,9 @@ class BaseExtractor(ABC):
         return '\n'.join(lines)
 
     def generate_updater_script(self):
-        template = Template(Path(package_dir / 'templates/recovery_updater_script.txt').read_text())
+        current_dir = Path(__file__).parent
+        template = Template(Path(
+            current_dir.parent / 'templates/recovery_updater_script.txt').read_text())
         lines = self.get_updater_script_lines()
         if not lines:
             raise RuntimeError("Could not extract lines from updater-script!")
@@ -152,19 +159,19 @@ class BaseExtractor(ABC):
             out.write(updater_script)
 
     def make_zip(self):
-        make_archive('result', 'zip', self._tmp_dir)
-        out = Path(work_dir / 'result.zip')
+        out = Path(f'{self._out_dir}/result.zip')
+        make_archive(str(out).split('.')[0], 'zip', self._tmp_dir)
         if not out.exists():
             raise RuntimeError("Could not create result zip file!")
         codename = extract_codename(self.update_script)
         if self.extract_mode is ProcessTypes.firmware:
-            out.rename(f"fw_{codename}_{self.get_zip_name()}")
+            out.rename(f"{self._out_dir}/fw_{codename}_{self.get_zip_name()}")
         elif self.extract_mode is ProcessTypes.non_arb_firmware:
-            out.rename(f"fw-non-arb_{codename}_{self.get_zip_name()}")
+            out.rename(f"{self._out_dir}/fw-non-arb_{codename}_{self.get_zip_name()}")
         elif self.extract_mode is ProcessTypes.firmware_less:
-            out.rename(f"fw-less_{codename}_{self.get_zip_name()}")
+            out.rename(f"{self._out_dir}/fw-less_{codename}_{self.get_zip_name()}")
         elif self.extract_mode is ProcessTypes.vendor:
-            out.rename(f"fw-vendor_{codename}_{self.get_zip_name()}")
+            out.rename(f"{self._out_dir}/fw-vendor_{codename}_{self.get_zip_name()}")
         else:
             pass  # This should never happen
 
