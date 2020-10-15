@@ -33,8 +33,11 @@ def mock_zip(zip_file: str, out_dir: Union[str, Path]):
             else:
                 if not item_path.exists():
                     item_path.parent.mkdir(parents=True, exist_ok=True)
-                with open(f"{out_dir}/{item}", 'wb') as out:
-                    out.write(b'')
+                if item.endswith("updater-script"):
+                    zipfile.extract(item, out_dir)
+                else:
+                    with open(f"{out_dir}/{item}", 'wb') as out:
+                        out.write(b'')
 
     mocked_zip = f"{out_dir.parent}/mocked_{zip_file.stem}"
     make_archive(mocked_zip, zip_file.suffix.split('.')[-1], out_dir)
