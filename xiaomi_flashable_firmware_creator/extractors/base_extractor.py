@@ -24,7 +24,7 @@ class BaseExtractor(ABC):
 
     def __init__(self, _extract_mode, out_dir=""):
         self._tmp_dir = Path(out_dir) / 'tmp' if out_dir else work_dir / 'tmp'
-        self._out_dir = self._tmp_dir.parent
+        self._out_dir = self._tmp_dir.parent.absolute()
         self._updater_script_dir = self._tmp_dir / 'META-INF/com/google/android'
         self.host = gethostname()
         self.datetime = datetime.now()
