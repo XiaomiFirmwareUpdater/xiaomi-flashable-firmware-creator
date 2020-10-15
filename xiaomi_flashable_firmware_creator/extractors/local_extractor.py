@@ -27,11 +27,5 @@ class LocalExtractor(BaseExtractor):
             rmtree(self._tmp_dir)
             raise RuntimeError(f"{self.zip_file} is not a valid ROM zip file. Exiting..")
 
-    def extract(self):
-        self.zip_file.extractall(path=self._tmp_dir, members=self.get_files_list())
-
-    def close(self):
-        self.zip_file.close()
-
     def get_zip_name(self):
         return self.zip_file_path.name

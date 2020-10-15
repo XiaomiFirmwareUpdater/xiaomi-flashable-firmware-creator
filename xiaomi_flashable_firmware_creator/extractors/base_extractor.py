@@ -4,7 +4,10 @@ from pathlib import Path
 from shutil import rmtree, make_archive
 from socket import gethostname
 from string import Template
-from typing import List
+from typing import List, Union
+from zipfile import ZipFile
+
+from remotezip import RemoteZip
 
 from xiaomi_flashable_firmware_creator import work_dir
 from xiaomi_flashable_firmware_creator.extractors.types import ProcessTypes, ZipTypes
@@ -19,6 +22,7 @@ class BaseExtractor(ABC):
     _extract_mode: str
     extract_mode: ProcessTypes
     zip_type: ZipTypes
+    zip_file: Union[ZipFile, RemoteZip]
     files: List[str]
     update_script: str
 
@@ -92,10 +96,6 @@ class BaseExtractor(ABC):
                     and not n.startswith('vbmeta')]
         else:
             return []  # Will never happen
-
-    @abstractmethod
-    def extract(self):
-        raise NotImplementedError
 
     def get_updater_script_lines(self):
         original_updater_script = Path(self._updater_script_dir / 'updater-script'
@@ -181,9 +181,11 @@ class BaseExtractor(ABC):
     def cleanup(self):
         rmtree(self._tmp_dir)
 
-    @abstractmethod
+    def extract(self):
+        self.zip_file.extractall(path=self._tmp_dir, members=self.get_files_list())
+
     def close(self):
-        raise NotImplementedError
+        self.zip_file.close()
 
     @abstractmethod
     def get_zip_name(self):

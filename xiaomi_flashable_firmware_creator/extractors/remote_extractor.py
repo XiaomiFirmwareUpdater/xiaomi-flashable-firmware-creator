@@ -23,11 +23,5 @@ class RemoteExtractor(BaseExtractor):
         else:
             raise RuntimeError(f"{self.zip_file} is not a valid ROM zip file. Exiting..")
 
-    def extract(self):
-        self.zip_file.extractall(path=self._tmp_dir, members=self.get_files_list())
-
-    def close(self):
-        self.zip_file.close()
-
     def get_zip_name(self):
         return self.zip_url.split('/')[-1]
