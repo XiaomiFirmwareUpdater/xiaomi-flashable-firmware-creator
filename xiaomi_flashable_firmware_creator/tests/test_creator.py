@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 from shutil import rmtree
 
-from xiaomi_flashable_firmware_creator.extractors.local_extractor import LocalExtractor
+from xiaomi_flashable_firmware_creator.xiaomi_flashable_firmware_creator import FlashableFirmwareCreator
 
 
 class TestCreator(unittest.TestCase):
@@ -12,21 +12,19 @@ class TestCreator(unittest.TestCase):
         self.files = self.work_dir.glob('files/*/*.zip')
 
     @staticmethod
-    def run_extractor(extractor):
-        print(f"Unzipping MIUI... ({extractor.zip_type.name}) device")
-        extractor.extract()
-        print("Generating updater-script..")
-        extractor.generate_updater_script()
-        print("Creating new zip file..")
-        extractor.make_zip()
-        extractor.cleanup()
-        extractor.close()
+    def run_extractor(firmware_creator):
+        print(f"Unzipping MIUI... ({firmware_creator.zip_type.name}) device")
+        firmware_creator.extract()
+        firmware_creator.generate_updater_script()
+        firmware_creator.make_zip()
+        firmware_creator.cleanup()
+        firmware_creator.close()
 
     def test_firmware(self):
         for file in self.files:
-            extractor = LocalExtractor('firmware', str(file.absolute()), self.out_dir)
+            firmware_creator = FlashableFirmwareCreator(str(file.absolute()), 'firmware', self.out_dir)
             print(f"Testing {file.name}")
-            self.run_extractor(extractor)
+            self.run_extractor(firmware_creator)
 
     def tearDown(self):
         rmtree(self.out_dir)
