@@ -13,7 +13,7 @@ class TestCreator(unittest.TestCase):
 
     @staticmethod
     def run_extractor(firmware_creator):
-        print(f"Unzipping MIUI... ({firmware_creator.zip_type.name}) device")
+        print(f"Unzipping MIUI... ({firmware_creator.type.name}) device")
         firmware_creator.extract()
         firmware_creator.generate_updater_script()
         firmware_creator.make_zip()

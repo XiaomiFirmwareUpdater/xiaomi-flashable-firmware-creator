@@ -12,7 +12,7 @@ class RemoteZipExtractor(BaseExtractor):
         self.zip_url = zip_url
         super().__init__(out_dir)
 
-    def exists(self):
+    def exists(self) -> bool:
         return head(self.zip_url).ok
 
     def open(self):
@@ -21,5 +21,5 @@ class RemoteZipExtractor(BaseExtractor):
     def get_files_list(self):
         self.files = self.file.namelist()
 
-    def get_file_name(self):
+    def get_file_name(self) -> str:
         return self.zip_url.split('/')[-1]

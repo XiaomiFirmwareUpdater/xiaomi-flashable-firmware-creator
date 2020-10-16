@@ -2,6 +2,7 @@
 """Xiaomi Flashable Firmware Creator"""
 
 from argparse import ArgumentParser
+
 from xiaomi_flashable_firmware_creator.firmware_creator import FlashableFirmwareCreator
 
 
@@ -34,7 +35,7 @@ def main():
     """
     zip_, process, output = arg_parse()
     firmware_creator = FlashableFirmwareCreator(zip_, process, output)
-    print(f"Unzipping MIUI... ({firmware_creator.zip_type.name}) device")
+    print(f"Unzipping MIUI... ({firmware_creator.type.name}) device")
     firmware_creator.extract()
     print("Generating updater-script..")
     firmware_creator.generate_updater_script()

@@ -3,10 +3,9 @@ from pathlib import Path
 from shutil import rmtree, make_archive
 from socket import gethostname
 from string import Template
-from typing import Union
+from typing import Union, List
 
 from xiaomi_flashable_firmware_creator import work_dir
-from xiaomi_flashable_firmware_creator.extractors.base_extractor import BaseExtractor
 from xiaomi_flashable_firmware_creator.extractors.local_zip_extractor import LocalZipExtractor
 from xiaomi_flashable_firmware_creator.extractors.remote_zip_extractor import RemoteZipExtractor
 from xiaomi_flashable_firmware_creator.helpers.misc import extract_codename
@@ -14,7 +13,7 @@ from xiaomi_flashable_firmware_creator.types import ProcessTypes, ZipTypes
 
 
 class FlashableFirmwareCreator:
-    extractor: BaseExtractor
+    extractor: Union[LocalZipExtractor, RemoteZipExtractor]
     input_file: Union[str, Path]
     _tmp_dir: Path
     _updater_script_dir: Path
@@ -22,24 +21,19 @@ class FlashableFirmwareCreator:
     datetime: datetime
     _extract_mode: str
     extract_mode: ProcessTypes
-    zip_type: ZipTypes
+    type: ZipTypes
     update_script: str
 
     def __init__(self, input_file, _extract_mode, out_dir=""):
         self.input_file = input_file
         self._tmp_dir = Path(out_dir) / 'tmp' if out_dir else work_dir / 'tmp'
         self._out_dir = self._tmp_dir.parent.absolute()
-        self._updater_script_dir = self._tmp_dir / 'META-INF/com/google/android'
+        self._updater_script_dir = self._tmp_dir.absolute() / 'META-INF/com/google/android'
         self.host = gethostname()
         self.datetime = datetime.now()
         self.extract_mode = self.get_extract_mode(_extract_mode)
         self.update_script = ''
-
-        if "http" in input_file or "ota.d.miui.com" in input_file:
-            self.extractor = RemoteZipExtractor(self.input_file, self._tmp_dir)
-        elif input_file.endswith(".zip"):
-            self.extractor = LocalZipExtractor(self.input_file, self._tmp_dir)
-
+        self.extractor = self.get_extractor()
         self.init()
 
     def init(self):
@@ -52,14 +46,20 @@ class FlashableFirmwareCreator:
             raise FileNotFoundError(f"input file {self.input_file} does not exist!")
         self.extractor.open()
         self.extractor.get_files_list()
-        if self.is_valid_firmware_zip():
-            self.get_fw_type()
+        if self.is_valid_rom():
+            self.get_rom_type()
         else:
             rmtree(self._tmp_dir)
             raise RuntimeError(f"{self.input_file} is not a valid ROM file. Exiting..")
 
+    def get_extractor(self) -> Union[LocalZipExtractor, RemoteZipExtractor]:
+        if "http" in self.input_file or "ota.d.miui.com" in self.input_file:
+            return RemoteZipExtractor(self.input_file, self._tmp_dir)
+        elif self.input_file.endswith(".zip"):
+            return LocalZipExtractor(self.input_file, self._tmp_dir)
+
     @staticmethod
-    def get_extract_mode(extract_mode):
+    def get_extract_mode(extract_mode) -> ProcessTypes:
         modes = {
             'firmware': ProcessTypes.firmware,
             'nonarb': ProcessTypes.non_arb_firmware,
@@ -71,17 +71,22 @@ class FlashableFirmwareCreator:
         except KeyError:
             raise RuntimeError('Unknown process!')
 
-    def is_valid_firmware_zip(self):
+    def is_valid_rom(self) -> bool:
         return "META-INF/com/google/android/update-binary" in self.extractor.files \
-               or "META-INF/com/google/android/updater-script" in self.extractor.files
+               or "META-INF/com/google/android/updater-script" in self.extractor.files \
+               or "payload.bin" in self.extractor.files
 
-    def get_fw_type(self):
-        if 'firmware-update' in str(self.extractor.files):
-            self.zip_type = ZipTypes.qcom
-        elif 'lk.img' in str(self.extractor.files) or 'preloader.img' in str(self.extractor.files):
-            self.zip_type = ZipTypes.mtk
+    def get_rom_type(self):
+        files = str(self.extractor.files)
+        if 'firmware-update' in files or 'dsp' in files \
+                or 'rpm' in files or 'tz' in files or 'keymaster' in files:
+            self.type = ZipTypes.qcom
+        elif 'lk.img' in files or 'preloader.img' in files:
+            self.type = ZipTypes.mtk
+        else:
+            raise RuntimeError("Can't detect rom type. It's not qcom or mtk!'")
 
-    def get_files_list(self):
+    def get_files_list(self) -> List[str]:
         if self.extract_mode is ProcessTypes.firmware:
             return [i for i in self.extractor.files if
                     (i.startswith('META-INF/')
@@ -91,7 +96,7 @@ class FlashableFirmwareCreator:
                            and 'splash' not in i
                            and 'logo' not in i
                            and 'vbmeta' not in i)] \
-                if self.zip_type is ZipTypes.qcom \
+                if self.type is ZipTypes.qcom \
                 else [n for n in self.extractor.files if 'system' not in n
                       and 'vendor' not in n
                       and 'product' not in n
@@ -104,16 +109,18 @@ class FlashableFirmwareCreator:
                     or n.startswith('META-INF/')]
         elif self.extract_mode is ProcessTypes.firmware_less:
             return [n for n in self.extractor.files if not n.startswith('firmware-update/')] \
-                if self.zip_type is ZipTypes.qcom else []
+                if self.type is ZipTypes.qcom else []
         elif self.extract_mode is ProcessTypes.vendor:
             return [n for n in self.extractor.files if not n.startswith('system')
                     and not n.startswith('vbmeta')]
         else:
             return []  # Will never happen
 
-    def get_updater_script_lines(self):
-        original_updater_script = Path(self._updater_script_dir / 'updater-script'
-                                       ).read_text().splitlines()
+    def get_updater_script_lines(self) -> str:
+        original_updater_script = Path(self._updater_script_dir / 'updater-script')
+        if not original_updater_script.exists():
+            raise FileNotFoundError("updater-script not found!")
+        original_updater_script = original_updater_script.read_text().splitlines()
         lines = []
         if self.extract_mode is ProcessTypes.firmware:
             lines = [line for line in original_updater_script if "getprop" in line
@@ -121,9 +128,10 @@ class FlashableFirmwareCreator:
                      or "firmware-update" in line and "dtbo.img" not in line
                      and "vbmeta" not in line and "splash" not in line
                      and "logo" not in line] \
-                if self.zip_type is ZipTypes.qcom \
+                if self.type is ZipTypes.qcom \
                 else [line for line in original_updater_script if "system" not in line
-                      and "vendor" not in line and 'boot.img' not in line]
+                      and "vendor" not in line and 'boot.img' not in line
+                      and "dtbo.img" not in line and "vbmeta" not in line]
         elif self.extract_mode is ProcessTypes.non_arb_firmware:
             lines = [line for line in original_updater_script if "getprop" in line
                      or "Target" in line
@@ -133,12 +141,12 @@ class FlashableFirmwareCreator:
                      or "Target" in line
                      or "boot.img" in line or "system" in line or "vendor" in line
                      or "product" in line] \
-                if self.zip_type is ZipTypes.qcom else []
+                if self.type is ZipTypes.qcom else []
         elif self.extract_mode is ProcessTypes.vendor:
             lines = [line for line in original_updater_script
                      if "getprop" in line or "Target" in line
                      or "firmware-update" in line
-                     or "vendor" in line] if self.zip_type is ZipTypes.qcom \
+                     or "vendor" in line] if self.type is ZipTypes.qcom \
                 else [line for line in original_updater_script if
                       "system" not in line and 'boot.img' not in line]
         return '\n'.join(lines)
