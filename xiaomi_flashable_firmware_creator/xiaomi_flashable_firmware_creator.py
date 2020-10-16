@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Xiaomi Flashable Firmware Creator"""
+"""Xiaomi Flashable Firmware Creator cli module."""
 
 from argparse import ArgumentParser
 
@@ -8,7 +8,11 @@ from xiaomi_flashable_firmware_creator.firmware_creator import FlashableFirmware
 
 def arg_parse() -> (str, str, str):
     """
-    Parses command-line arguments
+    Parse command-line arguments.
+
+    This function parse command-line arguments and return
+     the required parameters to be used in FlashableFirmwareCreator class constructor.
+
     :return: file, process, output dir
     """
     output = None
@@ -30,17 +34,9 @@ def arg_parse() -> (str, str, str):
 
 
 def main():
-    """
-    Xiaomi Flashable Firmware Creator
-    """
+    """Xiaomi Flashable Firmware Creator main module."""
     zip_, process, output = arg_parse()
     firmware_creator = FlashableFirmwareCreator(zip_, process, output)
     print(f"Unzipping MIUI... ({firmware_creator.type.name}) device")
-    firmware_creator.extract()
-    print("Generating updater-script..")
-    firmware_creator.generate_updater_script()
-    print("Creating new zip file..")
-    firmware_creator.make_zip()
-    firmware_creator.cleanup()
-    firmware_creator.close()
-    print("All done!")
+    new_zip = firmware_creator.auto()
+    print(f"All done! Output file is {new_zip}")

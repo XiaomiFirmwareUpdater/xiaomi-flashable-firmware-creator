@@ -1,4 +1,4 @@
-"""This module mock a zip file and create a placeholder files of its contents"""
+"""Mock a zip file and create a placeholder files of its contents."""
 from pathlib import Path
 from shutil import make_archive, rmtree
 from sys import argv
@@ -7,7 +7,8 @@ from zipfile import ZipFile
 
 
 def mock_zip(zip_file: str, out_dir: Union[str, Path]):
-    """A function to create a mock zip of a given zip file.
+    """Create a mock zip of a given zip file.
+
     It iterates over the zip contents, creates the folders
     and creates a file that contains one byte of every file inside the zip
     :param out_dir: zip file to mock

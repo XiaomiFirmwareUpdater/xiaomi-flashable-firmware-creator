@@ -3,8 +3,7 @@ import re
 
 
 def extract_codename(updater_script) -> str:
-    r"""
-    This method extracts device codename form updater-script
+    r"""Extract device codename form updater-script.
 
     Regex pattern explanation:
     - (?:/[\w\d_-]+/([\w\d]+):\d) matches codename in update fingerprint like
