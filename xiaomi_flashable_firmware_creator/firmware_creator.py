@@ -44,7 +44,7 @@ class FlashableFirmwareCreator:
 
         :param input_file: zip file to extract from.
          It can be a local path or a remote direct url.
-        :param _extract_mode: What mode should the tool use.
+        :param _extract_mode: Which mode should the tool use.
          This must be one of "firmware", "nonarb", "firmwareless" or "vendor".
         :param out_dir: The output directory to store the extracted file in.
         """

@@ -12,9 +12,23 @@ Create flashable firmware zip from MIUI Recovery ROMs!
 
 Xiaomi Flashable Firmware Creator is a tool that generates flashable firmware-update packages from official MIUI ROMS.
 
-It supports creating untouched firmware, non-arb firmware, firmware + vendor flashable zip, and firmware-less ROMs.
+It supports creating untouched firmware, non-arb firmware, firmware + vendor flashable zip, and firmware-less ROMs from any local zip file or direct link of the zip file.
+
+### Installation
+
+You can simply install this tool using Python pip.
+
+```shell script
+pip install xiaomi_flashable_firmware_creator
+```
 
 ### CLI Usage
+
+```shell script
+python3 -m xiaomi_flashable_firmware_creator [-h] (-F FIRMWARE | -N NONARB | -L FIRMWARELESS | -V VENDOR) [-o OUTPUT]
+```
+
+**Examples:**
 
 *   Creating normal (untouched) firmware:
 
@@ -38,4 +52,19 @@ python3 -m xiaomi_flashable_firmware_creator -L [MIUI ZIP]
 
 ```shell script
 python3 -m xiaomi_flashable_firmware_creator -V [MIUI ZIP]
+```
+
+### Using from other Python scripts
+
+```python
+from xiaomi_flashable_firmware_creator.firmware_creator import FlashableFirmwareCreator
+
+# initialize firmware creator object with the following parameters:
+# input_file: zip file to extract from. It can be a local path or a remote direct url.
+# process: Which mode should the tool use. This must be one of "firmware", "nonarb", "firmwareless" or "vendor".
+# out_dir: The output directory to store the extracted file in.
+
+firmware_creator = FlashableFirmwareCreator(input_zip, process, output_dir)
+# Now, you can either use auto() method to create the new zip file or do stuff at your own using firmware_creator public methods.
+new_zip = firmware_creator.auto()
 ```
