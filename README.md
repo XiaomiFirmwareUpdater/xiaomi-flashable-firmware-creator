@@ -25,7 +25,7 @@ pip install xiaomi_flashable_firmware_creator
 ### CLI Usage
 
 ```shell script
-python3 -m xiaomi_flashable_firmware_creator [-h] (-F FIRMWARE | -N NONARB | -L FIRMWARELESS | -V VENDOR) [-o OUTPUT]
+xiaomi_flashable_firmware_creator [-h] (-F FIRMWARE | -N NONARB | -L FIRMWARELESS | -V VENDOR) [-o OUTPUT]
 ```
 
 **Examples:**
@@ -33,25 +33,25 @@ python3 -m xiaomi_flashable_firmware_creator [-h] (-F FIRMWARE | -N NONARB | -L 
 *   Creating normal (untouched) firmware:
 
 ```shell script
-python3 -m xiaomi_flashable_firmware_creator -F [MIUI ZIP]
+xiaomi_flashable_firmware_creator -F [MIUI ZIP]
 ```
 
 *   Creating non-arb firmware (without anti-rollback):
 
 ```shell script
-python3 -m xiaomi_flashable_firmware_creator -N [MIUI ZIP]
+xiaomi_flashable_firmware_creator -N [MIUI ZIP]
 ```
 
 *   Creating firmware-less ROM (stock untouched ROM with just firmware removed):
 
 ```shell script
-python3 -m xiaomi_flashable_firmware_creator -L [MIUI ZIP]
+xiaomi_flashable_firmware_creator -L [MIUI ZIP]
 ```
 
 *   Creating firmware + vendor flashable zip:
 
 ```shell script
-python3 -m xiaomi_flashable_firmware_creator -V [MIUI ZIP]
+xiaomi_flashable_firmware_creator -V [MIUI ZIP]
 ```
 
 ### Using from other Python scripts
