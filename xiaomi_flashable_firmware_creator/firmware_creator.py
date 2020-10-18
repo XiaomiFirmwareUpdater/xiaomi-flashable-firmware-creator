@@ -164,7 +164,7 @@ class FlashableFirmwareCreator:
                       and 'product' not in n and 'boot.img' not in n
                       and 'file_contexts' not in n]
         if self.extract_mode is ProcessTypes.non_arb_firmware:
-            return [n for n in self.extractor.files if n.startswith('firmware-update/dspso.bin')
+            return [n for n in self.extractor.files if 'dspso.bin' in n
                     or n.startswith('firmware-update/BTFM.bin')
                     or n.startswith('firmware-update/NON-HLOS.bin')
                     or n.startswith('META-INF/')
