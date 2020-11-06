@@ -1,0 +1,87 @@
+getprop("ro.product.device") == "apollo" || abort("E3004: This package is for \"apollo\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+ui_print("Target: Xiaomi/apollo_eea/apollo:10/QKQ1.200419.002/V12.0.4.0.QJDEUXM:user/release-keys");
+show_progress(0.200000, 10);
+package_extract_file("boot.img", "/dev/block/bootdevice/by-name/boot");
+
+# ---- radio update tasks ----
+
+ui_print("Patching firmware images...");
+package_extract_file("firmware-update/cmnlib64.mbn", "/dev/block/bootdevice/by-name/cmnlib64");
+package_extract_file("firmware-update/xbl_config_5.elf", "/dev/block/bootdevice/by-name/xbl_config_5");
+package_extract_file("firmware-update/NON-HLOS.bin", "/dev/block/bootdevice/by-name/modem");
+package_extract_file("firmware-update/cmnlib.mbn", "/dev/block/bootdevice/by-name/cmnlib");
+package_extract_file("firmware-update/BTFM.bin", "/dev/block/bootdevice/by-name/bluetooth");
+package_extract_file("firmware-update/km4.mbn", "/dev/block/bootdevice/by-name/keymaster");
+package_extract_file("firmware-update/xbl_5.elf", "/dev/block/bootdevice/by-name/xbl_5");
+package_extract_file("firmware-update/tz.mbn", "/dev/block/bootdevice/by-name/tz");
+package_extract_file("firmware-update/aop.mbn", "/dev/block/bootdevice/by-name/aop");
+package_extract_file("firmware-update/featenabler.mbn", "/dev/block/bootdevice/by-name/featenabler");
+package_extract_file("firmware-update/xbl_config_4.elf", "/dev/block/bootdevice/by-name/xbl_config_4");
+package_extract_file("firmware-update/storsec.mbn", "/dev/block/bootdevice/by-name/storsec");
+package_extract_file("firmware-update/uefi_sec.mbn", "/dev/block/bootdevice/by-name/uefisecapp");
+package_extract_file("firmware-update/qupv3fw.elf", "/dev/block/bootdevice/by-name/qupfw");
+package_extract_file("firmware-update/abl.elf", "/dev/block/bootdevice/by-name/abl");
+package_extract_file("firmware-update/dspso.bin", "/dev/block/bootdevice/by-name/dsp");
+package_extract_file("firmware-update/devcfg.mbn", "/dev/block/bootdevice/by-name/devcfg");
+package_extract_file("firmware-update/xbl_4.elf", "/dev/block/bootdevice/by-name/xbl_4");
+package_extract_file("firmware-update/hyp.mbn", "/dev/block/bootdevice/by-name/hyp");
+package_extract_file("firmware-update/cmnlib64.mbn", "/dev/block/bootdevice/by-name/cmnlib64bak");
+package_extract_file("firmware-update/cmnlib.mbn", "/dev/block/bootdevice/by-name/cmnlibbak");
+package_extract_file("firmware-update/tz.mbn", "/dev/block/bootdevice/by-name/tzbak");
+package_extract_file("firmware-update/aop.mbn", "/dev/block/bootdevice/by-name/aopbak");
+package_extract_file("firmware-update/storsec.mbn", "/dev/block/bootdevice/by-name/storsecbak");
+package_extract_file("firmware-update/qupv3fw.elf", "/dev/block/bootdevice/by-name/qupfwbak");
+package_extract_file("firmware-update/abl.elf", "/dev/block/bootdevice/by-name/ablbak");
+package_extract_file("firmware-update/devcfg.mbn", "/dev/block/bootdevice/by-name/devcfgbak");
+package_extract_file("firmware-update/hyp.mbn", "/dev/block/bootdevice/by-name/hypbak");
+
+# ---- update tasks: exaid part 2----
+
+
+package_extract_file("exaid.img", "/dev/block/bootdevice/by-name/exaid");
+    
+show_progress(0.700000, 250);
+
+# --- Start patching dynamic partitions ---
+
+
+# Update dynamic partition metadata
+
+assert(update_dynamic_partitions(package_extract_file("dynamic_partitions_op_list")));
+
+# Patch partition product
+
+ui_print("Patching product image unconditionally...");
+block_image_update(map_partition("product"), package_extract_file("product.transfer.list"), "product.new.dat.br", "product.patch.dat") ||
+  abort("E2001: Failed to update product image.");
+
+# Patch partition vendor
+
+ui_print("Patching vendor image unconditionally...");
+block_image_update(map_partition("vendor"), package_extract_file("vendor.transfer.list"), "vendor.new.dat.br", "vendor.patch.dat") ||
+  abort("E2001: Failed to update vendor image.");
+
+# Patch partition system
+
+ui_print("Patching system image unconditionally...");
+block_image_update(map_partition("system"), package_extract_file("system.transfer.list"), "system.new.dat.br", "system.patch.dat") ||
+  abort("E1001: Failed to update system image.");
+
+# Patch partition odm
+
+ui_print("Patching odm image unconditionally...");
+block_image_update(map_partition("odm"), package_extract_file("odm.transfer.list"), "odm.new.dat.br", "odm.patch.dat") ||
+  abort("E2001: Failed to update odm image.");
+
+# --- End patching dynamic partitions ---
+
+show_progress(0.100000, 2);
+
+# ---- radio update tasks 2 ----
+
+ui_print("Patching vbmeta dtbo logo binimages...");
+package_extract_file("firmware-update/logo.img", "/dev/block/bootdevice/by-name/logo");
+package_extract_file("firmware-update/dtbo.img", "/dev/block/bootdevice/by-name/dtbo");
+package_extract_file("firmware-update/vbmeta_system.img", "/dev/block/bootdevice/by-name/vbmeta_system");
+package_extract_file("firmware-update/vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta");
+set_progress(1.000000);

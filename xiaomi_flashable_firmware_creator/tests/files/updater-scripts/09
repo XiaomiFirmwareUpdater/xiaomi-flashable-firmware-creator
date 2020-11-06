@@ -1,0 +1,34 @@
+get_device_compatible("ido") == "OK" || abort("This package is for \"ido\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+show_progress(0.900000, 150);
+package_extract_file("boot.img", "/dev/block/bootdevice/by-name/boot");
+
+# ---- radio update tasks ----
+
+ui_print("Patching firmware images...");
+ifelse(msm.boot_update("main"), (
+package_extract_file("firmware-update/tz.mbn", "/dev/block/bootdevice/by-name/tz");
+package_extract_file("firmware-update/hyp.mbn", "/dev/block/bootdevice/by-name/hyp");
+package_extract_file("firmware-update/sbl1.mbn", "/dev/block/bootdevice/by-name/sbl1");
+package_extract_file("firmware-update/rpm.mbn", "/dev/block/bootdevice/by-name/rpm");
+package_extract_file("firmware-update/emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/aboot");
+), "");
+ifelse(msm.boot_update("backup"), (
+package_extract_file("firmware-update/tz.mbn", "/dev/block/bootdevice/by-name/tzbak");
+package_extract_file("firmware-update/hyp.mbn", "/dev/block/bootdevice/by-name/hypbak");
+package_extract_file("firmware-update/sbl1.mbn", "/dev/block/bootdevice/by-name/sbl1bak");
+package_extract_file("firmware-update/rpm.mbn", "/dev/block/bootdevice/by-name/rpmbak");
+package_extract_file("firmware-update/emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/abootbak");
+), "");
+msm.boot_update("finalize");
+package_extract_file("firmware-update/NON-HLOS.bin", "/dev/block/bootdevice/by-name/modem");
+unmount("/firmware");
+mount("vfat", "EMMC", "/dev/block/bootdevice/by-name/splash", "/firmware");
+package_extract_file("firmware-update/splash.img", "/firmware/image/splash.img");
+unmount("/firmware");
+package_extract_file("META-INF/com/miui/miui_update", "/cache/miui_update");
+set_metadata("/cache/miui_update", "uid", 0, "gid", 0, "mode", 0555, "capabilities", 0x0);
+run_program("/cache/miui_update");
+delete("/cache/miui_update");
+ui_print("Patching system image unconditionally...");
+block_image_update("/dev/block/bootdevice/by-name/system", package_extract_file("system.transfer.list"), "system.new.dat", "system.patch.dat");
+show_progress(0.100000, 2);

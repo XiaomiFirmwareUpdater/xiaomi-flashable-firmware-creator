@@ -1,0 +1,88 @@
+getprop("ro.product.device") == "cereus" || abort("E3004: This package is for \"cereus\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+ui_print("Target: xiaomi/cereus/cereus:8.1.0/O11019/V10.3.6.0.OCGMIXM:user/release-keys");
+show_progress(0.100000, 5);
+show_progress(0.200000, 10);
+package_extract_file("boot.img", "/dev/block/platform/bootdevice/by-name/boot");
+show_progress(0.600000, 250);
+ui_print("Patching system image unconditionally...");
+block_image_update("/dev/block/platform/bootdevice/by-name/system", package_extract_file("system.transfer.list"), "system.new.dat.br", "system.patch.dat") ||
+  abort("E1001: Failed to update system image.");
+ui_print("Patching vendor image unconditionally...");
+block_image_update("/dev/block/platform/bootdevice/by-name/vendor", package_extract_file("vendor.transfer.list"), "vendor.new.dat.br", "vendor.patch.dat") ||
+  abort("E2001: Failed to update vendor image.");
+show_mtupdate_stage("/cache/recovery/last_mtupdate_stage");
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "1") ,
+(
+ui_print("start to update general image");
+package_extract_file("logo.bin", "/dev/block/platform/bootdevice/by-name/logo");
+package_extract_file("md1img.img", "/dev/block/platform/bootdevice/by-name/md1img");
+package_extract_file("spmfw.img", "/dev/block/platform/bootdevice/by-name/spmfw");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "1");
+),
+ui_print("general images are already updated");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "3") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "2") then
+
+ui_print("start to update alt loader image");
+package_extract_file("sspm.img", "/dev/block/platform/bootdevice/by-name/sspm_2");
+package_extract_file("tee.img", "/dev/block/platform/bootdevice/by-name/tee2");
+package_extract_file("lk.img", "/dev/block/platform/bootdevice/by-name/lk2");
+package_extract_file("scp.img", "/dev/block/platform/bootdevice/by-name/scp2");
+assert(set_emmc_writable("/sys/block/mmcblk0boot1/force_ro"),
+       package_extract_file("preloader.img", "/dev/block/mmcblk0boot1"));
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "2");
+endif;
+
+switch_active("sspm_1", "sspm_2");
+switch_active("tee1", "tee2");
+switch_active("lk", "lk2");
+switch_active("scp1", "scp2");
+switch_active("preloader", "preloader2");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "3");
+),
+ui_print("alt loder images are already updated");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "5") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "4") then
+
+ui_print("start to update main loader image");
+package_extract_file("sspm.img", "/dev/block/platform/bootdevice/by-name/sspm_1");
+package_extract_file("tee.img", "/dev/block/platform/bootdevice/by-name/tee1");
+package_extract_file("lk.img", "/dev/block/platform/bootdevice/by-name/lk");
+package_extract_file("scp.img", "/dev/block/platform/bootdevice/by-name/scp1");
+assert(set_emmc_writable("/sys/block/mmcblk0boot0/force_ro"),
+       package_extract_file("preloader.img", "/dev/block/mmcblk0boot0"));
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "4");
+endif;
+
+switch_active("sspm_2", "sspm_1");
+switch_active("tee2", "tee1");
+switch_active("lk2", "lk");
+switch_active("scp2", "scp1");
+switch_active("preloader2", "preloader");
+),
+ui_print("main loader images are already updated");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "6") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "5") then
+
+ui_print("start to update vbmeta and odmdtbo image");
+package_extract_file("vbmeta.img", "/dev/block/platform/bootdevice/by-name/vbmeta");
+package_extract_file("odmdtbo.img", "/dev/block/platform/bootdevice/by-name/odmdtbo");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "5");
+endif;
+
+),
+ui_print("vbmeta and odmdtbo images are already updated");
+);
+delete("/cache/recovery/last_mtupdate_stage");
+show_progress(0.100000, 2);
+set_progress(1.000000);
