@@ -1,5 +1,6 @@
 """Remote Zip Extractor is a concrete class that implements BaseExtractor methods \
 that deals with remote zip files using remotezip library."""
+from typing import List
 
 from remotezip import RemoteZip
 from requests import head
@@ -54,3 +55,12 @@ class RemoteZipExtractor(BaseExtractor):
         :return: a string of the input zip url file name.
         """
         return self.zip_url.split('/')[-1]
+
+    def extract(self, files_to_extract: List[str]):
+        """
+        Extract a list of files from the zip file
+
+        :param files_to_extract: a list of files to extract
+        :return:
+        """
+        self.file.extractall(path=self._out_dir, members=files_to_extract)

@@ -56,14 +56,18 @@ class BaseExtractor(ABC):
         """
         raise NotImplementedError
 
+    @abstractmethod
     def extract(self, files_to_extract: List[str]):
-        """
-        Extract a list of files from the zip file into an output directory.
+        raise NotImplementedError
 
-        :param files_to_extract: a list of files to extract
-        :return:
-        """
-        self.file.extractall(path=self._out_dir, members=files_to_extract)
+    # def extract(self, files_to_extract: List[str]):
+    #     """
+    #     Extract a list of files from the zip file into an output directory.
+    #
+    #     :param files_to_extract: a list of files to extract
+    #     :return:
+    #     """
+    #     self.file.extractall(path=self._out_dir, members=files_to_extract)
 
     def close(self):
         """

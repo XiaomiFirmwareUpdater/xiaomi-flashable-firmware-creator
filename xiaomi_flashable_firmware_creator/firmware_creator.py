@@ -11,15 +11,16 @@ Using extract, generate_updater_script, and make_zip you can create
 # pylint: disable=too-many-instance-attributes
 from datetime import datetime
 from pathlib import Path
-from shutil import rmtree, make_archive
+from shutil import rmtree, make_archive, copy2
 from socket import gethostname
-from string import Template
 from typing import Union, List
 
 from xiaomi_flashable_firmware_creator import work_dir
+from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import AndroidOneZip
 from xiaomi_flashable_firmware_creator.extractors.local_zip_extractor import LocalZipExtractor
 from xiaomi_flashable_firmware_creator.extractors.remote_zip_extractor import RemoteZipExtractor
-from xiaomi_flashable_firmware_creator.helpers.misc import extract_codename
+from xiaomi_flashable_firmware_creator.helpers.misc import extract_codename, \
+    ScriptTemplate, cleanup_codename
 from xiaomi_flashable_firmware_creator.types import ProcessTypes, ZipTypes
 
 
@@ -30,13 +31,14 @@ class FlashableFirmwareCreator:
     extractor: Union[LocalZipExtractor, RemoteZipExtractor]
     input_file: Union[str, Path]
     _tmp_dir: Path
-    _updater_script_dir: Path
+    _flashing_script_dir: Path
     host: str
     datetime: datetime
     _extract_mode: str
     extract_mode: ProcessTypes
     type: ZipTypes
     update_script: str
+    is_android_one: bool
 
     def __init__(self, input_file, _extract_mode, out_dir=""):
         """
@@ -51,11 +53,14 @@ class FlashableFirmwareCreator:
         self.input_file = input_file
         self._tmp_dir = Path(out_dir) / 'tmp' if out_dir else work_dir / 'tmp'
         self._out_dir = self._tmp_dir.parent.absolute()
-        self._updater_script_dir = self._tmp_dir.absolute() / 'META-INF/com/google/android'
+        self._flashing_script_dir = self._tmp_dir.absolute() / 'META-INF/com/google/android'
         self.host = gethostname()
         self.datetime = datetime.now()
         self.extract_mode = self.get_extract_mode(_extract_mode)
         self.update_script = ''
+        self.is_android_one = False
+        self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot', 'system',
+                                        'vendor', 'product', 'odm']
         self.extractor = self.get_extractor()
         self.init()
 
@@ -75,15 +80,13 @@ class FlashableFirmwareCreator:
         if self._tmp_dir.exists():
             rmtree(self._tmp_dir)
         self._tmp_dir.mkdir(parents=True, exist_ok=True)
-        self._updater_script_dir.mkdir(parents=True, exist_ok=True)
+        self._flashing_script_dir.mkdir(parents=True, exist_ok=True)
         if not self.extractor.exists():
             raise FileNotFoundError(
                 f"input file {self.input_file} does not exist!")
         self.extractor.open()
         self.extractor.get_files_list()
-        if self.is_valid_rom():
-            self.get_rom_type()
-        else:
+        if not self.is_valid_rom():
             rmtree(self._tmp_dir)
             raise RuntimeError(
                 f"{self.input_file} is not a valid ROM file. Exiting..")
@@ -123,11 +126,12 @@ class FlashableFirmwareCreator:
         """
         Check if the zip file is valid ROM.
 
-        :return: True if update-binary or updater-script is present
+        :return: True if update-binary or updater-script or payload.bin is present
          in contents list, False otherwise.
         """
         return "META-INF/com/google/android/update-binary" in self.extractor.files \
-               or "META-INF/com/google/android/updater-script" in self.extractor.files
+               or "META-INF/com/google/android/updater-script" in self.extractor.files \
+               or "payload.bin" in self.extractor.files
 
     def get_rom_type(self):
         """
@@ -150,15 +154,13 @@ class FlashableFirmwareCreator:
 
         :return: a list of file names string.
         """
+        # TODO: match fastboot and android one img files
+        #  when no firmware-update directory is found
         if self.extract_mode is ProcessTypes.firmware:
             return [i for i in self.extractor.files if
                     (i.startswith('META-INF/')
                      and (i.endswith('updater-script') or i.endswith('update-binary'))
-                     ) or (i.startswith('firmware-update/')
-                           and 'dtbo' not in i
-                           and 'splash' not in i
-                           and 'logo' not in i
-                           and 'vbmeta' not in i)] \
+                     ) or all(n not in i for n in self.firmware_excluded_files)] \
                 if self.type is ZipTypes.qcom \
                 else [n for n in self.extractor.files if 'system' not in n and 'vendor' not in n
                       and 'product' not in n and 'boot.img' not in n
@@ -183,8 +185,7 @@ class FlashableFirmwareCreator:
 
         :return: a string of the updater-script lines
         """
-        original_updater_script = Path(
-            self._updater_script_dir / 'updater-script')
+        original_updater_script = Path(self._flashing_script_dir / 'updater-script')
         if not original_updater_script.exists():
             raise FileNotFoundError("updater-script not found!")
         original_updater_script = original_updater_script.read_text().splitlines()
@@ -224,9 +225,8 @@ class FlashableFirmwareCreator:
 
         :return:
         """
-        current_dir = Path(__file__)
-        template = Template(Path(
-            current_dir.parent / 'templates/recovery_updater_script.txt').read_text())
+        template = ScriptTemplate(Path(
+            Path(__file__).parent / 'templates/recovery_updater_script').read_text())
         lines = self.get_updater_script_lines()
         if not lines:
             raise RuntimeError("Could not extract lines from updater-script!")
@@ -251,8 +251,46 @@ class FlashableFirmwareCreator:
             updater_script = updater_script.replace(
                 '/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
         self.update_script = updater_script
-        with open(f"{str(self._updater_script_dir)}/updater-script", "w") as out:
+        with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
             out.write(updater_script)
+
+    # def generate_update_binary(self):
+    #     """
+    #     Generate the new zip update-binary and write it to the temporary directory.
+    #
+    #     :return:
+    #     """
+    #     template = ScriptTemplate(Path(
+    #         Path(__file__).parent / 'templates/recovery_update-binary').read_text())
+    #     update_binary_text = template.substitute(datetime=self.datetime, host=self.host)
+    #     update_binary = Path(f"{str(self._flashing_script_dir)}/update-binary")
+    #     update_binary.write_text(update_binary_text)
+    #     update_binary.chmod(775)
+
+    def generate_ab_updater_script(self):
+        script_template = ScriptTemplate(Path(
+            Path(__file__).parent / 'templates/recovery_ab_updater_script').read_text())
+        flashing_template = ScriptTemplate(Path(
+            Path(__file__).parent / 'templates/partition_flashing').read_text())
+        lines = [flashing_template.substitute(partition=file.split('/')[-1].split('.')[0])
+                 for file in self.get_files_list()
+                 if file.startswith('firmware-update/')]
+        updater_script = script_template.substitute(
+            datetime=self.datetime, host=self.host, lines='\n'.join(lines))
+        with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
+            out.write(updater_script)
+
+    def generate_flashing_script(self):
+        """
+        Generate update_script or update-binary
+        :return:
+        """
+        if self.is_android_one is True:
+            self.generate_ab_updater_script()
+            copy2(Path(Path(__file__).parent / 'binaries/update-binary'),
+                  f"{str(self._flashing_script_dir)}/update-binary")
+        else:
+            self.generate_updater_script()
 
     def make_zip(self) -> str:
         """
@@ -266,7 +304,10 @@ class FlashableFirmwareCreator:
         make_archive(f"/{partial_path}/{out.stem}", 'zip', self._tmp_dir)
         if not out.exists():
             raise RuntimeError("Could not create result zip file!")
-        codename = extract_codename(self.update_script)
+        if not self.is_android_one:
+            codename = extract_codename(self.update_script)
+        else:
+            codename = cleanup_codename(self.extractor.zip_file_path.name.split('_')[1]).lower()
         zip_prefix = ""
         if self.extract_mode is ProcessTypes.firmware:
             zip_prefix = "fw"
@@ -288,6 +329,10 @@ class FlashableFirmwareCreator:
 
         :return:
         """
+        if hasattr(self.extractor, 'handler') and isinstance(self.extractor.handler, AndroidOneZip):
+            self.is_android_one = True
+            self.extractor.prepare()
+        self.get_rom_type()
         files_to_extract = self.get_files_list()
         if not files_to_extract or (
                 len(files_to_extract) == 2
@@ -324,8 +369,8 @@ class FlashableFirmwareCreator:
         :return: output zip file name as a string.
         """
         self.extract()
-        print("Generating updater-script..")
-        self.generate_updater_script()
+        print("Generating flashing script...")
+        self.generate_flashing_script()
         print("Creating new zip file..")
         new_zip = self.make_zip()
         self.cleanup()

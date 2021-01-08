@@ -29,7 +29,7 @@ class TestCreator(unittest.TestCase):
         :param firmware_creator: FlashableFirmwareCreator object
         :return:
         """
-        print(f"Unzipping MIUI... ({firmware_creator.type.name}) device")
+        print("Unzipping MIUI ROM...")
         firmware_creator.auto()
 
     def test_firmware(self):

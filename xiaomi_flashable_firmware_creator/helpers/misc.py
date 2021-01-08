@@ -1,5 +1,6 @@
 """Miscellaneous functions used by the tool."""
 import re
+from string import Template
 
 
 def extract_codename(updater_script) -> str:
@@ -22,3 +23,32 @@ def extract_codename(updater_script) -> str:
         codename = [i for i in match.groups() if i is not None]
         return codename[0]
     return 'codename'
+
+
+def cleanup_codename(codename: str) -> str:
+    """
+    Remove region names from codename and android one's "SPROUT"
+    :param codename: codename from miui zip
+    :return: clean codename
+    """
+    if "SPROUT" in codename:
+        codename = codename.replace("SPROUT", "")
+    if "EEAGlobal" in codename:
+        return codename.replace("EEAGlobal", "")
+    if "IDGlobal" in codename:
+        return codename.replace("IDGlobal", "")
+    if "INGlobal" in codename:
+        return codename.replace("INGlobal", "")
+    if "RUGlobal" in codename:
+        return codename.replace("RUGlobal", "")
+    if "TRGlobal" in codename:
+        return codename.replace("TRGlobal", "")
+    if "TWGlobal" in codename:
+        return codename.replace("TWGlobal", "")
+    if "Global" in codename:
+        return codename.replace("Global", "")
+    return codename
+
+
+class ScriptTemplate(Template):
+    delimiter = "[-]"

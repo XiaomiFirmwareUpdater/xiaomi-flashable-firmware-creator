@@ -37,6 +37,6 @@ def main():
     """Xiaomi Flashable Firmware Creator main module."""
     zip_, process, output = arg_parse()
     firmware_creator = FlashableFirmwareCreator(zip_, process, output)
-    print(f"Unzipping MIUI... ({firmware_creator.type.name}) device")
+    print("Unzipping MIUI ROM...")
     new_zip = firmware_creator.auto()
     print(f"All done! Output file is {new_zip}")
