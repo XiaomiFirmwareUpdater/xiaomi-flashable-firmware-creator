@@ -13,12 +13,11 @@ from datetime import datetime
 from pathlib import Path
 from shutil import rmtree, make_archive, copy2
 from socket import gethostname
-from typing import Union, List
+from typing import List
 
 from xiaomi_flashable_firmware_creator import work_dir
 from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import AndroidOneZip
-from xiaomi_flashable_firmware_creator.extractors.local_zip_extractor import LocalZipExtractor
-from xiaomi_flashable_firmware_creator.extractors.remote_zip_extractor import RemoteZipExtractor
+from xiaomi_flashable_firmware_creator.extractors.zip_extractor import ZipExtractor
 from xiaomi_flashable_firmware_creator.helpers.misc import extract_codename, \
     ScriptTemplate, cleanup_codename
 from xiaomi_flashable_firmware_creator.types import ProcessTypes, ZipTypes
@@ -28,8 +27,8 @@ class FlashableFirmwareCreator:
     """FlashableFirmwareCreator provides methods for creating \
      flashable firmware files from Xiaomi supported ROMs."""
 
-    extractor: Union[LocalZipExtractor, RemoteZipExtractor]
-    input_file: Union[str, Path]
+    extractor: ZipExtractor
+    input_file: str
     _tmp_dir: Path
     _flashing_script_dir: Path
     host: str
@@ -61,7 +60,7 @@ class FlashableFirmwareCreator:
         self.is_android_one = False
         self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot', 'system',
                                         'vendor', 'product', 'odm']
-        self.extractor = self.get_extractor()
+        self.extractor = ZipExtractor(self.input_file, self._tmp_dir)
         self.init()
 
     def init(self):
@@ -84,23 +83,11 @@ class FlashableFirmwareCreator:
         if not self.extractor.exists():
             raise FileNotFoundError(
                 f"input file {self.input_file} does not exist!")
-        self.extractor.open()
         self.extractor.get_files_list()
         if not self.is_valid_rom():
             rmtree(self._tmp_dir)
             raise RuntimeError(
                 f"{self.input_file} is not a valid ROM file. Exiting..")
-
-    def get_extractor(self) -> Union[LocalZipExtractor, RemoteZipExtractor]:
-        """
-        Get the proper extractor object according to the zip file.
-
-        :rtype: RemoteZipExtractor or LocalZipExtractor
-        """
-        if "http" in self.input_file or "ota.d.miui.com" in self.input_file:
-            return RemoteZipExtractor(self.input_file, self._tmp_dir)
-        # elif self.input_file.endswith(".zip"):
-        return LocalZipExtractor(self.input_file, self._tmp_dir)
 
     @staticmethod
     def get_extract_mode(extract_mode) -> ProcessTypes:

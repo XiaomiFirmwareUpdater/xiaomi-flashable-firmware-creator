@@ -12,8 +12,8 @@ class AndroidOneZip(BaseHandler):
     payload: Payload
     partitions: Dict[str, RepeatedCompositeContainer]
 
-    def __init__(self, zip_file_path, tmp_dir):
-        super().__init__(zip_file_path, tmp_dir)
+    def __init__(self, zip_file_path, tmp_dir, extractor):
+        super().__init__(zip_file_path, tmp_dir, extractor)
         self.payload_file = None
         self.all_partitions = set()
         self.files = []
@@ -23,7 +23,7 @@ class AndroidOneZip(BaseHandler):
         Extract payload from zip in order to get partition names
         :return: a list of partition names strings
         """
-        self.payload_file = open(self.file.extract('payload.bin', self._tmp_dir), 'rb')
+        self.payload_file = open(self.extractor.extract('payload.bin', self._tmp_dir), 'rb')
         self.payload = Payload(self.payload_file)
         self.payload.Init()
         self.partitions = {i.partition_name: i for i in self.payload.manifest.partitions}
