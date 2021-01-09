@@ -263,7 +263,8 @@ class FlashableFirmwareCreator:
                  for file in self.get_files_list()
                  if file.startswith('firmware-update/')]
         updater_script = script_template.substitute(
-            datetime=self.datetime, host=self.host, lines='\n'.join(lines))
+            datetime=self.datetime, host=self.host,
+            zip_name=self.extractor.get_file_name(), lines='\n'.join(lines))
         with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
             out.write(updater_script)
 
@@ -294,7 +295,7 @@ class FlashableFirmwareCreator:
         if not self.is_android_one:
             codename = extract_codename(self.update_script)
         else:
-            codename = cleanup_codename(self.extractor.zip_file_path.name.split('_')[1]).lower()
+            codename = cleanup_codename(self.extractor.get_file_name().split('_')[1]).lower()
         zip_prefix = ""
         if self.extract_mode is ProcessTypes.firmware:
             zip_prefix = "fw"

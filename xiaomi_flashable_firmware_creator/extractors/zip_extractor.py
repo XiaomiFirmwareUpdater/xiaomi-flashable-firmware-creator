@@ -51,7 +51,7 @@ class ZipExtractor:
         """
         self.files = self._extractor.namelist()
 
-    def get_file_name(self):
+    def get_file_name(self) -> str:
         """
         Get input zip file name and return it as a string.
 
