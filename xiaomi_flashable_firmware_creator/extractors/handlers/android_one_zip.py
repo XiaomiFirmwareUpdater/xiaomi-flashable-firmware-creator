@@ -1,7 +1,7 @@
 from pathlib import Path
-from typing import List, Dict
+from typing import List
 
-from google.protobuf.pyext._message import RepeatedCompositeContainer
+# from google.protobuf.pyext._message import RepeatedCompositeContainer
 
 from xiaomi_flashable_firmware_creator.extractors.handlers.base_handler import BaseHandler
 from xiaomi_flashable_firmware_creator.extractors.ota_payload_extractor.extract_android_ota_payload \
@@ -10,7 +10,8 @@ from xiaomi_flashable_firmware_creator.extractors.ota_payload_extractor.extract_
 
 class AndroidOneZip(BaseHandler):
     payload: Payload
-    partitions: Dict[str, RepeatedCompositeContainer]
+
+    # partitions: Dict[str, RepeatedCompositeContainer]
 
     def __init__(self, zip_file_path, tmp_dir, extractor):
         super().__init__(zip_file_path, tmp_dir, extractor)
@@ -41,7 +42,8 @@ class AndroidOneZip(BaseHandler):
         Path(self._tmp_dir / 'firmware-update').mkdir(parents=True, exist_ok=True)
         files_to_extract: set = set(self.files).intersection(set(files_to_extract))
         for file in files_to_extract:
-            partition: RepeatedCompositeContainer = self.partitions.get(file.split('/')[-1].split('.')[0])
+            # partition: RepeatedCompositeContainer = self.partitions.get(file.split('/')[-1].split('.')[0])
+            partition = self.partitions.get(file.split('/')[-1].split('.')[0])
             with open(Path(self._tmp_dir / f"firmware-update/{partition.partition_name}.img"), 'wb') as out_f:
                 parse_payload(self.payload, partition, out_f)
         self.payload_file.close()
