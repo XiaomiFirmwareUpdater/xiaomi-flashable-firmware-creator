@@ -9,6 +9,7 @@ Using extract, generate_updater_script, and make_zip you can create
 """
 
 # pylint: disable=too-many-instance-attributes
+import re
 from datetime import datetime
 from pathlib import Path
 from shutil import rmtree, make_archive, copy2
@@ -58,8 +59,9 @@ class FlashableFirmwareCreator:
         self.extract_mode = self.get_extract_mode(_extract_mode)
         self.update_script = ''
         self.is_android_one = False
-        self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot', 'system',
-                                        'vendor', 'product', 'odm']
+        self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot.img', 'system',
+                                        'vendor', 'product', 'odm', 'exaid',
+                                        'dynamic_partitions_op_list']
         self.extractor = ZipExtractor(self.input_file, self._tmp_dir)
         self.init()
 
@@ -149,9 +151,8 @@ class FlashableFirmwareCreator:
                      and (i.endswith('updater-script') or i.endswith('update-binary'))
                      ) or all(n not in i for n in self.firmware_excluded_files)] \
                 if self.type is ZipTypes.qcom \
-                else [n for n in self.extractor.files if 'system' not in n and 'vendor' not in n
-                      and 'product' not in n and 'boot.img' not in n
-                      and 'file_contexts' not in n]
+                else [n for n in self.extractor.files if all(
+                file not in n for file in self.firmware_excluded_files + ['file_contexts'])]
         if self.extract_mode is ProcessTypes.non_arb_firmware:
             return [n for n in self.extractor.files if 'dspso.bin' in n
                     or n.startswith('firmware-update/BTFM.bin')
@@ -180,13 +181,11 @@ class FlashableFirmwareCreator:
         if self.extract_mode is ProcessTypes.firmware:
             lines = [line for line in original_updater_script if "getprop" in line
                      or "Target" in line
-                     or "firmware-update" in line and "dtbo.img" not in line
-                     and "vbmeta" not in line and "splash" not in line
-                     and "logo" not in line] \
+                     or "firmware-update" in line and ("ro.product" in line or all(
+                file not in line for file in self.firmware_excluded_files))] \
                 if self.type is ZipTypes.qcom \
-                else [line for line in original_updater_script if "system" not in line
-                      and "vendor" not in line and 'boot.img' not in line
-                      and "dtbo.img" not in line and "vbmeta" not in line]
+                else [line for line in original_updater_script if "ro.product" in line or
+                      all(file not in line for file in self.firmware_excluded_files)]
         elif self.extract_mode is ProcessTypes.non_arb_firmware:
             lines = [line for line in original_updater_script if "getprop" in line
                      or "Target" in line
@@ -240,6 +239,13 @@ class FlashableFirmwareCreator:
         self.update_script = updater_script
         with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
             out.write(updater_script)
+        # Use modified dynamic_partitions_op_list with resize vendor line only
+        if self.extract_mode is ProcessTypes.vendor and "dynamic_partitions_op_list" in updater_script:
+            original_dynamic_partitions_list = Path(self._tmp_dir / 'dynamic_partitions_op_list').read_text()
+            vendor_resize = re.search(r'(resize vendor .*$)', original_dynamic_partitions_list, re.M)
+            if vendor_resize:
+                with open(f"{str(self._tmp_dir)}/dynamic_partitions_op_list", "w") as out:
+                    out.write(vendor_resize.group(1))
 
     # def generate_update_binary(self):
     #     """
