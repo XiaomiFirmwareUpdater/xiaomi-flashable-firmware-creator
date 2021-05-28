@@ -62,6 +62,7 @@ class FlashableFirmwareCreator:
         self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot.img', 'system',
                                         'vendor', 'product', 'odm', 'exaid',
                                         'dynamic_partitions_op_list']
+        self.vendor_excluded_files = ['logo', 'splash', 'vbmeta', 'system', 'product.', 'odm.', 'exaid',]
         self.extractor = ZipExtractor(self.input_file, self._tmp_dir)
         self.init()
 
@@ -163,8 +164,7 @@ class FlashableFirmwareCreator:
             return [n for n in self.extractor.files if not n.startswith('firmware-update/')] \
                 if self.type is ZipTypes.qcom else []
         if self.extract_mode is ProcessTypes.vendor:
-            return [n for n in self.extractor.files if not n.startswith('system')
-                    and not n.startswith('vbmeta')]
+            return [i for i in self.extractor.files if all(n not in i for n in self.vendor_excluded_files)]
         return []  # Will never happen
 
     def get_updater_script_lines(self) -> str:
