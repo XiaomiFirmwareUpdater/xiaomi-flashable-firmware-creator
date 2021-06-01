@@ -62,7 +62,7 @@ class FlashableFirmwareCreator:
         self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot.img', 'system',
                                         'vendor', 'product', 'odm', 'exaid',
                                         'dynamic_partitions_op_list']
-        self.vendor_excluded_files = ['logo', 'splash', 'vbmeta', 'system', 'product.', 'odm.', 'exaid',]
+        self.vendor_excluded_files = ['vbmeta', 'system', 'product.', 'odm.' ]
         self.extractor = ZipExtractor(self.input_file, self._tmp_dir)
         self.init()
 
@@ -199,7 +199,8 @@ class FlashableFirmwareCreator:
         elif self.extract_mode is ProcessTypes.vendor:
             lines = [line for line in original_updater_script
                      if "getprop" in line or "Target" in line
-                     or "firmware-update" in line
+                     or "dynamic_partitions_op_list" in line
+                     or "firmware-update" in line and "vbmeta" not in line
                      or "vendor" in line] if self.type is ZipTypes.qcom \
                 else [line for line in original_updater_script if
                       "system" not in line and 'boot.img' not in line]
