@@ -27,7 +27,7 @@ protobuf = "^3.15.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.11.1"
-pycodestyle = "^2.6.0"
+pycodestyle = "^2.8.0"
 
 [tool.pylint.messages_control]
 disable = [
