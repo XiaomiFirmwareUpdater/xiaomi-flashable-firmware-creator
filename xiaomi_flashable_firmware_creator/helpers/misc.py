@@ -33,6 +33,8 @@ def cleanup_codename(codename: str) -> str:
     """
     if "SPROUT" in codename:
         codename = codename.replace("SPROUT", "")
+    if codename.endswith("PRE"):
+        codename = codename.replace("PRE", "")
     if "EEAGlobal" in codename:
         return codename.replace("EEAGlobal", "")
     if "IDGlobal" in codename:
