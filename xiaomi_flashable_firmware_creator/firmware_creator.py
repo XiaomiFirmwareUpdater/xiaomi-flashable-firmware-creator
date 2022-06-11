@@ -234,7 +234,7 @@ class FlashableFirmwareCreator:
                 [
                     line
                     for line in original_updater_script
-                    if "getprop" in line
+                    if ("getprop" in line and "ro.build.date.utc" not in line)
                     or "Target" in line
                     or "firmware-update" in line
                     and (
@@ -256,7 +256,7 @@ class FlashableFirmwareCreator:
             lines = [
                 line
                 for line in original_updater_script
-                if "getprop" in line
+                if ("getprop" in line and "ro.build.date.utc" not in line)
                 or "Target" in line
                 or "modem" in line
                 or "bluetooth" in line
@@ -267,7 +267,7 @@ class FlashableFirmwareCreator:
                 [
                     line
                     for line in original_updater_script
-                    if "getprop" in line
+                    if ("getprop" in line and "ro.build.date.utc" not in line)
                     or "Target" in line
                     or "boot.img" in line
                     or "system" in line
@@ -282,7 +282,7 @@ class FlashableFirmwareCreator:
                 [
                     line
                     for line in original_updater_script
-                    if "getprop" in line
+                    if ("getprop" in line and "ro.build.date.utc" not in line)
                     or "Target" in line
                     or "dynamic_partitions_op_list" in line
                     or "firmware-update" in line

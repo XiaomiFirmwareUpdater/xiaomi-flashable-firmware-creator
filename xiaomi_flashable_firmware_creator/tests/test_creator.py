@@ -93,6 +93,26 @@ class TestCreator(unittest.TestCase):
             print(f"Testing {file.name}")
             self.run_extractor(firmware_creator)
 
+    def test_date_assertion(self):
+        """
+        Test non-existence of ro.build.date.utc assertion.
+
+        :return:
+        """
+        for file in self.files:
+            firmware_creator = FlashableFirmwareCreator(
+                str(file.absolute()), "firmware", self.out_dir
+            )
+            print(f"Testing {file.name}")
+            firmware_creator.extract()
+            firmware_creator.generate_flashing_script()
+            update_script = Path(
+                firmware_creator._flashing_script_dir / "updater-script"
+            ).read_text()
+            self.assertNotIn("ro.build.date.utc", update_script)
+            firmware_creator.cleanup()
+            firmware_creator.close()
+
     def tearDown(self):
         """
         Remove output directory after finishing tests
