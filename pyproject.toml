@@ -41,6 +41,11 @@ exclude = '''
     \.git
   | __pycache__
   | \.venv
+  | ota_payload_extractor
+  | updater-scripts
+  | binaries
+  | files
+  | templates
 )/
 '''
 
