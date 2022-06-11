@@ -17,18 +17,18 @@ def mock_zip(zip_file: str, out_dir: Union[str, Path]):
     :type out_dir: str or Path
     """
     if isinstance(out_dir, str):
-        out_dir = Path(out_dir) / 'mock_tmp'
+        out_dir = Path(out_dir) / "mock_tmp"
     else:
-        out_dir = out_dir / 'mock_tmp'
+        out_dir = out_dir / "mock_tmp"
     out_dir = out_dir.absolute()
     out_dir.mkdir(parents=True, exist_ok=True)
     zip_file = Path(zip_file)
 
-    with ZipFile(zip_file, 'r') as zipfile:
+    with ZipFile(zip_file, "r") as zipfile:
         files = zipfile.namelist()
         for item in files:
             item_path = Path(out_dir / item)
-            if item.endswith('/'):
+            if item.endswith("/"):
                 if not item_path.exists():
                     item_path.mkdir(parents=True, exist_ok=True)
             else:
@@ -37,16 +37,16 @@ def mock_zip(zip_file: str, out_dir: Union[str, Path]):
                 if item.endswith("updater-script"):
                     zipfile.extract(item, out_dir)
                 else:
-                    with open(f"{out_dir}/{item}", 'wb') as out:
-                        out.write(b'')
+                    with open(f"{out_dir}/{item}", "wb") as out:
+                        out.write(b"")
 
     mocked_zip = f"{out_dir.parent}/mocked_{zip_file.stem}"
-    make_archive(mocked_zip, zip_file.suffix.split('.')[-1], out_dir)
+    make_archive(mocked_zip, zip_file.suffix.split(".")[-1], out_dir)
     out = Path(f"{mocked_zip}.zip")
     if not out.exists():
         raise RuntimeError("Could not create mocked zip file!")
     rmtree(out_dir)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     mock_zip(argv[1], argv[2])

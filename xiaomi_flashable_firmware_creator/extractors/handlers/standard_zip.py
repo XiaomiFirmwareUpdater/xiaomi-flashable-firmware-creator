@@ -1,4 +1,6 @@
-from xiaomi_flashable_firmware_creator.extractors.handlers.base_handler import BaseHandler
+from xiaomi_flashable_firmware_creator.extractors.handlers.base_handler import (
+    BaseHandler,
+)
 
 
 class StandardZip(BaseHandler):

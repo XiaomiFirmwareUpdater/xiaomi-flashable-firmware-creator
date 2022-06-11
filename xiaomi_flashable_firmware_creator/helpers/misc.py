@@ -15,14 +15,16 @@ def extract_codename(updater_script) -> str:
     :param updater_script: updater-script file as string
     :return: extracted codename if found or 'codename' if not found.
     """
-    pattern = re.compile(r'(?:/[\w\d_-]+/([\w\d]+):\d)|'
-                         r'(?:\(\"ro\.product\.device\"\) == \"([\w\d]+)\")|'
-                         r'(?:get_device_compatible\(\"([\w\d]+)\"\))')
+    pattern = re.compile(
+        r"(?:/[\w\d_-]+/([\w\d]+):\d)|"
+        r"(?:\(\"ro\.product\.device\"\) == \"([\w\d]+)\")|"
+        r"(?:get_device_compatible\(\"([\w\d]+)\"\))"
+    )
     match = pattern.search(updater_script)
     if match:
         codename = [i for i in match.groups() if i is not None]
         return codename[0]
-    return 'codename'
+    return "codename"
 
 
 def cleanup_codename(codename: str) -> str:

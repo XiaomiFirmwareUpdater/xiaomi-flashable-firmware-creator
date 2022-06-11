@@ -2,14 +2,18 @@
 that deals with local zip files using zipfile standard library."""
 
 from pathlib import Path
-from typing import Union, List
+from typing import List, Union
 from zipfile import ZipFile
 
 from remotezip import RemoteZip
 from requests import head
 
-from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import AndroidOneZip
-from xiaomi_flashable_firmware_creator.extractors.handlers.standard_zip import StandardZip
+from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import (
+    AndroidOneZip,
+)
+from xiaomi_flashable_firmware_creator.extractors.handlers.standard_zip import (
+    StandardZip,
+)
 
 
 class ZipExtractor:
@@ -27,13 +31,21 @@ class ZipExtractor:
         :param zip_file: a path object or a string to a zip that contains a full recovery ROM.
         :param tmp_dir: output directory to place the extracted zip in.
         """
-        self.zip_url = zip_file if "http" in zip_file or "ota.d.miui.com" in zip_file else ""
-        self.zip_file_path = Path(zip_file) if not self.zip_url and isinstance(zip_file, str) else ""
+        self.zip_url = (
+            zip_file if "http" in zip_file or "ota.d.miui.com" in zip_file else ""
+        )
+        self.zip_file_path = (
+            Path(zip_file) if not self.zip_url and isinstance(zip_file, str) else ""
+        )
         self.files = []
-        self._extractor = RemoteZip(self.zip_url) if self.zip_url else ZipFile(self.zip_file_path)
-        self.handler = AndroidOneZip(self.zip_file_path, tmp_dir, self._extractor) \
-            if "payload.bin" in str(self._extractor.namelist()) \
+        self._extractor = (
+            RemoteZip(self.zip_url) if self.zip_url else ZipFile(self.zip_file_path)
+        )
+        self.handler = (
+            AndroidOneZip(self.zip_file_path, tmp_dir, self._extractor)
+            if "payload.bin" in str(self._extractor.namelist())
             else StandardZip(self.zip_file_path, tmp_dir, self._extractor)
+        )
 
     def exists(self) -> bool:
         """
@@ -41,7 +53,9 @@ class ZipExtractor:
 
         :return: True if zip file exists, False otherwise.
         """
-        return self.zip_file_path.exists() if self.zip_file_path else head(self.zip_url).ok
+        return (
+            self.zip_file_path.exists() if self.zip_file_path else head(self.zip_url).ok
+        )
 
     def get_files_list(self):
         """
@@ -57,7 +71,11 @@ class ZipExtractor:
 
         :return: a string of the input zip file name.
         """
-        return self.zip_file_path.name if self.zip_file_path else self.zip_url.split('/')[-1]
+        return (
+            self.zip_file_path.name
+            if self.zip_file_path
+            else self.zip_url.split("/")[-1]
+        )
 
     def prepare(self):
         if isinstance(self.handler, AndroidOneZip):

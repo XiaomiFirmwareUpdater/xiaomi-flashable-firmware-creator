@@ -12,15 +12,20 @@ Using extract, generate_updater_script, and make_zip you can create
 import re
 from datetime import datetime
 from pathlib import Path
-from shutil import rmtree, make_archive, copy2
+from shutil import copy2, make_archive, rmtree
 from socket import gethostname
 from typing import List
 
 from xiaomi_flashable_firmware_creator import work_dir
-from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import AndroidOneZip
+from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import (
+    AndroidOneZip,
+)
 from xiaomi_flashable_firmware_creator.extractors.zip_extractor import ZipExtractor
-from xiaomi_flashable_firmware_creator.helpers.misc import extract_codename, \
-    ScriptTemplate, cleanup_codename
+from xiaomi_flashable_firmware_creator.helpers.misc import (
+    ScriptTemplate,
+    cleanup_codename,
+    extract_codename,
+)
 from xiaomi_flashable_firmware_creator.types import ProcessTypes, ZipTypes
 
 
@@ -51,18 +56,30 @@ class FlashableFirmwareCreator:
         :param out_dir: The output directory to store the extracted file in.
         """
         self.input_file = input_file
-        self._tmp_dir = Path(out_dir) / 'tmp' if out_dir else work_dir / 'tmp'
+        self._tmp_dir = Path(out_dir) / "tmp" if out_dir else work_dir / "tmp"
         self._out_dir = self._tmp_dir.parent.absolute()
-        self._flashing_script_dir = self._tmp_dir.absolute() / 'META-INF/com/google/android'
+        self._flashing_script_dir = (
+            self._tmp_dir.absolute() / "META-INF/com/google/android"
+        )
         self.host = gethostname()
         self.datetime = datetime.now()
         self.extract_mode = self.get_extract_mode(_extract_mode)
-        self.update_script = ''
+        self.update_script = ""
         self.is_android_one = False
-        self.firmware_excluded_files = ['dtbo', 'logo', 'splash', 'vbmeta', 'boot.img', 'system',
-                                        'vendor', 'product', 'odm', 'exaid',
-                                        'dynamic_partitions_op_list']
-        self.vendor_excluded_files = ['vbmeta', 'system', 'product.', 'odm.' ]
+        self.firmware_excluded_files = [
+            "dtbo",
+            "logo",
+            "splash",
+            "vbmeta",
+            "boot.img",
+            "system",
+            "vendor",
+            "product",
+            "odm",
+            "exaid",
+            "dynamic_partitions_op_list",
+        ]
+        self.vendor_excluded_files = ["vbmeta", "system", "product.", "odm."]
         self.extractor = ZipExtractor(self.input_file, self._tmp_dir)
         self.init()
 
@@ -84,13 +101,11 @@ class FlashableFirmwareCreator:
         self._tmp_dir.mkdir(parents=True, exist_ok=True)
         self._flashing_script_dir.mkdir(parents=True, exist_ok=True)
         if not self.extractor.exists():
-            raise FileNotFoundError(
-                f"input file {self.input_file} does not exist!")
+            raise FileNotFoundError(f"input file {self.input_file} does not exist!")
         self.extractor.get_files_list()
         if not self.is_valid_rom():
             rmtree(self._tmp_dir)
-            raise RuntimeError(
-                f"{self.input_file} is not a valid ROM file. Exiting..")
+            raise RuntimeError(f"{self.input_file} is not a valid ROM file. Exiting..")
 
     @staticmethod
     def get_extract_mode(extract_mode) -> ProcessTypes:
@@ -101,15 +116,15 @@ class FlashableFirmwareCreator:
         :return: ProcessTypes enum
         """
         modes = {
-            'firmware': ProcessTypes.firmware,
-            'nonarb': ProcessTypes.non_arb_firmware,
-            'firmwareless': ProcessTypes.firmware_less,
-            'vendor': ProcessTypes.vendor
+            "firmware": ProcessTypes.firmware,
+            "nonarb": ProcessTypes.non_arb_firmware,
+            "firmwareless": ProcessTypes.firmware_less,
+            "vendor": ProcessTypes.vendor,
         }
         try:
             return modes[extract_mode]
         except KeyError as err:
-            print('Unknown process!')
+            print("Unknown process!")
             raise err
 
     def is_valid_rom(self) -> bool:
@@ -119,9 +134,11 @@ class FlashableFirmwareCreator:
         :return: True if update-binary or updater-script or payload.bin is present
          in contents list, False otherwise.
         """
-        return "META-INF/com/google/android/update-binary" in self.extractor.files \
-               or "META-INF/com/google/android/updater-script" in self.extractor.files \
-               or "payload.bin" in self.extractor.files
+        return (
+            "META-INF/com/google/android/update-binary" in self.extractor.files
+            or "META-INF/com/google/android/updater-script" in self.extractor.files
+            or "payload.bin" in self.extractor.files
+        )
 
     def get_rom_type(self):
         """
@@ -130,10 +147,14 @@ class FlashableFirmwareCreator:
         :return: An enum of ROM type. Either qcom or mtk.
         """
         files = str(self.extractor.files)
-        if 'lk.img' in files or 'preloader.img' in files:
+        if "lk.img" in files or "preloader.img" in files:
             self.type = ZipTypes.mtk
-        elif 'firmware-update' in files or 'rpm' in files or 'tz' in files \
-                or 'keymaster' in files:
+        elif (
+            "firmware-update" in files
+            or "rpm" in files
+            or "tz" in files
+            or "keymaster" in files
+        ):
             self.type = ZipTypes.qcom
         else:
             raise RuntimeError("Can't detect rom type. It's not qcom or mtk!'")
@@ -147,24 +168,54 @@ class FlashableFirmwareCreator:
         # TODO: match fastboot and android one img files
         #  when no firmware-update directory is found
         if self.extract_mode is ProcessTypes.firmware:
-            return [i for i in self.extractor.files if
-                    (i.startswith('META-INF/')
-                     and (i.endswith('updater-script') or i.endswith('update-binary'))
-                     ) or all(n not in i for n in self.firmware_excluded_files)] \
-                if self.type is ZipTypes.qcom \
-                else [n for n in self.extractor.files if all(
-                file not in n for file in self.firmware_excluded_files + ['file_contexts'])]
+            return (
+                [
+                    i
+                    for i in self.extractor.files
+                    if (
+                        i.startswith("META-INF/")
+                        and (
+                            i.endswith("updater-script") or i.endswith("update-binary")
+                        )
+                    )
+                    or all(n not in i for n in self.firmware_excluded_files)
+                ]
+                if self.type is ZipTypes.qcom
+                else [
+                    n
+                    for n in self.extractor.files
+                    if all(
+                        file not in n
+                        for file in self.firmware_excluded_files + ["file_contexts"]
+                    )
+                ]
+            )
         if self.extract_mode is ProcessTypes.non_arb_firmware:
-            return [n for n in self.extractor.files if 'dspso.bin' in n
-                    or n.startswith('firmware-update/BTFM.bin')
-                    or n.startswith('firmware-update/NON-HLOS.bin')
-                    or n.startswith('META-INF/')
-                    and (n.endswith('updater-script') or n.endswith('update-binary'))]
+            return [
+                n
+                for n in self.extractor.files
+                if "dspso.bin" in n
+                or n.startswith("firmware-update/BTFM.bin")
+                or n.startswith("firmware-update/NON-HLOS.bin")
+                or n.startswith("META-INF/")
+                and (n.endswith("updater-script") or n.endswith("update-binary"))
+            ]
         if self.extract_mode is ProcessTypes.firmware_less:
-            return [n for n in self.extractor.files if not n.startswith('firmware-update/')] \
-                if self.type is ZipTypes.qcom else []
+            return (
+                [
+                    n
+                    for n in self.extractor.files
+                    if not n.startswith("firmware-update/")
+                ]
+                if self.type is ZipTypes.qcom
+                else []
+            )
         if self.extract_mode is ProcessTypes.vendor:
-            return [i for i in self.extractor.files if all(n not in i for n in self.vendor_excluded_files)]
+            return [
+                i
+                for i in self.extractor.files
+                if all(n not in i for n in self.vendor_excluded_files)
+            ]
         return []  # Will never happen
 
     def get_updater_script_lines(self) -> str:
@@ -173,38 +224,79 @@ class FlashableFirmwareCreator:
 
         :return: a string of the updater-script lines
         """
-        original_updater_script = Path(self._flashing_script_dir / 'updater-script')
+        original_updater_script = Path(self._flashing_script_dir / "updater-script")
         if not original_updater_script.exists():
             raise FileNotFoundError("updater-script not found!")
         original_updater_script = original_updater_script.read_text().splitlines()
         lines = []
         if self.extract_mode is ProcessTypes.firmware:
-            lines = [line for line in original_updater_script if "getprop" in line
-                     or "Target" in line
-                     or "firmware-update" in line and ("ro.product" in line or all(
-                file not in line for file in self.firmware_excluded_files))] \
-                if self.type is ZipTypes.qcom \
-                else [line for line in original_updater_script if "ro.product" in line or
-                      all(file not in line for file in self.firmware_excluded_files)]
+            lines = (
+                [
+                    line
+                    for line in original_updater_script
+                    if "getprop" in line
+                    or "Target" in line
+                    or "firmware-update" in line
+                    and (
+                        "ro.product" in line
+                        or all(
+                            file not in line for file in self.firmware_excluded_files
+                        )
+                    )
+                ]
+                if self.type is ZipTypes.qcom
+                else [
+                    line
+                    for line in original_updater_script
+                    if "ro.product" in line
+                    or all(file not in line for file in self.firmware_excluded_files)
+                ]
+            )
         elif self.extract_mode is ProcessTypes.non_arb_firmware:
-            lines = [line for line in original_updater_script if "getprop" in line
-                     or "Target" in line
-                     or "modem" in line or "bluetooth" in line or "dsp" in line]
+            lines = [
+                line
+                for line in original_updater_script
+                if "getprop" in line
+                or "Target" in line
+                or "modem" in line
+                or "bluetooth" in line
+                or "dsp" in line
+            ]
         elif self.extract_mode is ProcessTypes.firmware_less:
-            lines = [line for line in original_updater_script if "getprop" in line
-                     or "Target" in line
-                     or "boot.img" in line or "system" in line or "vendor" in line
-                     or "product" in line] \
-                if self.type is ZipTypes.qcom else []
+            lines = (
+                [
+                    line
+                    for line in original_updater_script
+                    if "getprop" in line
+                    or "Target" in line
+                    or "boot.img" in line
+                    or "system" in line
+                    or "vendor" in line
+                    or "product" in line
+                ]
+                if self.type is ZipTypes.qcom
+                else []
+            )
         elif self.extract_mode is ProcessTypes.vendor:
-            lines = [line for line in original_updater_script
-                     if "getprop" in line or "Target" in line
-                     or "dynamic_partitions_op_list" in line
-                     or "firmware-update" in line and "vbmeta" not in line
-                     or "vendor" in line] if self.type is ZipTypes.qcom \
-                else [line for line in original_updater_script if
-                      "system" not in line and 'boot.img' not in line]
-        return '\n'.join(lines)
+            lines = (
+                [
+                    line
+                    for line in original_updater_script
+                    if "getprop" in line
+                    or "Target" in line
+                    or "dynamic_partitions_op_list" in line
+                    or "firmware-update" in line
+                    and "vbmeta" not in line
+                    or "vendor" in line
+                ]
+                if self.type is ZipTypes.qcom
+                else [
+                    line
+                    for line in original_updater_script
+                    if "system" not in line and "boot.img" not in line
+                ]
+            )
+        return "\n".join(lines)
 
     def generate_updater_script(self):
         """
@@ -212,8 +304,11 @@ class FlashableFirmwareCreator:
 
         :return:
         """
-        template = ScriptTemplate(Path(
-            Path(__file__).parent / 'templates/recovery_updater_script').read_text())
+        template = ScriptTemplate(
+            Path(
+                Path(__file__).parent / "templates/recovery_updater_script"
+            ).read_text()
+        )
         lines = self.get_updater_script_lines()
         if not lines:
             raise RuntimeError("Could not extract lines from updater-script!")
@@ -228,24 +323,36 @@ class FlashableFirmwareCreator:
         else:
             process = "Unknown"  # This should never happen
 
-        updater_script = template.substitute(datetime=self.datetime, host=self.host,
-                                             process=process, lines=lines)
+        updater_script = template.substitute(
+            datetime=self.datetime, host=self.host, process=process, lines=lines
+        )
         # correct some updater-script lines that exist in old devices' file
         if "/firmware/image/sec.dat" in updater_script:
             updater_script = updater_script.replace(
-                '/firmware/image/sec.dat', '/dev/block/bootdevice/by-name/sec')
-        if '/firmware/image/splash.img' in updater_script:
+                "/firmware/image/sec.dat", "/dev/block/bootdevice/by-name/sec"
+            )
+        if "/firmware/image/splash.img" in updater_script:
             updater_script = updater_script.replace(
-                '/firmware/image/splash.img', '/dev/block/bootdevice/by-name/splash')
+                "/firmware/image/splash.img", "/dev/block/bootdevice/by-name/splash"
+            )
         self.update_script = updater_script
         with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
             out.write(updater_script)
         # Use modified dynamic_partitions_op_list with resize vendor line only
-        if self.extract_mode is ProcessTypes.vendor and "dynamic_partitions_op_list" in updater_script:
-            original_dynamic_partitions_list = Path(self._tmp_dir / 'dynamic_partitions_op_list').read_text()
-            vendor_resize = re.search(r'(resize vendor .*$)', original_dynamic_partitions_list, re.M)
+        if (
+            self.extract_mode is ProcessTypes.vendor
+            and "dynamic_partitions_op_list" in updater_script
+        ):
+            original_dynamic_partitions_list = Path(
+                self._tmp_dir / "dynamic_partitions_op_list"
+            ).read_text()
+            vendor_resize = re.search(
+                r"(resize vendor .*$)", original_dynamic_partitions_list, re.M
+            )
             if vendor_resize:
-                with open(f"{str(self._tmp_dir)}/dynamic_partitions_op_list", "w") as out:
+                with open(
+                    f"{str(self._tmp_dir)}/dynamic_partitions_op_list", "w"
+                ) as out:
                     out.write(vendor_resize.group(1))
 
     # def generate_update_binary(self):
@@ -262,16 +369,25 @@ class FlashableFirmwareCreator:
     #     update_binary.chmod(775)
 
     def generate_ab_updater_script(self):
-        script_template = ScriptTemplate(Path(
-            Path(__file__).parent / 'templates/recovery_ab_updater_script').read_text())
-        flashing_template = ScriptTemplate(Path(
-            Path(__file__).parent / 'templates/partition_flashing').read_text())
-        lines = [flashing_template.substitute(partition=file.split('/')[-1].split('.')[0])
-                 for file in self.get_files_list()
-                 if file.startswith('firmware-update/')]
+        script_template = ScriptTemplate(
+            Path(
+                Path(__file__).parent / "templates/recovery_ab_updater_script"
+            ).read_text()
+        )
+        flashing_template = ScriptTemplate(
+            Path(Path(__file__).parent / "templates/partition_flashing").read_text()
+        )
+        lines = [
+            flashing_template.substitute(partition=file.split("/")[-1].split(".")[0])
+            for file in self.get_files_list()
+            if file.startswith("firmware-update/")
+        ]
         updater_script = script_template.substitute(
-            datetime=self.datetime, host=self.host,
-            zip_name=self.extractor.get_file_name(), lines='\n'.join(lines))
+            datetime=self.datetime,
+            host=self.host,
+            zip_name=self.extractor.get_file_name(),
+            lines="\n".join(lines),
+        )
         with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
             out.write(updater_script)
 
@@ -282,8 +398,10 @@ class FlashableFirmwareCreator:
         """
         if self.is_android_one is True:
             self.generate_ab_updater_script()
-            copy2(Path(Path(__file__).parent / 'binaries/update-binary'),
-                  f"{str(self._flashing_script_dir)}/update-binary")
+            copy2(
+                Path(Path(__file__).parent / "binaries/update-binary"),
+                f"{str(self._flashing_script_dir)}/update-binary",
+            )
         else:
             self.generate_updater_script()
 
@@ -294,15 +412,17 @@ class FlashableFirmwareCreator:
         Also, name it according to process parameters.
         :return:
         """
-        out = Path(f'{self._out_dir}/result.zip')
-        partial_path = '/'.join(out.parts[1:-1])
-        make_archive(f"/{partial_path}/{out.stem}", 'zip', self._tmp_dir)
+        out = Path(f"{self._out_dir}/result.zip")
+        partial_path = "/".join(out.parts[1:-1])
+        make_archive(f"/{partial_path}/{out.stem}", "zip", self._tmp_dir)
         if not out.exists():
             raise RuntimeError("Could not create result zip file!")
         if not self.is_android_one:
             codename = extract_codename(self.update_script)
         else:
-            codename = cleanup_codename(self.extractor.get_file_name().split('_')[1]).lower()
+            codename = cleanup_codename(
+                self.extractor.get_file_name().split("_")[1]
+            ).lower()
         zip_prefix = ""
         if self.extract_mode is ProcessTypes.firmware:
             zip_prefix = "fw"
@@ -314,7 +434,9 @@ class FlashableFirmwareCreator:
             zip_prefix = "fw-vendor"
         else:
             pass  # This should never happen
-        zip_name = f"{self._out_dir}/{zip_prefix}_{codename}_{self.extractor.get_file_name()}"
+        zip_name = (
+            f"{self._out_dir}/{zip_prefix}_{codename}_{self.extractor.get_file_name()}"
+        )
         out.rename(zip_name)
         return zip_name
 
@@ -324,15 +446,17 @@ class FlashableFirmwareCreator:
 
         :return:
         """
-        if hasattr(self.extractor, 'handler') and isinstance(self.extractor.handler, AndroidOneZip):
+        if hasattr(self.extractor, "handler") and isinstance(
+            self.extractor.handler, AndroidOneZip
+        ):
             self.is_android_one = True
             self.extractor.prepare()
         self.get_rom_type()
         files_to_extract = self.get_files_list()
         if not files_to_extract or (
-                len(files_to_extract) == 2
-                and "updater-script" in str(files_to_extract)
-                and "update-binary" in str(files_to_extract)
+            len(files_to_extract) == 2
+            and "updater-script" in str(files_to_extract)
+            and "update-binary" in str(files_to_extract)
         ):
             self.cleanup()
             self.close()

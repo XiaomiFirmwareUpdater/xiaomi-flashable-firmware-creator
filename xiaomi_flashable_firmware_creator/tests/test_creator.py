@@ -4,8 +4,9 @@ import unittest
 from pathlib import Path
 from shutil import rmtree
 
-from xiaomi_flashable_firmware_creator.xiaomi_flashable_firmware_creator \
-    import FlashableFirmwareCreator
+from xiaomi_flashable_firmware_creator.xiaomi_flashable_firmware_creator import (
+    FlashableFirmwareCreator,
+)
 
 
 class TestCreator(unittest.TestCase):
@@ -18,8 +19,8 @@ class TestCreator(unittest.TestCase):
         :return:
         """
         self.work_dir = Path(__file__).parent
-        self.out_dir = self.work_dir / 'out'
-        self.files = self.work_dir.glob('files/*/*.zip')
+        self.out_dir = self.work_dir / "out"
+        self.files = self.work_dir.glob("files/*/*.zip")
 
     @staticmethod
     def run_extractor(firmware_creator):
@@ -40,7 +41,8 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), 'firmware', self.out_dir)
+                str(file.absolute()), "firmware", self.out_dir
+            )
             print(f"Testing {file.name}")
             self.run_extractor(firmware_creator)
 
@@ -52,7 +54,8 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), 'firmwareless', self.out_dir)
+                str(file.absolute()), "firmwareless", self.out_dir
+            )
             print(f"Testing {file.name}")
             try:
                 self.run_extractor(firmware_creator)
@@ -68,7 +71,8 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), 'nonarb', self.out_dir)
+                str(file.absolute()), "nonarb", self.out_dir
+            )
             print(f"Testing {file.name}")
             try:
                 self.run_extractor(firmware_creator)
@@ -84,7 +88,8 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), 'vendor', self.out_dir)
+                str(file.absolute()), "vendor", self.out_dir
+            )
             print(f"Testing {file.name}")
             self.run_extractor(firmware_creator)
 
@@ -97,5 +102,5 @@ class TestCreator(unittest.TestCase):
         rmtree(self.out_dir)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
