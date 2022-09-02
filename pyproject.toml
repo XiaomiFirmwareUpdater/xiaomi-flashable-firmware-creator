@@ -27,7 +27,7 @@ protobuf = ">=3.15,<5.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.20.0"
-black = "^22.6.0"
+black = "^22.8.0"
 isort = "^5.10.1"
 flake8 = "^5.0.4"
 
