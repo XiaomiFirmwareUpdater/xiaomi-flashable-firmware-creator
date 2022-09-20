@@ -78,8 +78,15 @@ class FlashableFirmwareCreator:
             "odm",
             "exaid",
             "dynamic_partitions_op_list",
+            "metadata.pb",
         ]
-        self.vendor_excluded_files = ["vbmeta", "system", "product.", "odm."]
+        self.vendor_excluded_files = [
+            "vbmeta",
+            "system",
+            "product.",
+            "odm.",
+            "metadata.pb",
+        ]
         self.extractor = ZipExtractor(self.input_file, self._tmp_dir)
         self.init()
 
