@@ -1,6 +1,8 @@
 """Miscellaneous functions used by the tool."""
 import re
+from pathlib import Path
 from string import Template
+from typing import Union
 
 
 def extract_codename(updater_script) -> str:
@@ -56,3 +58,7 @@ def cleanup_codename(codename: str) -> str:
 
 class ScriptTemplate(Template):
     delimiter = "[-]"
+
+
+def write_text_to_file(file: Union[str, Path], text: str):
+    Path(file).write_text(text, encoding="utf-8", newline="\n")

@@ -25,6 +25,7 @@ from xiaomi_flashable_firmware_creator.helpers.misc import (
     ScriptTemplate,
     cleanup_codename,
     extract_codename,
+    write_text_to_file,
 )
 from xiaomi_flashable_firmware_creator.types import ProcessTypes, ZipTypes
 
@@ -343,8 +344,9 @@ class FlashableFirmwareCreator:
                 "/firmware/image/splash.img", "/dev/block/bootdevice/by-name/splash"
             )
         self.update_script = updater_script
-        with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
-            out.write(updater_script)
+        write_text_to_file(
+            f"{str(self._flashing_script_dir)}/updater-script", updater_script
+        )
         # Use modified dynamic_partitions_op_list with resize vendor line only
         if (
             self.extract_mode is ProcessTypes.vendor
@@ -357,10 +359,10 @@ class FlashableFirmwareCreator:
                 r"(resize vendor .*$)", original_dynamic_partitions_list, re.M
             )
             if vendor_resize:
-                with open(
-                    f"{str(self._tmp_dir)}/dynamic_partitions_op_list", "w"
-                ) as out:
-                    out.write(vendor_resize.group(1))
+                write_text_to_file(
+                    f"{str(self._tmp_dir)}/dynamic_partitions_op_list",
+                    vendor_resize.group(1),
+                )
 
     # def generate_update_binary(self):
     #     """
@@ -395,8 +397,9 @@ class FlashableFirmwareCreator:
             zip_name=self.extractor.get_file_name(),
             lines="\n".join(lines),
         )
-        with open(f"{str(self._flashing_script_dir)}/updater-script", "w") as out:
-            out.write(updater_script)
+        write_text_to_file(
+            f"{str(self._flashing_script_dir)}/updater-script", updater_script
+        )
 
     def generate_flashing_script(self):
         """
