@@ -46,7 +46,6 @@ class AndroidOneZip(BaseHandler):
         :param files_to_extract: a list of files to extract
         :return:
         """
-        Path(self._tmp_dir / "payload.bin").unlink()
         Path(self._tmp_dir / "firmware-update").mkdir(parents=True, exist_ok=True)
         files_to_extract: set = set(self.files).intersection(set(files_to_extract))
         for file in files_to_extract:
@@ -58,3 +57,4 @@ class AndroidOneZip(BaseHandler):
             ) as out_f:
                 parse_payload(self.payload, partition, out_f)
         self.payload_file.close()
+        Path(self._tmp_dir / "payload.bin").unlink()
