@@ -61,4 +61,4 @@ class ScriptTemplate(Template):
 
 
 def write_text_to_file(file: Union[str, Path], text: str):
-    Path(file).write_text(text, encoding="utf-8", newline="\n")
+    Path(file).write_bytes(text.encode("utf-8"))

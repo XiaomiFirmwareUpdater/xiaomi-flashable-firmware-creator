@@ -6,7 +6,7 @@ from argparse import ArgumentParser
 from xiaomi_flashable_firmware_creator.firmware_creator import FlashableFirmwareCreator
 
 
-def arg_parse() -> (str, str, str):
+def arg_parse() -> tuple[str, str, str]:
     """
     Parse command-line arguments.
 
