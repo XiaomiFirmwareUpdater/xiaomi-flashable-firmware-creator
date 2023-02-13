@@ -424,7 +424,6 @@ class FlashableFirmwareCreator:
         :return:
         """
         out = Path(f"{self._out_dir}/result.zip")
-        partial_path = "/".join(out.parts[1:-1])
         make_archive(str(out.with_suffix("").absolute()), "zip", self._tmp_dir)
         if not out.exists():
             raise RuntimeError("Could not create result zip file!")
