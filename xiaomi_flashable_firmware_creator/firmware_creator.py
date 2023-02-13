@@ -78,6 +78,7 @@ class FlashableFirmwareCreator:
             "product",
             "odm",
             "exaid",
+            "mi_ext",
             "dynamic_partitions_op_list",
             "metadata.pb",
         ]
