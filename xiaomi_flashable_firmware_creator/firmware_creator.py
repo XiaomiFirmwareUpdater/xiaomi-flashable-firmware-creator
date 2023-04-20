@@ -227,7 +227,7 @@ class FlashableFirmwareCreator:
             ]
         return []  # Will never happen
 
-    def get_updater_script_lines(self) -> str:
+    def get_updater_script_lines(self, invalid_files: set[str]) -> str:
         """
         Get selective lines from the update-script according to process type enum value.
 
@@ -245,7 +245,10 @@ class FlashableFirmwareCreator:
                     for line in original_updater_script
                     if ("getprop" in line and "ro.build.date.utc" not in line)
                     or "Target" in line
-                    or "firmware-update" in line
+                    or (
+                        "firmware-update" in line
+                        and line.split("/")[1].split('"')[0] not in invalid_files
+                    )
                     and (
                         "ro.product" in line
                         or all(
@@ -294,7 +297,10 @@ class FlashableFirmwareCreator:
                     if ("getprop" in line and "ro.build.date.utc" not in line)
                     or "Target" in line
                     or "dynamic_partitions_op_list" in line
-                    or "firmware-update" in line
+                    or (
+                        "firmware-update" in line
+                        and line.split("/")[1].split('"')[0] not in invalid_files
+                    )
                     and "vbmeta" not in line
                     or "vendor" in line
                 ]
@@ -307,7 +313,7 @@ class FlashableFirmwareCreator:
             )
         return "\n".join(lines)
 
-    def generate_updater_script(self):
+    def generate_updater_script(self, invalid_files: set[str]):
         """
         Generate the new zip updater-script and write it to the temporary directory.
 
@@ -318,7 +324,7 @@ class FlashableFirmwareCreator:
                 Path(__file__).parent / "templates/recovery_updater_script"
             ).read_text()
         )
-        lines = self.get_updater_script_lines()
+        lines = self.get_updater_script_lines(invalid_files)
         if not lines:
             raise RuntimeError("Could not extract lines from updater-script!")
         if self.extract_mode is ProcessTypes.firmware:
@@ -378,7 +384,7 @@ class FlashableFirmwareCreator:
     #     update_binary.write_text(update_binary_text)
     #     update_binary.chmod(775)
 
-    def generate_ab_updater_script(self):
+    def generate_ab_updater_script(self, invalid_files: set[str]):
         script_template = ScriptTemplate(
             Path(
                 Path(__file__).parent / "templates/recovery_ab_updater_script"
@@ -390,7 +396,7 @@ class FlashableFirmwareCreator:
         lines = [
             flashing_template.substitute(partition=file.split("/")[-1].split(".")[0])
             for file in self.get_files_list()
-            if file.startswith("firmware-update/")
+            if file.startswith("firmware-update/") and file not in invalid_files
         ]
         updater_script = script_template.substitute(
             datetime=self.datetime,
@@ -402,19 +408,19 @@ class FlashableFirmwareCreator:
             f"{str(self._flashing_script_dir)}/updater-script", updater_script
         )
 
-    def generate_flashing_script(self):
+    def generate_flashing_script(self, invalid_files: set[str]):
         """
         Generate update_script or update-binary
         :return:
         """
         if self.is_android_one is True:
-            self.generate_ab_updater_script()
+            self.generate_ab_updater_script(invalid_files)
             copy2(
                 Path(Path(__file__).parent / "binaries/update-binary"),
                 f"{str(self._flashing_script_dir)}/update-binary",
             )
         else:
-            self.generate_updater_script()
+            self.generate_updater_script(invalid_files)
 
     def make_zip(self) -> str:
         """
@@ -450,11 +456,11 @@ class FlashableFirmwareCreator:
         out.rename(zip_name)
         return zip_name
 
-    def extract(self):
+    def extract(self) -> tuple[set[str], set[str]]:
         """
         Invoke the extract method of extractor object.
 
-        :return:
+        :return: a tuple of a set of valid files to extract and a set of zero length invalid files.
         """
         if hasattr(self.extractor, "handler") and isinstance(
             self.extractor.handler, AndroidOneZip
@@ -472,6 +478,13 @@ class FlashableFirmwareCreator:
             self.close()
             raise RuntimeError("Nothing found to extract!")
         self.extractor.extract(files_to_extract)
+        # Filter out zero length invalid files
+        invalid_files = set()
+        for file in Path(self._tmp_dir / "firmware-update").iterdir():
+            if file.is_file() and file.stat().st_size == 0:
+                file.unlink(missing_ok=True)
+                invalid_files.add(file.name)
+        return set(files_to_extract).difference(invalid_files), invalid_files
 
     def cleanup(self):
         """
@@ -491,15 +504,15 @@ class FlashableFirmwareCreator:
 
     def auto(self) -> str:
         """
-        Auto-pilot method for doing everything with a single call.
+        Autopilot method for doing everything with a single call.
 
         This is useful for using this class from a command line interface
          or another application.
         :return: output zip file name as a string.
         """
-        self.extract()
+        _, invalid_files = self.extract()
         print("Generating flashing script...")
-        self.generate_flashing_script()
+        self.generate_flashing_script(invalid_files)
         print("Creating new zip file..")
         new_zip = self.make_zip()
         self.cleanup()
