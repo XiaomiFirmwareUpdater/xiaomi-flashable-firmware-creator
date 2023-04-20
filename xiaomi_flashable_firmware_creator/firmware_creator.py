@@ -57,8 +57,13 @@ class FlashableFirmwareCreator:
         :param out_dir: The output directory to store the extracted file in.
         """
         self.input_file = input_file
-        self._tmp_dir = Path(out_dir) / "tmp" if out_dir else work_dir / "tmp"
-        self._out_dir = self._tmp_dir.parent.absolute()
+        _tmp_sub_dir = f"{Path(input_file).stem.split('_')[-2]}_"  # set tmp subdirectory to ROM's hash
+        self._tmp_dir = (
+            Path(out_dir) / "tmp" / _tmp_sub_dir
+            if out_dir
+            else work_dir / "tmp" / _tmp_sub_dir
+        )
+        self._out_dir = self._tmp_dir.parent.parent.absolute()
         self._flashing_script_dir = (
             self._tmp_dir.absolute() / "META-INF/com/google/android"
         )
