@@ -485,7 +485,10 @@ class FlashableFirmwareCreator:
         self.extractor.extract(files_to_extract)
         # Filter out zero length invalid files
         invalid_files = set()
-        for file in Path(self._tmp_dir / "firmware-update").iterdir():
+        firmware_update_dir = Path(self._tmp_dir / "firmware-update")
+        if not firmware_update_dir.exists():
+            return set(files_to_extract), invalid_files
+        for file in firmware_update_dir.iterdir():
             if file.is_file() and file.stat().st_size == 0:
                 file.unlink(missing_ok=True)
                 invalid_files.add(file.name)
