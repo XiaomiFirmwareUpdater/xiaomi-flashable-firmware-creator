@@ -78,6 +78,7 @@ class FlashableFirmwareCreator:
             "splash",
             "vbmeta",
             "boot.img",
+            "recovery.img",
             "system",
             "vendor",
             "product",
