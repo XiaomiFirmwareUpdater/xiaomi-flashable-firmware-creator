@@ -479,17 +479,20 @@ files = [
 
 [[package]]
 name = "remotezip"
-version = "0.12.1"
+version = "0.12.2"
 description = "Access zip file content hosted remotely without downloading the full file."
 optional = false
 python-versions = "*"
 files = [
-    {file = "remotezip-0.12.1.tar.gz", hash = "sha256:ce65b7910c5c25d8950ed402023592967f5791ac14987141c050016ffad18dec"},
+    {file = "remotezip-0.12.2.tar.gz", hash = "sha256:211ecf7dd291e5339359b3422ca758a679f3d89624f7cff6039e90a6904efd96"},
 ]
 
 [package.dependencies]
 requests = "*"
 tabulate = "*"
+
+[package.extras]
+test = ["requests_mock"]
 
 [[package]]
 name = "requests"
