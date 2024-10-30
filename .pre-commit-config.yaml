@@ -1,25 +1,49 @@
+# https://pre-commit.com
+default_install_hook_types: [ commit-msg, pre-commit ]
+default_stages: [ commit, manual ]
+fail_fast: true
 repos:
-  - repo: local
+  - repo: meta
     hooks:
-      - id: isort
-        name: isort
-        stages: [ commit ]
-        language: system
-        entry: poetry run isort
+      - id: check-useless-excludes
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-mock-methods
+      - id: python-use-type-annotations
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
+      - id: text-unicode-replacement-char
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
         types: [ python ]
-
-      - id: black
-        name: black
-        stages: [ commit ]
-        language: system
-        entry: poetry run black
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: name-tests-test
+        args: [ --pytest-test-first ]
+      - id: trailing-whitespace
         types: [ python ]
-
-      - id: flake8
-        name: flake8
-        stages: [ commit ]
-        language: system
-        entry: poetry run flake8
-        types: [ python ]
-        exclude: setup.py
-
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 'v0.7.1'
+    hooks:
+      - id: ruff
+      - id: ruff-format
