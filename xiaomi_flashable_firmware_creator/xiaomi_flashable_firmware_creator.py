@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Xiaomi Flashable Firmware Creator cli module."""
 
 from argparse import ArgumentParser
@@ -17,15 +16,15 @@ def arg_parse() -> tuple[str, str, str]:
     """
     output = None
     parser = ArgumentParser(
-        prog="python3 -m xiaomi_flashable_firmware_creator",
-        description="Xiaomi Flashable Firmware Creator",
+        prog='python3 -m xiaomi_flashable_firmware_creator',
+        description='Xiaomi Flashable Firmware Creator',
     )
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-F", "--firmware", help="Create normal Firmware zip")
-    group.add_argument("-N", "--nonarb", help="Create non-ARB Firmware zip")
-    group.add_argument("-L", "--firmwareless", help="Create Firmware-less zip")
-    group.add_argument("-V", "--vendor", help="Create Firmware+Vendor zip")
-    parser.add_argument("-o", "--output", help="Output directory")
+    group.add_argument('-F', '--firmware', help='Create normal Firmware zip')
+    group.add_argument('-N', '--nonarb', help='Create non-ARB Firmware zip')
+    group.add_argument('-L', '--firmwareless', help='Create Firmware-less zip')
+    group.add_argument('-V', '--vendor', help='Create Firmware+Vendor zip')
+    parser.add_argument('-o', '--output', help='Output directory')
     args = parser.parse_args()
     if args.output:
         output = args.output
@@ -39,6 +38,6 @@ def main():
     """Xiaomi Flashable Firmware Creator main module."""
     zip_, process, output = arg_parse()
     firmware_creator = FlashableFirmwareCreator(zip_, process, output)
-    print("Unzipping MIUI ROM...")
+    print('Unzipping MIUI ROM...')
     new_zip = firmware_creator.auto()
-    print(f"All done! Output file is {new_zip}")
+    print(f'All done! Output file is {new_zip}')

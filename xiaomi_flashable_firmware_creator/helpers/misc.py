@@ -1,4 +1,5 @@
 """Miscellaneous functions used by the tool."""
+
 import re
 from pathlib import Path
 from string import Template
@@ -18,15 +19,15 @@ def extract_codename(updater_script) -> str:
     :return: extracted codename if found or 'codename' if not found.
     """
     pattern = re.compile(
-        r"(?:/[\w\d_-]+/([\w\d]+):\d)|"
-        r"(?:\(\"ro\.product\.device\"\) == \"([\w\d]+)\")|"
-        r"(?:get_device_compatible\(\"([\w\d]+)\"\))"
+        r'(?:/[\w_-]+/(\w+):\d)|'
+        r'(?:\(\"ro\.product\.device\"\) == \"(\w+)\")|'
+        r'(?:get_device_compatible\(\"(\w+)\"\))'
     )
     match = pattern.search(updater_script)
     if match:
         codename = [i for i in match.groups() if i is not None]
         return codename[0]
-    return "codename"
+    return 'codename'
 
 
 def cleanup_codename(codename: str) -> str:
@@ -35,30 +36,30 @@ def cleanup_codename(codename: str) -> str:
     :param codename: codename from miui zip
     :return: clean codename
     """
-    if "SPROUT" in codename:
-        codename = codename.replace("SPROUT", "")
-    if codename.endswith("PRE"):
-        codename = codename.replace("PRE", "")
-    if "EEAGlobal" in codename:
-        return codename.replace("EEAGlobal", "")
-    if "IDGlobal" in codename and codename not in ["CUPIDGlobal"]:
-        return codename.replace("IDGlobal", "")
-    if "INGlobal" in codename and codename not in ["CHOPINGlobal"]:
-        return codename.replace("INGlobal", "")
-    if "RUGlobal" in codename:
-        return codename.replace("RUGlobal", "")
-    if "TRGlobal" in codename:
-        return codename.replace("TRGlobal", "")
-    if "TWGlobal" in codename:
-        return codename.replace("TWGlobal", "")
-    if "Global" in codename:
-        return codename.replace("Global", "")
+    if 'SPROUT' in codename:
+        codename = codename.replace('SPROUT', '')
+    if codename.endswith('PRE'):
+        codename = codename.replace('PRE', '')
+    if 'EEAGlobal' in codename:
+        return codename.replace('EEAGlobal', '')
+    if 'IDGlobal' in codename and codename not in ['CUPIDGlobal']:
+        return codename.replace('IDGlobal', '')
+    if 'INGlobal' in codename and codename not in ['CHOPINGlobal']:
+        return codename.replace('INGlobal', '')
+    if 'RUGlobal' in codename:
+        return codename.replace('RUGlobal', '')
+    if 'TRGlobal' in codename:
+        return codename.replace('TRGlobal', '')
+    if 'TWGlobal' in codename:
+        return codename.replace('TWGlobal', '')
+    if 'Global' in codename:
+        return codename.replace('Global', '')
     return codename
 
 
 class ScriptTemplate(Template):
-    delimiter = "[-]"
+    delimiter = '[-]'
 
 
 def write_text_to_file(file: Union[str, Path], text: str):
-    Path(file).write_bytes(text.encode("utf-8"))
+    Path(file).write_bytes(text.encode('utf-8'))

@@ -22,7 +22,7 @@ class TestMisc(unittest.TestCase):
         :return:
         """
         self.work_dir = Path(__file__).parent
-        self.files = self.work_dir.glob("files/updater-scripts/*")
+        self.files = self.work_dir.glob('files/updater-scripts/*')
 
     def test_extract_codename(self):
         """
@@ -33,8 +33,8 @@ class TestMisc(unittest.TestCase):
         for file in self.files:
             updater_script = file.read_text()
             codename = extract_codename(updater_script)
-            self.assertNotEqual("codename", codename)
+            self.assertNotEqual('codename', codename)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

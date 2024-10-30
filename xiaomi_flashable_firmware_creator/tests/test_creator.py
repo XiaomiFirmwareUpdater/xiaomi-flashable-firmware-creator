@@ -19,8 +19,8 @@ class TestCreator(unittest.TestCase):
         :return:
         """
         self.work_dir = Path(__file__).parent
-        self.out_dir = self.work_dir / "out"
-        self.files = self.work_dir.glob("files/*/*.zip")
+        self.out_dir = self.work_dir / 'out'
+        self.files = self.work_dir.glob('files/*/*.zip')
 
     @staticmethod
     def run_extractor(firmware_creator):
@@ -30,7 +30,7 @@ class TestCreator(unittest.TestCase):
         :param firmware_creator: FlashableFirmwareCreator object
         :return:
         """
-        print("Unzipping ROM...")
+        print('Unzipping ROM...')
         firmware_creator.auto()
 
     def test_firmware(self):
@@ -41,9 +41,9 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), "firmware", self.out_dir
+                str(file.absolute()), 'firmware', self.out_dir
             )
-            print(f"Testing {file.name}")
+            print(f'Testing {file.name}')
             self.run_extractor(firmware_creator)
 
     def test_firmwareless(self):
@@ -54,13 +54,13 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), "firmwareless", self.out_dir
+                str(file.absolute()), 'firmwareless', self.out_dir
             )
-            print(f"Testing {file.name}")
+            print(f'Testing {file.name}')
             try:
                 self.run_extractor(firmware_creator)
             except RuntimeError as err:
-                if str(err) != "Nothing found to extract!":
+                if str(err) != 'Nothing found to extract!':
                     raise err
 
     def test_nonarb(self):
@@ -71,13 +71,13 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), "nonarb", self.out_dir
+                str(file.absolute()), 'nonarb', self.out_dir
             )
-            print(f"Testing {file.name}")
+            print(f'Testing {file.name}')
             try:
                 self.run_extractor(firmware_creator)
             except RuntimeError as err:
-                if str(err) != "Nothing found to extract!":
+                if str(err) != 'Nothing found to extract!':
                     raise err
 
     def test_vendor(self):
@@ -88,9 +88,9 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), "vendor", self.out_dir
+                str(file.absolute()), 'vendor', self.out_dir
             )
-            print(f"Testing {file.name}")
+            print(f'Testing {file.name}')
             self.run_extractor(firmware_creator)
 
     def test_date_assertion(self):
@@ -101,15 +101,15 @@ class TestCreator(unittest.TestCase):
         """
         for file in self.files:
             firmware_creator = FlashableFirmwareCreator(
-                str(file.absolute()), "firmware", self.out_dir
+                str(file.absolute()), 'firmware', self.out_dir
             )
-            print(f"Testing {file.name}")
+            print(f'Testing {file.name}')
             firmware_creator.extract()
             firmware_creator.generate_flashing_script([])
             update_script = Path(
-                firmware_creator._flashing_script_dir / "updater-script"
+                firmware_creator._flashing_script_dir / 'updater-script'
             ).read_text()
-            self.assertNotIn("ro.build.date.utc", update_script)
+            self.assertNotIn('ro.build.date.utc', update_script)
             firmware_creator.cleanup()
             firmware_creator.close()
 
@@ -122,5 +122,5 @@ class TestCreator(unittest.TestCase):
         rmtree(self.out_dir)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
