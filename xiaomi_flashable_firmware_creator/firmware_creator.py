@@ -442,8 +442,9 @@ class FlashableFirmwareCreator:
         if not self.is_android_one:
             codename = extract_codename(self.update_script)
         else:
+            file_name = self.extractor.get_file_name()
             codename = cleanup_codename(
-                self.extractor.get_file_name().split("_")[1]
+                file_name.split("-")[0] if "OS2." in file_name else file_name.split("_")[1]
             ).lower()
         zip_prefix = ""
         if self.extract_mode is ProcessTypes.firmware:

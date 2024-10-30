@@ -30,7 +30,7 @@ class TestCreator(unittest.TestCase):
         :param firmware_creator: FlashableFirmwareCreator object
         :return:
         """
-        print("Unzipping MIUI ROM...")
+        print("Unzipping ROM...")
         firmware_creator.auto()
 
     def test_firmware(self):
@@ -105,7 +105,7 @@ class TestCreator(unittest.TestCase):
             )
             print(f"Testing {file.name}")
             firmware_creator.extract()
-            firmware_creator.generate_flashing_script()
+            firmware_creator.generate_flashing_script([])
             update_script = Path(
                 firmware_creator._flashing_script_dir / "updater-script"
             ).read_text()
