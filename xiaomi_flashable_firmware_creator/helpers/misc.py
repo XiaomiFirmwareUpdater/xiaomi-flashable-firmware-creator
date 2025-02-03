@@ -44,7 +44,7 @@ def cleanup_codename(codename: str) -> str:
         return codename.replace('EEAGlobal', '')
     if 'IDGlobal' in codename and codename not in ['CUPIDGlobal']:
         return codename.replace('IDGlobal', '')
-    if 'INGlobal' in codename and codename not in ['CHOPINGlobal']:
+    if 'INGlobal' in codename and codename not in ['CHOPINGlobal', 'KLEINGlobal']:
         return codename.replace('INGlobal', '')
     if 'RUGlobal' in codename:
         return codename.replace('RUGlobal', '')
