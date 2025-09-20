@@ -12,7 +12,7 @@ requires-python = ">=3.12"
 
 dependencies = [
     "remotezip>=0.12.3",
-    "protobuf>=4.22.1,<6.0.0",
+    "protobuf>=6.32.1,<6.33.0",
 ]
 
 [dependency-groups]
