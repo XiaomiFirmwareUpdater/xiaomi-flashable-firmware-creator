@@ -6,7 +6,7 @@ authors = [{ name = "yshalsager", email = "contact@yshalsager.com" }]
 license-files = ["LICENSE"]
 keywords = ["xiaomi", "firmware", "android"]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = ["remotezip>=0.12.3", "protobuf>=4.22.1,<6.0.0"]
 
 [dependency-groups]
@@ -34,7 +34,7 @@ source-include = ["templates/**", "binaries/**"]
 [tool.ruff]
 fix = true
 src = ["xiaomi_flashable_firmware_creator"]
-target-version = "py312"
+target-version = "py313"
 line-length = 100
 
 [tool.ruff.format]
