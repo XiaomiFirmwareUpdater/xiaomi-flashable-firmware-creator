@@ -1,6 +1,6 @@
 [project]
 name = "xiaomi_flashable_firmware_creator"
-version = "2.2.14"
+version = "2.3.0"
 description = "Create flashable firmware zip from MIUI and HyperOS Recovery ROMs!"
 authors = [{ name = "yshalsager", email = "contact@yshalsager.com" }]
 license-files = ["LICENSE"]
