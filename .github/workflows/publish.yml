@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          submodules: true
       - name: uv cache
         uses: actions/cache@v4
         if: hashFiles('uv.lock') != ''
