@@ -310,7 +310,7 @@ wheels = [
 
 [[package]]
 name = "xiaomi-flashable-firmware-creator"
-version = "2.2.14"
+version = "2.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "protobuf" },
