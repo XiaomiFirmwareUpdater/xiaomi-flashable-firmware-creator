@@ -11,14 +11,13 @@ Using extract, generate_updater_script, and make_zip you can create
 # pylint: disable=too-many-instance-attributes
 import re
 from datetime import datetime
+from hashlib import md5
 from pathlib import Path
 from shutil import copy2, make_archive, rmtree
 from socket import gethostname
 
 from xiaomi_flashable_firmware_creator import work_dir
-from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import (
-    PayloadZip,
-)
+from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import PayloadZip
 from xiaomi_flashable_firmware_creator.extractors.zip_extractor import ZipExtractor
 from xiaomi_flashable_firmware_creator.helpers.misc import (
     ScriptTemplate,
@@ -56,9 +55,7 @@ class FlashableFirmwareCreator:
         :param out_dir: The output directory to store the extracted file in.
         """
         self.input_file = input_file
-        _tmp_sub_dir = (
-            f'{Path(input_file).stem.split("_")[-2]}_'  # set tmp subdirectory to ROM's hash
-        )
+        _tmp_sub_dir = md5(Path(input_file).name.encode()).hexdigest()
         self._tmp_dir = (
             Path(out_dir) / 'tmp' / _tmp_sub_dir if out_dir else work_dir / 'tmp' / _tmp_sub_dir
         )
