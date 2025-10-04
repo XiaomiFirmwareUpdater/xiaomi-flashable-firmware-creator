@@ -14,12 +14,40 @@ Xiaomi Flashable Firmware Creator is a tool that generates flashable firmware-up
 
 It supports creating untouched firmware, non-arb firmware, firmware + vendor flashable zip, and firmware-less ROMs from any local zip file or direct link of the zip file.
 
+### Requirements
+
+This tool requires the following dependencies to be installed on your system:
+
+- **[payload-dumper-go](https://github.com/ssut/payload-dumper-go)**: Used for extracting Android OTA payload files. Install using your system package manager or from releases.
+- **[xz](https://tukaani.org/xz/)**: Required for payload decompression.
+
+#### Installing xz
+
+**Linux and macOS (From package manager, recommended)**:
+
+- **Ubuntu/Debian**: `sudo apt install xz-utils`
+- **CentOS/RHEL/Fedora**: `sudo yum install xz` or `sudo dnf install xz`
+- **Arch Linux**: `sudo pacman -S xz`
+- **openSUSE**: `sudo zypper install xz`
+- **macOS (Homebrew)**: `brew install xz`
+- **macOS (MacPorts)**: `sudo port install xz`
+
+**Windows**:
+
+1. Download the latest XZ Utils for Windows from [tukaani.org/xz/](https://tukaani.org/xz/)
+2. Extract the downloaded archive to a directory on your system
+3. Add the directory containing `xz.exe` to your system's PATH environment variable
+
+**Verify installation**: Run `xz --version` in your terminal to confirm xz is properly installed.
+
+**Note**: Working on a SSD is highly recommended for performance reasons when processing large payload files, as HDDs can be a bottleneck.
+
 ### Installation
 
-You can simply install this tool using Python pip.
+You can simply install this tool using [uv](https://docs.astral.sh/uv/).
 
 ```shell script
-pip install xiaomi_flashable_firmware_creator
+uv install xiaomi_flashable_firmware_creator
 ```
 
 ### CLI Usage
@@ -68,3 +96,33 @@ firmware_creator = FlashableFirmwareCreator(input_zip, process, output_dir)
 # Now, you can either use auto() method to create the new zip file or do stuff at your own using firmware_creator public methods.
 new_zip = firmware_creator.auto()
 ```
+
+## Development
+
+This project uses several tools to streamline the development process:
+
+### mise
+
+[mise](https://mise.jdx.dev/) is used for managing project-level dependencies and environment variables. mise helps ensure consistent development environments across different machines.
+
+To get started with mise:
+
+1. Install mise by following the instructions on the [official website](https://mise.jdx.dev/).
+2. Run `mise install` in the project root to set up the development environment.
+
+This file is automatically loaded by mise and allows you to customize your local development environment without modifying the shared configuration files.
+
+### UV
+
+[UV](https://docs.astral.sh/uv/) is used for dependency management and packaging. It provides a clean, version-controlled way to manage project dependencies.
+
+To set up the project with UV:
+
+1. Install UV using mise, or by following the instructions on the [official website](https://docs.astral.sh/uv/getting-started/installation/).
+2. Run `uv sync` to install project dependencies.
+
+### Development Tools
+
+For development, this project uses additional tools managed by mise:
+
+- **[payload-dumper-go](https://github.com/ssut/payload-dumper-go)**: Automatically managed by mise when you run `mise install`.
