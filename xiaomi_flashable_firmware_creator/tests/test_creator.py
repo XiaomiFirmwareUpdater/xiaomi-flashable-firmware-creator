@@ -8,9 +8,7 @@ import pytest
 from xiaomi_flashable_firmware_creator.xiaomi_flashable_firmware_creator import (
     FlashableFirmwareCreator,
 )
-from xiaomi_flashable_firmware_creator.extractors.ota_payload_extractor.extract_android_ota_payload import (
-    PayloadError,
-)
+from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import PayloadError
 
 TESTS_DIR = Path(__file__).parent
 ROM_FILES = sorted(TESTS_DIR.glob('files/*/*.zip'))
