@@ -1,3 +1,0 @@
-[submodule "xiaomi_flashable_firmware_creator/extractors/ota_payload_extractor"]
-	path = xiaomi_flashable_firmware_creator/extractors/ota_payload_extractor
-	url = https://github.com/XiaomiFirmwareUpdater/extract_android_ota_payload
