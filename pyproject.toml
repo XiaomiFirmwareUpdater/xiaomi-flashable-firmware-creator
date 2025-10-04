@@ -7,7 +7,7 @@ license-files = ["LICENSE"]
 keywords = ["xiaomi", "firmware", "android"]
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["remotezip>=0.12.3", "protobuf>=6.32.1,<6.33.0"]
+dependencies = ["remotezip>=0.12.3"]
 
 [dependency-groups]
 dev = ["pre-commit>=4.0.0", "pytest>=8.4.2", "ruff>=0.13.3"]
