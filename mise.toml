@@ -1,7 +1,7 @@
 [tools]
 python = "3.13"
-"aqua:astral-sh/uv" = 'latest'
-
+"aqua:astral-sh/uv" = '0.8.22'
+"github:ssut/payload-dumper-go" = '1.3.0'
 
 [tasks.dev]
 alias = "default"
