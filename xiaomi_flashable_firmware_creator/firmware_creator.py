@@ -14,11 +14,10 @@ from datetime import datetime
 from pathlib import Path
 from shutil import copy2, make_archive, rmtree
 from socket import gethostname
-from typing import List
 
 from xiaomi_flashable_firmware_creator import work_dir
-from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import (
-    AndroidOneZip,
+from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import (
+    PayloadZip,
 )
 from xiaomi_flashable_firmware_creator.extractors.zip_extractor import ZipExtractor
 from xiaomi_flashable_firmware_creator.helpers.misc import (
@@ -44,7 +43,7 @@ class FlashableFirmwareCreator:
     extract_mode: ProcessTypes
     type: ZipTypes
     update_script: str
-    is_android_one: bool
+    uses_payload: bool
 
     def __init__(self, input_file, _extract_mode, out_dir=''):
         """
@@ -58,7 +57,7 @@ class FlashableFirmwareCreator:
         """
         self.input_file = input_file
         _tmp_sub_dir = (
-            f"{Path(input_file).stem.split('_')[-2]}_"  # set tmp subdirectory to ROM's hash
+            f'{Path(input_file).stem.split("_")[-2]}_'  # set tmp subdirectory to ROM's hash
         )
         self._tmp_dir = (
             Path(out_dir) / 'tmp' / _tmp_sub_dir if out_dir else work_dir / 'tmp' / _tmp_sub_dir
@@ -69,7 +68,7 @@ class FlashableFirmwareCreator:
         self.datetime = datetime.now()
         self.extract_mode = self.get_extract_mode(_extract_mode)
         self.update_script = ''
-        self.is_android_one = False
+        self.uses_payload = False
         self.firmware_excluded_files = [
             'dtbo',
             'logo',
@@ -167,7 +166,7 @@ class FlashableFirmwareCreator:
         else:
             raise RuntimeError("Can't detect rom type. It's not qcom or mtk!'")
 
-    def get_files_list(self) -> List[str]:
+    def get_files_list(self) -> list[str]:
         """
         Get files to extract list according to the extract mode Enum.
 
@@ -395,7 +394,7 @@ class FlashableFirmwareCreator:
         Generate update_script or update-binary
         :return:
         """
-        if self.is_android_one is True:
+        if self.uses_payload is True:
             self.generate_ab_updater_script(invalid_files)
             copy2(
                 Path(Path(__file__).parent / 'binaries/update-binary'),
@@ -415,7 +414,7 @@ class FlashableFirmwareCreator:
         make_archive(str(out.with_suffix('').absolute()), 'zip', self._tmp_dir)
         if not out.exists():
             raise RuntimeError('Could not create result zip file!')
-        if not self.is_android_one:
+        if not self.uses_payload:
             codename = extract_codename(self.update_script)
         else:
             file_name = self.extractor.get_file_name()
@@ -443,8 +442,8 @@ class FlashableFirmwareCreator:
 
         :return: a tuple of a set of valid files to extract and a set of zero length invalid files.
         """
-        if hasattr(self.extractor, 'handler') and isinstance(self.extractor.handler, AndroidOneZip):
-            self.is_android_one = True
+        if hasattr(self.extractor, 'handler') and isinstance(self.extractor.handler, PayloadZip):
+            self.uses_payload = True
             self.extractor.prepare()
         self.get_rom_type()
         files_to_extract = self.get_files_list()

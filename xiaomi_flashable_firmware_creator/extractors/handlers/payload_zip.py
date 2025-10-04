@@ -12,7 +12,7 @@ from xiaomi_flashable_firmware_creator.extractors.ota_payload_extractor.extract_
 # from google.protobuf.pyext._message import RepeatedCompositeContainer
 
 
-class AndroidOneZip(BaseHandler):
+class PayloadZip(BaseHandler):
     payload: Payload
 
     # partitions: Dict[str, RepeatedCompositeContainer]

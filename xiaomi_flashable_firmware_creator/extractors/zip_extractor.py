@@ -8,8 +8,8 @@ from zipfile import ZipFile
 from remotezip import RemoteZip
 from requests import head
 
-from xiaomi_flashable_firmware_creator.extractors.handlers.android_one_zip import (
-    AndroidOneZip,
+from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import (
+    PayloadZip,
 )
 from xiaomi_flashable_firmware_creator.extractors.handlers.standard_zip import (
     StandardZip,
@@ -22,7 +22,7 @@ class ZipExtractor:
     zip_file_path: Union[Path, str]
     zip_file: str
     zip_url: str
-    handler: Union[StandardZip, AndroidOneZip]
+    handler: Union[StandardZip, PayloadZip]
 
     def __init__(self, zip_file, tmp_dir):
         """
@@ -38,7 +38,7 @@ class ZipExtractor:
         self.files = []
         self._extractor = RemoteZip(self.zip_url) if self.zip_url else ZipFile(self.zip_file_path)
         self.handler = (
-            AndroidOneZip(self.zip_file_path, tmp_dir, self._extractor)
+            PayloadZip(self.zip_file_path, tmp_dir, self._extractor)
             if 'payload.bin' in str(self._extractor.namelist())
             else StandardZip(self.zip_file_path, tmp_dir, self._extractor)
         )
@@ -68,7 +68,7 @@ class ZipExtractor:
         return self.zip_file_path.name if self.zip_file_path else self.zip_url.split('/')[-1]
 
     def prepare(self):
-        if isinstance(self.handler, AndroidOneZip):
+        if isinstance(self.handler, PayloadZip):
             self.files = self.handler.prepare()
 
     def extract(self, files_to_extract: List[str]):
