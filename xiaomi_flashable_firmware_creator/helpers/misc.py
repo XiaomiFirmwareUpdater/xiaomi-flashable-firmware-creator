@@ -1,9 +1,27 @@
 """Miscellaneous functions used by the tool."""
 
+from dataclasses import dataclass
 import re
 from pathlib import Path
 from string import Template
-from typing import Union
+from typing import Callable
+
+
+PAYLOAD_CODENAME_PATTERNS = (
+    (
+        re.compile(
+            r'miui_(?P<miui_name>[\w\d]+)_(?P<version>.*)_(?P<md5_part>[\w\d]+)_(?P<android>[\d.]+)\.zip'
+        ),
+        'miui_name',
+    ),
+    (
+        re.compile(
+            r'(?P<codename>[\w\d_]+)-ota_full-(?P<version>[\da-zA-Z.]+)-(?P<type>\w+)-'
+            r'(?P<android>[\d.]+)-(?P<md5_part>[\w\d]+)\.zip'
+        ),
+        'codename',
+    ),
+)
 
 
 def extract_codename(updater_script) -> str:
@@ -23,43 +41,69 @@ def extract_codename(updater_script) -> str:
         r'(?:\(\"ro\.product\.device\"\) == \"(\w+)\")|'
         r'(?:get_device_compatible\(\"(\w+)\"\))'
     )
-    match = pattern.search(updater_script)
-    if match:
-        codename = [i for i in match.groups() if i is not None]
-        return codename[0]
+    matches = pattern.findall(updater_script)
+    if matches:
+        candidates = [value for match in matches for value in match if value]
+        if candidates:
+            return max(candidates, key=len)
     return 'codename'
 
 
+@dataclass(frozen=True)
+class _SuffixRule:
+    suffix: str
+    transform: Callable[[str], str]
+    exceptions: frozenset[str] = frozenset()
+
+
+_SUFFIX_RULES: tuple[_SuffixRule, ...] = (
+    # _SuffixRule('EMERALDRGLOBAL', lambda prefix: 'emerald_r'),
+    _SuffixRule('JPGLOBAL', lambda prefix: prefix.lower()),
+    _SuffixRule('KRGLOBAL', lambda prefix: prefix.lower()),
+    _SuffixRule('EEAGLOBAL', lambda prefix: prefix.lower()),
+    _SuffixRule('IDGLOBAL', lambda prefix: prefix.lower(), frozenset({'CUPIDGLOBAL'})),
+    _SuffixRule(
+        'INGLOBAL', lambda prefix: prefix.lower(), frozenset({'CHOPINGLOBAL', 'KLEINGLOBAL'})
+    ),
+    _SuffixRule('RUGLOBAL', lambda prefix: prefix.lower()),
+    _SuffixRule('TRGLOBAL', lambda prefix: prefix.lower()),
+    _SuffixRule('TWGLOBAL', lambda prefix: prefix.lower()),
+    _SuffixRule('GLOBAL', lambda prefix: prefix.lower()),
+)
+
+
 def cleanup_codename(codename: str) -> str:
-    """
-    Remove region names from codename and android one's "SPROUT"
-    :param codename: codename from miui zip
-    :return: clean codename
-    """
-    if 'SPROUT' in codename:
-        codename = codename.replace('SPROUT', '')
+    """Remove region names from codename and android one's "SPROUT"."""
+    codename = codename.replace('SPROUT', '')
     if codename.endswith('PRE'):
-        codename = codename.replace('PRE', '')
-    if 'EEAGlobal' in codename:
-        return codename.replace('EEAGlobal', '')
-    if 'IDGlobal' in codename and codename not in ['CUPIDGlobal']:
-        return codename.replace('IDGlobal', '')
-    if 'INGlobal' in codename and codename not in ['CHOPINGlobal', 'KLEINGlobal']:
-        return codename.replace('INGlobal', '')
-    if 'RUGlobal' in codename:
-        return codename.replace('RUGlobal', '')
-    if 'TRGlobal' in codename:
-        return codename.replace('TRGlobal', '')
-    if 'TWGlobal' in codename:
-        return codename.replace('TWGlobal', '')
-    if 'Global' in codename:
-        return codename.replace('Global', '')
-    return codename
+        codename = codename[: -len('PRE')]
+
+    if '_' in codename:
+        return codename.split('_', 1)[0].lower()
+
+    upper = codename.upper()
+    for rule in _SUFFIX_RULES:
+        if upper.endswith(rule.suffix) and upper not in rule.exceptions:
+            prefix = upper[: -len(rule.suffix)]
+            return rule.transform(prefix)
+    return upper.lower()
+
+
+def extract_payload_codename(file_name: str) -> str:
+    file_name = Path(file_name).name
+    for pattern, group in PAYLOAD_CODENAME_PATTERNS:
+        match = pattern.search(file_name)
+        if match and match.groupdict().get(group):
+            codename = match.group(group)
+            return cleanup_codename(codename).lower()
+    base_name = Path(file_name).stem
+    android_one_segment = base_name.split('_', 1)[0]
+    return cleanup_codename(android_one_segment.split('-', 1)[0]).lower()
 
 
 class ScriptTemplate(Template):
     delimiter = '[-]'
 
 
-def write_text_to_file(file: Union[str, Path], text: str):
+def write_text_to_file(file: str | Path, text: str):
     Path(file).write_bytes(text.encode('utf-8'))

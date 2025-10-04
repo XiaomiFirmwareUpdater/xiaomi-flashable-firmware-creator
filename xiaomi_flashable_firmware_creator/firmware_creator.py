@@ -22,8 +22,8 @@ from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import (
 from xiaomi_flashable_firmware_creator.extractors.zip_extractor import ZipExtractor
 from xiaomi_flashable_firmware_creator.helpers.misc import (
     ScriptTemplate,
-    cleanup_codename,
     extract_codename,
+    extract_payload_codename,
     write_text_to_file,
 )
 from xiaomi_flashable_firmware_creator.types import ProcessTypes, ZipTypes
@@ -418,9 +418,7 @@ class FlashableFirmwareCreator:
             codename = extract_codename(self.update_script)
         else:
             file_name = self.extractor.get_file_name()
-            codename = cleanup_codename(
-                file_name.split('-')[0] if 'OS2.' in file_name else file_name.split('_')[1]
-            ).lower()
+            codename = extract_payload_codename(file_name)
         zip_prefix = ''
         if self.extract_mode is ProcessTypes.firmware:
             zip_prefix = 'fw'
