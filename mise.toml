@@ -1,3 +1,61 @@
 [tools]
 python = "3.13"
 "aqua:astral-sh/uv" = 'latest'
+
+
+[tasks.dev]
+alias = "default"
+run = "uv run -m xiaomi_flashable_firmware_creator"
+
+[tasks.pre-commit]
+run = "pre-commit run --all-files"
+
+[tasks.test]
+run = "uv run pytest"
+
+[tasks.'version:bump']
+description = "Bump project version (override with --level=major|minor|patch|stable|alpha|beta|rc|post|dev)."
+run = '''
+echo "Bumped version to $(uv version --bump "{{option(name="level", default="patch")}}" --short)"
+'''
+
+[tasks.'version:tag']
+description = "Create and push a git tag for the current project version (use --dry-run to skip pushing)."
+usage = '''
+flag "--dry-run" help="Skip pushing the tag"
+flag "--overwrite" help="Replace the existing local tag if it already exists"
+'''
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+version=$(uv version --short)
+tag="v${version}"
+overwrite='{{flag(name="overwrite", default="false")}}'
+
+if git rev-parse "$tag" >/dev/null 2>&1; then
+  if [ "$overwrite" != 'true' ]; then
+    echo "Tag ${tag} already exists" >&2
+    exit 1
+  fi
+fi
+
+if [ "$overwrite" = 'true' ]; then
+  git tag -f "$tag"
+else
+  git tag "$tag"
+fi
+
+push_cmd=(git push origin "$tag")
+if [ "$overwrite" = 'true' ]; then
+  push_cmd=(git push --force origin "$tag")
+fi
+
+if [ '{{flag(name="dry-run", default="false")}}' != 'true' ]; then
+  "${push_cmd[@]}"
+else
+  echo "dry-run flag enabled; skipping git push"
+fi
+
+echo "Created tag ${tag}"
+'''
