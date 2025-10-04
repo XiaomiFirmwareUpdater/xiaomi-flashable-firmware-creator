@@ -11,3 +11,5 @@ venv/
 *.zip
 *bak*
 tmp*
+*.egg-info/
+mise.local.toml
