@@ -1,6 +1,6 @@
 [tools]
 python = "3.14.0"
-"aqua:astral-sh/uv" = '0.9.13'
+"aqua:astral-sh/uv" = '0.9.15'
 "github:ssut/payload-dumper-go" = '1.3.0'
 
 [tasks.dev]
