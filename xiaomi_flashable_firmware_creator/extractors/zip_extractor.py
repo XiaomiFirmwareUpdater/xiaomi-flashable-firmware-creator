@@ -36,7 +36,11 @@ class ZipExtractor:
             Path(zip_file) if not self.zip_url and isinstance(zip_file, str) else ''
         )
         self.files = []
-        self._extractor = RemoteZip(self.zip_url) if self.zip_url else ZipFile(self.zip_file_path)
+        self._extractor = (
+            RemoteZip(self.zip_url, timeout=(30, 300))
+            if self.zip_url
+            else ZipFile(self.zip_file_path)
+        )
         self.handler = (
             PayloadZip(self.zip_file_path, tmp_dir, self._extractor)
             if 'payload.bin' in str(self._extractor.namelist())
@@ -49,7 +53,11 @@ class ZipExtractor:
 
         :return: True if zip file exists, False otherwise.
         """
-        return self.zip_file_path.exists() if self.zip_file_path else head(self.zip_url).ok
+        return (
+            self.zip_file_path.exists()
+            if self.zip_file_path
+            else head(self.zip_url, timeout=(30, 300)).ok
+        )
 
     def get_files_list(self):
         """

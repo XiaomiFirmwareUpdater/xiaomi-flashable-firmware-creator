@@ -5,10 +5,11 @@ from pathlib import Path
 
 import pytest
 
+from xiaomi_flashable_firmware_creator.extractors import zip_extractor
+from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import PayloadError
 from xiaomi_flashable_firmware_creator.xiaomi_flashable_firmware_creator import (
     FlashableFirmwareCreator,
 )
-from xiaomi_flashable_firmware_creator.extractors.handlers.payload_zip import PayloadError
 
 TESTS_DIR = Path(__file__).parent
 ROM_FILES = sorted(TESTS_DIR.glob('files/*/*.zip'))
@@ -26,11 +27,8 @@ def rom_zip(request):
 def _run_auto_allowing_empty(process: str, rom_zip: Path, tmp_path: Path) -> str | None:
     """Execute auto() while tolerating expected extraction edge cases."""
     creator = FlashableFirmwareCreator(str(rom_zip), process, tmp_path)
-    success = False
     try:
-        output = creator.auto()
-        success = True
-        return output
+        return creator.auto()
     except RuntimeError as err:  # pragma: no cover - defensive guard
         if str(err) != 'Nothing found to extract!':
             raise
@@ -38,10 +36,7 @@ def _run_auto_allowing_empty(process: str, rom_zip: Path, tmp_path: Path) -> str
     except PayloadError:
         return None
     finally:
-        if not success:
-            with suppress(FileNotFoundError):
-                creator.cleanup()
-            creator.close()
+        assert not creator._tmp_dir.exists()
 
 
 @pytest.mark.parametrize('process', ['firmware', 'vendor'])
@@ -54,6 +49,20 @@ def test_auto_creates_flashable_zip(process: str, rom_zip: Path, tmp_path: Path)
 @pytest.mark.parametrize('process', ['firmwareless', 'nonarb'])
 def test_auto_handles_missing_artifacts(process: str, rom_zip: Path, tmp_path: Path) -> None:
     _run_auto_allowing_empty(process, rom_zip, tmp_path)
+
+
+def test_remote_zip_has_timeout(monkeypatch, tmp_path: Path) -> None:
+    class FakeRemoteZip:
+        def __init__(self, _url, **kwargs):
+            self.timeout = kwargs['timeout']
+
+        @staticmethod
+        def namelist():
+            return []
+
+    monkeypatch.setattr(zip_extractor, 'RemoteZip', FakeRemoteZip)
+    extractor = zip_extractor.ZipExtractor('https://example.com/rom.zip', tmp_path)
+    assert extractor._extractor.timeout == (30, 300)
 
 
 def test_updater_script_has_no_build_date(rom_zip: Path, tmp_path: Path) -> None:

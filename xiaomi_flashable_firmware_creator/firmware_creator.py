@@ -468,7 +468,7 @@ class FlashableFirmwareCreator:
 
         :return:
         """
-        rmtree(self._tmp_dir)
+        rmtree(self._tmp_dir, ignore_errors=True)
 
     def close(self):
         """
@@ -486,11 +486,12 @@ class FlashableFirmwareCreator:
          or another application.
         :return: output zip file name as a string.
         """
-        _, invalid_files = self.extract()
-        print('Generating flashing script...')
-        self.generate_flashing_script(invalid_files)
-        print('Creating new zip file..')
-        new_zip = self.make_zip()
-        self.cleanup()
-        self.close()
-        return new_zip
+        try:
+            _, invalid_files = self.extract()
+            print('Generating flashing script...')
+            self.generate_flashing_script(invalid_files)
+            print('Creating new zip file..')
+            return self.make_zip()
+        finally:
+            self.cleanup()
+            self.close()
