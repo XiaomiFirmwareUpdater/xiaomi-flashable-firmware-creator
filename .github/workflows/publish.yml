@@ -48,5 +48,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          files: dist/*.whl dist/*.tar.gz
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
           generate_release_notes: true
