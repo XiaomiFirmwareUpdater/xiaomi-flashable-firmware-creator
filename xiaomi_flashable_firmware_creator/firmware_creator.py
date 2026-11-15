@@ -389,7 +389,7 @@ class FlashableFirmwareCreator:
         )
         if not images:
             raise RuntimeError('No firmware images found to flash!')
-        if any(not re.fullmatch(r'[A-Za-z0-9_]+', partition) for partition, _, _ in images):
+        if any(not re.fullmatch(r'[A-Za-z0-9_-]+', partition) for partition, _, _ in images):
             raise RuntimeError('Payload contains an invalid partition name!')
         devices = self.get_payload_devices()
         update_binary_template = ScriptTemplate(
