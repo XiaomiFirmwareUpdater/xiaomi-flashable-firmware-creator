@@ -166,7 +166,7 @@ def test_payload_update_binary_is_portable_shell(payload_rom_zip: Path, tmp_path
 
 @pytest.mark.parametrize(
     ('filename', 'message'),
-    [(None, 'No firmware images found'), ('xbl-config.img', 'invalid partition name')],
+    [(None, 'No firmware images found'), ('xbl.config.img', 'invalid partition name')],
 )
 def test_payload_update_binary_rejects_unsafe_images(
     payload_rom_zip: Path, tmp_path: Path, filename: str | None, message: str
